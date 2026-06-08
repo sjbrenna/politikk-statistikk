@@ -18,7 +18,7 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import useDebounce from "@/app/hooks/useDebounce";
 import { MIN_PASSWORD_LENGTH } from "@/lib/consts";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Props = {
   mode: AuthMode;
@@ -31,6 +31,7 @@ function AuthForm({ mode }: Props) {
   const [validationPassword, setValidationPassword] = useState("");
   const debouncedPassword = useDebounce(password);
   const debouncedValidationPassword = useDebounce(validationPassword);
+  const router = useRouter();
 
   const handleSubmit = (formData: FormData) => {
     console.log("Trying to submit");
@@ -57,7 +58,7 @@ function AuthForm({ mode }: Props) {
       console.log(errorMessage);
       if (!errorMessage) {
         toast.success(title, { description: description });
-        redirect("/");
+        router.push("/");
       } else {
         toast.error("Error", { description: errorMessage });
       }

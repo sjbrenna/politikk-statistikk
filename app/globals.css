@@ -81,6 +81,7 @@
   --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
   --sidebar-border: oklch(0.925 0.005 214.3);
   --sidebar-ring: oklch(0.723 0.014 214.4);
+  --link-hover: oklch(78.043% 0.13795 222.738);
 }
 
 .dark {
@@ -115,6 +116,7 @@
   --sidebar-accent-foreground: oklch(0.987 0.002 197.1);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.56 0.021 213.5);
+  --link-hover: oklch(78.043% 0.13795 222.738);
 }
 
 /*Component specific styling*/
@@ -125,6 +127,9 @@
   }
   .infoLink:hover {
     color: var(--link-hover);
+  }
+  .navLink {
+    font-weight: bold;
   }
   .navLink:hover {
     color: var(--link-hover);

@@ -5,6 +5,7 @@ import { getUser } from "@/lib/supabase/server";
 import { DarkModeToggle } from "@/components/ui/darkModeToggle";
 import { logOutAction } from "@/app/server-actions/users";
 import LogOutButton from "./LogOutButton";
+import ProfileButton from "./ProfileButton";
 
 async function Header() {
   const user = await getUser();
@@ -37,7 +38,10 @@ async function Header() {
           <Link href={"/sign-up"}>Registrer Bruker</Link>
         </Button>
         {user ? (
-          <LogOutButton />
+          <div className="flex flex-row gap-x-2">
+            <ProfileButton userId={user.id} />
+            <LogOutButton />
+          </div>
         ) : (
           <Button>
             <Link href={"/login"}>Logg Inn</Link>

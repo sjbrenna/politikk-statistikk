@@ -1,14 +1,15 @@
 "use server";
 
-import { createClient } from "../../lib/supabase/server";
 import { prisma } from "../../prisma/prisma";
 import { handleError } from "../../lib/utils";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient } from "@/lib/supabase/server";
+import { getUser } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-
 export const signUpAction = async (email: string, password: string) => {
   console.log("Ran signup");
   try {
-    const { auth } = await createClient();
+    const { auth } = await createAdminClient();
     const { data, error } = await auth.signUp({ email, password });
     if (error) throw error;
 
@@ -38,10 +39,27 @@ export const logInAction = async (email: string, password: string) => {
   }
 };
 
+export const deleteUserAction = async () => {
+  try {
+    const { auth } = await createAdminClient();
+    const user = await getUser();
+    if (!user?.id) {
+      throw new Error("You must be logged in to delete your account");
+    }
+    const { error } = await auth.admin.deleteUser(user.id);
+
+    if (error) throw error;
+    await auth.signOut();
+    return { errorMessage: null };
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 export const logOutAction = async () => {
   try {
     const { auth } = await createClient();
-    const { error } = await auth.signOut({ scope: "local" });
+    const { error } = await auth.signOut();
 
     if (error) throw error;
     return { errorMessage: null };

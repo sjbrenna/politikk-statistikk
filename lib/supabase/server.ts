@@ -28,22 +28,15 @@ export async function createClient() {
   );
 }
 
-export async function getVerifiedUser() {
-  const { auth } = await createClient();
-  const userObject = await auth.getUser();
-
-  if (userObject.error) {
-    console.error(userObject.error);
-    return null;
-  }
-  return userObject.data.user;
-}
-
 export async function getUser() {
   const { auth } = await createClient();
-  const {
-    data: { session },
-  } = await auth.getSession();
 
-  return session?.user ?? null;
+  try {
+    const { data, error } = await auth.getUser();
+    if (error) return null;
+
+    return data.user ?? null;
+  } catch (error) {
+    return null;
+  }
 }
