@@ -49,6 +49,11 @@ export const deleteUserAction = async () => {
     const { error } = await auth.admin.deleteUser(user.id);
 
     if (error) throw error;
+    prisma.user.delete({
+      where: {
+        id: user.id,
+      },
+    });
     await auth.signOut();
     return { errorMessage: null };
   } catch (error) {
