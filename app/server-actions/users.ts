@@ -46,14 +46,16 @@ export const deleteUserAction = async () => {
     if (!user?.id) {
       throw new Error("You must be logged in to delete your account");
     }
-    const { error } = await auth.admin.deleteUser(user.id);
-
-    if (error) throw error;
-    prisma.user.delete({
+    await prisma.user.delete({
       where: {
         id: user.id,
       },
     });
+    const { error } = await auth.admin.deleteUser(user.id);
+
+    console.log(user.id);
+    if (error) throw error;
+
     await auth.signOut();
     return { errorMessage: null };
   } catch (error) {
