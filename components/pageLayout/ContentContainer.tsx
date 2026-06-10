@@ -1,8 +1,6 @@
 function ContentContainer({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col w-full min-h-full items-center bg-accent flex-1">
-      {children}
-    </div>
+    <div className="flex flex-col w-full h-full items-center">{children}</div>
   );
 }
 

@@ -40,7 +40,7 @@ export default function RootLayout({
         notoSans.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-screen flex flex-col w-screen">
         <Toaster />
         <ThemeProvider
           attribute="class"
