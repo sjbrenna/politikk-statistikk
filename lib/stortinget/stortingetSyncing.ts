@@ -1,5 +1,6 @@
 import { fetchCurrentParties } from "./stortingetFetches";
 
-export const syncParties = () => {
-  fetchCurrentParties();
+export const syncParties = async () => {
+  const parties = await fetchCurrentParties();
+  parties.forEach((party) => console.log(party));
 };

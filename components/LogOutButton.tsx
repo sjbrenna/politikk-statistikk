@@ -30,7 +30,7 @@ function LogOutButton() {
   };
 
   return (
-    <Button className="w-24" onClick={handleLogout}>
+    <Button className="w-fit p-4 lg:h-12" onClick={handleLogout}>
       {loading ? <Loader2 className="animate-spin" /> : "Logg Ut"}
     </Button>
   );

@@ -1,19 +1,15 @@
 const baseApi = "https://data.stortinget.no/eksport/";
 
-export async function stortingFetch<T>(endpoint: string): Promise<T | null> {
-  try {
-    let jsonFormat;
-    endpoint.includes("?")
-      ? (jsonFormat = "&format=json")
-      : (jsonFormat = "?format=json");
+export async function stortingFetch<T>(endpoint: string): Promise<T> {
+  const jsonFormat = endpoint.includes("?") ? "&format=json" : "?format=json";
 
-    const response = await fetch(`${baseApi}${endpoint}${jsonFormat}`);
+  const response = await fetch(`${baseApi}${endpoint}${jsonFormat}`);
 
-    if (!response.ok) {
-      throw new Error("API fetch failed");
-    }
-    return response.json() as Promise<T>;
-  } catch (error) {
-    return null;
+  if (!response.ok) {
+    throw new Error(
+      `API request failed: ${response.status} ${response.statusText}`,
+    );
   }
+
+  return response.json() as Promise<T>;
 }

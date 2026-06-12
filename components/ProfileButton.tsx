@@ -16,7 +16,7 @@ function ProfileButton({ userId }: Props) {
 
   return (
     <div>
-      <Button onClick={handleProfileClick}>
+      <Button onClick={handleProfileClick} className="lg:size-12">
         <User className="size-4" />
       </Button>
     </div>

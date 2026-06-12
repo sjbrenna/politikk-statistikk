@@ -12,7 +12,7 @@ async function Header() {
   return (
     <div
       className="bg-popover shadow-xl
-    border-b-2 relative flex h-12 w-full items-center justify-between gap-4 sm:px-3"
+    border-b-2 relative flex h-24 w-full items-center justify-between gap-4 sm:px-3"
     >
       <div className="flex flex-row *:flex *:flex-row gap-4 items-center *:items-center *:hover:text-ace">
         <Link href={"/"} className="navLink">
@@ -37,17 +37,19 @@ async function Header() {
         <Button hidden={user !== null}>
           <Link href={"/sign-up"}>Registrer Bruker</Link>
         </Button>
-        {user ? (
-          <div className="flex flex-row gap-x-2">
-            <ProfileButton userId={user.id} />
-            <LogOutButton />
-          </div>
-        ) : (
-          <Button>
-            <Link href={"/login"}>Logg Inn</Link>
-          </Button>
-        )}
-        <DarkModeToggle />
+        <div className="flex flex-row gap-x-4">
+          {user ? (
+            <>
+              <ProfileButton userId={user.id} />
+              <LogOutButton />
+            </>
+          ) : (
+            <Button>
+              <Link href={"/login"}>Logg Inn</Link>
+            </Button>
+          )}
+          <DarkModeToggle />
+        </div>
       </div>
     </div>
   );
