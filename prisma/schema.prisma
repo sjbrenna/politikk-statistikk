@@ -20,4 +20,14 @@ model Party {
   id String @id
   name String
   logoURL String
+  representatives Representative[]
+}
+
+model Representative {
+  id String @id
+  firstName String
+  lastName String
+  birthday String
+  partyId String
+  party Party @relation(fields: [partyId], references: [id])
 }

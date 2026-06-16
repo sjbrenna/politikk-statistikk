@@ -3,7 +3,7 @@ import AuthMode from "../enums/authMode";
 
 function LoginPage() {
   return (
-    <div className="flex flex-col w-full flex-1 items-center justify-center">
+    <div className="flex flex-col w-full h-full flex-1 items-center justify-center">
       <AuthForm mode={AuthMode.LogIn}></AuthForm>
     </div>
   );

@@ -1,9 +1,10 @@
 import { fetchCurrentParties } from "@/lib/stortinget/stortingetFetches";
 import PartyLogoButton from "./PartyLogoButton";
+import { prisma } from "@/prisma/prisma";
 
 async function PartyLogos() {
   try {
-    const parties = await fetchCurrentParties();
+    const parties = await prisma.party.findMany();
     console.log(parties);
     return (
       <div className="flex flex-row justify-between">

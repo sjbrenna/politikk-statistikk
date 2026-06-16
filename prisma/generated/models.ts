@@ -9,4 +9,6 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User'
+export type * from './models/Party'
+export type * from './models/Representative'
 export type * from './commonInputTypes'

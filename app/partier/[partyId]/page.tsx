@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { PartyResourceId } from "@/lib/stortinget/parties/partyResources";
 import ContentContainer from "@/components/pageLayout/ContentContainer";
 import PageTitle from "@/components/pageLayout/PageTitle";
+import ContentCard from "@/components/pageLayout/ContentCard";
 
 //Logo, navn, antall representanter
 
@@ -21,6 +22,7 @@ function page() {
         width={48}
         height={48}
       ></Image>
+      <ContentCard>TEST</ContentCard>
     </ContentContainer>
   );
 }
