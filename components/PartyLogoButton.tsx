@@ -1,21 +1,33 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import {
+  getPartyLogo,
+  PartyResourceId,
+} from "@/lib/stortinget/parties/partyResources";
 
 type Props = {
-  logoUrl: string;
   partyId: string;
 };
 
-function PartyLogoButton({ logoUrl, partyId }: Props) {
+function PartyLogoButton({ partyId }: Props) {
   return (
-    <div>
-      <Button className="rounded-full size-16" variant={"white"}>
-        <Link href={`/partier/${partyId.toUpperCase()}`}>
-          <Image src={logoUrl} alt={partyId} width={48} height={48} />
-        </Link>
-      </Button>
-    </div>
+    <Button
+      key={partyId}
+      asChild
+      size="icon"
+      className="lg:size-20 relative rounded-full p-0 flex items-center justify-center"
+      variant="white"
+    >
+      <Link href={`/partier/${partyId.toUpperCase()}`}>
+        <Image
+          src={getPartyLogo(partyId as PartyResourceId)}
+          alt={partyId}
+          className="object-contain p-4"
+          fill
+        />
+      </Link>
+    </Button>
   );
 }
 

@@ -7,6 +7,7 @@ import { PartyResourceId } from "@/lib/stortinget/parties/partyResources";
 import ContentContainer from "@/components/pageLayout/ContentContainer";
 import PageTitle from "@/components/pageLayout/PageTitle";
 import ContentCard from "@/components/pageLayout/ContentCard";
+import PartyInfoCard from "@/components/party/PartyInfoCard";
 
 //Logo, navn, antall representanter
 
@@ -16,13 +17,7 @@ function page() {
   return (
     <ContentContainer>
       <PageTitle title={partyName} />
-      <Image
-        src={`/logos/${partyId}.png`}
-        alt="error"
-        width={48}
-        height={48}
-      ></Image>
-      <ContentCard>TEST</ContentCard>
+      <PartyInfoCard partyId={partyId as PartyResourceId}></PartyInfoCard>
     </ContentContainer>
   );
 }

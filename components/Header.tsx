@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { getUser } from "@/lib/supabase/server";
 import { DarkModeToggle } from "@/components/ui/darkModeToggle";
-import { logOutAction } from "@/app/server-actions/users";
 import LogOutButton from "./LogOutButton";
 import ProfileButton from "./ProfileButton";
 
