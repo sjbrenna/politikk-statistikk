@@ -10,7 +10,7 @@ function Page() {
     <ContentContainer mode={"half"}>
       <PageTitle title="Partier" />
       <ContentCard>
-        <div className="text-3xl w-full text-center font-bold border-b-2">
+        <div className="text-2xl w-full text-center font-bold border-b-2">
           Alle partiene representert på Stortinget i dag
         </div>
         <PartyLogos />

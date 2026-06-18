@@ -23,8 +23,9 @@ function PartyLogoButton({ partyId }: Props) {
         <Image
           src={getPartyLogo(partyId as PartyResourceId)}
           alt={partyId}
-          className="object-contain p-4"
+          className="object-contain p-4 rounded-2xl"
           fill
+          sizes={"(max-width: 64px) 100vw, 64px"}
         />
       </Link>
     </Button>
