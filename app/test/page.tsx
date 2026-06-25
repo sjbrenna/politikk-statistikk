@@ -1,30 +1,23 @@
-//Testpage to compare fetch to prisma find
+//page to run syncing functions manually
 "use client";
 
 import { Button } from "@/components/ui/button";
 import {
   syncParties,
-  syncRepresentatives,
+  syncPoliticians,
 } from "@/lib/stortinget/stortingetSyncing";
-import { fetchTimingTest } from "../server-actions/tests";
-import { fetchCurrentRepresentatives } from "@/lib/stortinget/stortingetFetches";
 
 function page() {
-  const handlePrismaClick = async () => {
+  const handlePartyClick = async () => {
     await syncParties();
   };
-  const handleFetchClick = async () => {
-    await fetchTimingTest();
-  };
-
-  const handleRepresentativeClick = async () => {
-    await syncRepresentatives();
+  const handlePoliticianClick = async () => {
+    await syncPoliticians();
   };
   return (
     <div>
-      <Button onClick={handlePrismaClick}>Test Prisma</Button>
-      <Button onClick={handleFetchClick}>Test fetch</Button>
-      <Button onClick={handleRepresentativeClick}>Representatives</Button>
+      <Button onClick={handlePartyClick}>Sync Parties</Button>
+      <Button onClick={handlePoliticianClick}>Sync Politicians</Button>
     </div>
   );
 }

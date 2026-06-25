@@ -27,19 +27,16 @@ export type AggregateParty = {
 export type PartyMinAggregateOutputType = {
   id: string | null
   name: string | null
-  logoURL: string | null
 }
 
 export type PartyMaxAggregateOutputType = {
   id: string | null
   name: string | null
-  logoURL: string | null
 }
 
 export type PartyCountAggregateOutputType = {
   id: number
   name: number
-  logoURL: number
   _all: number
 }
 
@@ -47,19 +44,16 @@ export type PartyCountAggregateOutputType = {
 export type PartyMinAggregateInputType = {
   id?: true
   name?: true
-  logoURL?: true
 }
 
 export type PartyMaxAggregateInputType = {
   id?: true
   name?: true
-  logoURL?: true
 }
 
 export type PartyCountAggregateInputType = {
   id?: true
   name?: true
-  logoURL?: true
   _all?: true
 }
 
@@ -138,7 +132,6 @@ export type PartyGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type PartyGroupByOutputType = {
   id: string
   name: string
-  logoURL: string
   _count: PartyCountAggregateOutputType | null
   _min: PartyMinAggregateOutputType | null
   _max: PartyMaxAggregateOutputType | null
@@ -165,15 +158,13 @@ export type PartyWhereInput = {
   NOT?: Prisma.PartyWhereInput | Prisma.PartyWhereInput[]
   id?: Prisma.StringFilter<"Party"> | string
   name?: Prisma.StringFilter<"Party"> | string
-  logoURL?: Prisma.StringFilter<"Party"> | string
-  representatives?: Prisma.RepresentativeListRelationFilter
+  politicians?: Prisma.PoliticianListRelationFilter
 }
 
 export type PartyOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  logoURL?: Prisma.SortOrder
-  representatives?: Prisma.RepresentativeOrderByRelationAggregateInput
+  politicians?: Prisma.PoliticianOrderByRelationAggregateInput
 }
 
 export type PartyWhereUniqueInput = Prisma.AtLeast<{
@@ -182,14 +173,12 @@ export type PartyWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PartyWhereInput[]
   NOT?: Prisma.PartyWhereInput | Prisma.PartyWhereInput[]
   name?: Prisma.StringFilter<"Party"> | string
-  logoURL?: Prisma.StringFilter<"Party"> | string
-  representatives?: Prisma.RepresentativeListRelationFilter
+  politicians?: Prisma.PoliticianListRelationFilter
 }, "id">
 
 export type PartyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  logoURL?: Prisma.SortOrder
   _count?: Prisma.PartyCountOrderByAggregateInput
   _max?: Prisma.PartyMaxOrderByAggregateInput
   _min?: Prisma.PartyMinOrderByAggregateInput
@@ -201,71 +190,60 @@ export type PartyScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PartyScalarWhereWithAggregatesInput | Prisma.PartyScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Party"> | string
   name?: Prisma.StringWithAggregatesFilter<"Party"> | string
-  logoURL?: Prisma.StringWithAggregatesFilter<"Party"> | string
 }
 
 export type PartyCreateInput = {
   id: string
   name: string
-  logoURL: string
-  representatives?: Prisma.RepresentativeCreateNestedManyWithoutPartyInput
+  politicians?: Prisma.PoliticianCreateNestedManyWithoutPartyInput
 }
 
 export type PartyUncheckedCreateInput = {
   id: string
   name: string
-  logoURL: string
-  representatives?: Prisma.RepresentativeUncheckedCreateNestedManyWithoutPartyInput
+  politicians?: Prisma.PoliticianUncheckedCreateNestedManyWithoutPartyInput
 }
 
 export type PartyUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  logoURL?: Prisma.StringFieldUpdateOperationsInput | string
-  representatives?: Prisma.RepresentativeUpdateManyWithoutPartyNestedInput
+  politicians?: Prisma.PoliticianUpdateManyWithoutPartyNestedInput
 }
 
 export type PartyUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  logoURL?: Prisma.StringFieldUpdateOperationsInput | string
-  representatives?: Prisma.RepresentativeUncheckedUpdateManyWithoutPartyNestedInput
+  politicians?: Prisma.PoliticianUncheckedUpdateManyWithoutPartyNestedInput
 }
 
 export type PartyCreateManyInput = {
   id: string
   name: string
-  logoURL: string
 }
 
 export type PartyUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  logoURL?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PartyUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  logoURL?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PartyCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  logoURL?: Prisma.SortOrder
 }
 
 export type PartyMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  logoURL?: Prisma.SortOrder
 }
 
 export type PartyMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  logoURL?: Prisma.SortOrder
 }
 
 export type PartyScalarRelationFilter = {
@@ -273,58 +251,54 @@ export type PartyScalarRelationFilter = {
   isNot?: Prisma.PartyWhereInput
 }
 
-export type PartyCreateNestedOneWithoutRepresentativesInput = {
-  create?: Prisma.XOR<Prisma.PartyCreateWithoutRepresentativesInput, Prisma.PartyUncheckedCreateWithoutRepresentativesInput>
-  connectOrCreate?: Prisma.PartyCreateOrConnectWithoutRepresentativesInput
+export type PartyCreateNestedOneWithoutPoliticiansInput = {
+  create?: Prisma.XOR<Prisma.PartyCreateWithoutPoliticiansInput, Prisma.PartyUncheckedCreateWithoutPoliticiansInput>
+  connectOrCreate?: Prisma.PartyCreateOrConnectWithoutPoliticiansInput
   connect?: Prisma.PartyWhereUniqueInput
 }
 
-export type PartyUpdateOneRequiredWithoutRepresentativesNestedInput = {
-  create?: Prisma.XOR<Prisma.PartyCreateWithoutRepresentativesInput, Prisma.PartyUncheckedCreateWithoutRepresentativesInput>
-  connectOrCreate?: Prisma.PartyCreateOrConnectWithoutRepresentativesInput
-  upsert?: Prisma.PartyUpsertWithoutRepresentativesInput
+export type PartyUpdateOneRequiredWithoutPoliticiansNestedInput = {
+  create?: Prisma.XOR<Prisma.PartyCreateWithoutPoliticiansInput, Prisma.PartyUncheckedCreateWithoutPoliticiansInput>
+  connectOrCreate?: Prisma.PartyCreateOrConnectWithoutPoliticiansInput
+  upsert?: Prisma.PartyUpsertWithoutPoliticiansInput
   connect?: Prisma.PartyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PartyUpdateToOneWithWhereWithoutRepresentativesInput, Prisma.PartyUpdateWithoutRepresentativesInput>, Prisma.PartyUncheckedUpdateWithoutRepresentativesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PartyUpdateToOneWithWhereWithoutPoliticiansInput, Prisma.PartyUpdateWithoutPoliticiansInput>, Prisma.PartyUncheckedUpdateWithoutPoliticiansInput>
 }
 
-export type PartyCreateWithoutRepresentativesInput = {
+export type PartyCreateWithoutPoliticiansInput = {
   id: string
   name: string
-  logoURL: string
 }
 
-export type PartyUncheckedCreateWithoutRepresentativesInput = {
+export type PartyUncheckedCreateWithoutPoliticiansInput = {
   id: string
   name: string
-  logoURL: string
 }
 
-export type PartyCreateOrConnectWithoutRepresentativesInput = {
+export type PartyCreateOrConnectWithoutPoliticiansInput = {
   where: Prisma.PartyWhereUniqueInput
-  create: Prisma.XOR<Prisma.PartyCreateWithoutRepresentativesInput, Prisma.PartyUncheckedCreateWithoutRepresentativesInput>
+  create: Prisma.XOR<Prisma.PartyCreateWithoutPoliticiansInput, Prisma.PartyUncheckedCreateWithoutPoliticiansInput>
 }
 
-export type PartyUpsertWithoutRepresentativesInput = {
-  update: Prisma.XOR<Prisma.PartyUpdateWithoutRepresentativesInput, Prisma.PartyUncheckedUpdateWithoutRepresentativesInput>
-  create: Prisma.XOR<Prisma.PartyCreateWithoutRepresentativesInput, Prisma.PartyUncheckedCreateWithoutRepresentativesInput>
+export type PartyUpsertWithoutPoliticiansInput = {
+  update: Prisma.XOR<Prisma.PartyUpdateWithoutPoliticiansInput, Prisma.PartyUncheckedUpdateWithoutPoliticiansInput>
+  create: Prisma.XOR<Prisma.PartyCreateWithoutPoliticiansInput, Prisma.PartyUncheckedCreateWithoutPoliticiansInput>
   where?: Prisma.PartyWhereInput
 }
 
-export type PartyUpdateToOneWithWhereWithoutRepresentativesInput = {
+export type PartyUpdateToOneWithWhereWithoutPoliticiansInput = {
   where?: Prisma.PartyWhereInput
-  data: Prisma.XOR<Prisma.PartyUpdateWithoutRepresentativesInput, Prisma.PartyUncheckedUpdateWithoutRepresentativesInput>
+  data: Prisma.XOR<Prisma.PartyUpdateWithoutPoliticiansInput, Prisma.PartyUncheckedUpdateWithoutPoliticiansInput>
 }
 
-export type PartyUpdateWithoutRepresentativesInput = {
+export type PartyUpdateWithoutPoliticiansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  logoURL?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type PartyUncheckedUpdateWithoutRepresentativesInput = {
+export type PartyUncheckedUpdateWithoutPoliticiansInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  logoURL?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -333,11 +307,11 @@ export type PartyUncheckedUpdateWithoutRepresentativesInput = {
  */
 
 export type PartyCountOutputType = {
-  representatives: number
+  politicians: number
 }
 
 export type PartyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  representatives?: boolean | PartyCountOutputTypeCountRepresentativesArgs
+  politicians?: boolean | PartyCountOutputTypeCountPoliticiansArgs
 }
 
 /**
@@ -353,40 +327,36 @@ export type PartyCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * PartyCountOutputType without action
  */
-export type PartyCountOutputTypeCountRepresentativesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RepresentativeWhereInput
+export type PartyCountOutputTypeCountPoliticiansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PoliticianWhereInput
 }
 
 
 export type PartySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  logoURL?: boolean
-  representatives?: boolean | Prisma.Party$representativesArgs<ExtArgs>
+  politicians?: boolean | Prisma.Party$politiciansArgs<ExtArgs>
   _count?: boolean | Prisma.PartyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["party"]>
 
 export type PartySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  logoURL?: boolean
 }, ExtArgs["result"]["party"]>
 
 export type PartySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
-  logoURL?: boolean
 }, ExtArgs["result"]["party"]>
 
 export type PartySelectScalar = {
   id?: boolean
   name?: boolean
-  logoURL?: boolean
 }
 
-export type PartyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "logoURL", ExtArgs["result"]["party"]>
+export type PartyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["party"]>
 export type PartyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  representatives?: boolean | Prisma.Party$representativesArgs<ExtArgs>
+  politicians?: boolean | Prisma.Party$politiciansArgs<ExtArgs>
   _count?: boolean | Prisma.PartyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PartyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -395,12 +365,11 @@ export type PartyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $PartyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Party"
   objects: {
-    representatives: Prisma.$RepresentativePayload<ExtArgs>[]
+    politicians: Prisma.$PoliticianPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
-    logoURL: string
   }, ExtArgs["result"]["party"]>
   composites: {}
 }
@@ -795,7 +764,7 @@ readonly fields: PartyFieldRefs;
  */
 export interface Prisma__PartyClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  representatives<T extends Prisma.Party$representativesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Party$representativesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RepresentativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  politicians<T extends Prisma.Party$politiciansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Party$politiciansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PoliticianPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -827,7 +796,6 @@ export interface Prisma__PartyClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface PartyFieldRefs {
   readonly id: Prisma.FieldRef<"Party", 'String'>
   readonly name: Prisma.FieldRef<"Party", 'String'>
-  readonly logoURL: Prisma.FieldRef<"Party", 'String'>
 }
     
 
@@ -1221,27 +1189,27 @@ export type PartyDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Party.representatives
+ * Party.politicians
  */
-export type Party$representativesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Party$politiciansArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Representative
+   * Select specific fields to fetch from the Politician
    */
-  select?: Prisma.RepresentativeSelect<ExtArgs> | null
+  select?: Prisma.PoliticianSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Representative
+   * Omit specific fields from the Politician
    */
-  omit?: Prisma.RepresentativeOmit<ExtArgs> | null
+  omit?: Prisma.PoliticianOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.RepresentativeInclude<ExtArgs> | null
-  where?: Prisma.RepresentativeWhereInput
-  orderBy?: Prisma.RepresentativeOrderByWithRelationInput | Prisma.RepresentativeOrderByWithRelationInput[]
-  cursor?: Prisma.RepresentativeWhereUniqueInput
+  include?: Prisma.PoliticianInclude<ExtArgs> | null
+  where?: Prisma.PoliticianWhereInput
+  orderBy?: Prisma.PoliticianOrderByWithRelationInput | Prisma.PoliticianOrderByWithRelationInput[]
+  cursor?: Prisma.PoliticianWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.RepresentativeScalarFieldEnum | Prisma.RepresentativeScalarFieldEnum[]
+  distinct?: Prisma.PoliticianScalarFieldEnum | Prisma.PoliticianScalarFieldEnum[]
 }
 
 /**

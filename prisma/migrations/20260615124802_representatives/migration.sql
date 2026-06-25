@@ -1,13 +1,13 @@
 -- CreateTable
-CREATE TABLE "Representative" (
+CREATE TABLE "Politician" (
     "id" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "birthday" TIMESTAMP(3) NOT NULL,
     "partyId" TEXT NOT NULL,
 
-    CONSTRAINT "Representative_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Politician_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
-ALTER TABLE "Representative" ADD CONSTRAINT "Representative_partyId_fkey" FOREIGN KEY ("partyId") REFERENCES "Party"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Politician" ADD CONSTRAINT "Politician_partyId_fkey" FOREIGN KEY ("partyId") REFERENCES "Party"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -19,15 +19,25 @@ model User {
 model Party {
   id String @id
   name String
-  logoURL String
-  representatives Representative[]
+  politicians Politician[]
 }
 
-model Representative {
+
+model Politician {
   id String @id
   firstName String
   lastName String
   birthday String
   partyId String
   party Party @relation(fields: [partyId], references: [id])
+  governmentRole GovernmentRole?
+  representative Boolean
+}
+
+model GovernmentRole {
+  politicianId String @id
+  politician Politician @relation(fields: [politicianId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  department String
+  title String
+  role String
 }

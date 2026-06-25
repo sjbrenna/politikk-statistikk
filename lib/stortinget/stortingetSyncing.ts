@@ -3,14 +3,14 @@
 import { prisma } from "@/prisma/prisma";
 import {
   fetchCurrentParties,
-  fetchCurrentRepresentatives,
+  fetchCurrentPoliticians,
+  fetchGovernmentRoles,
 } from "./stortingetFetches";
-import { Representative } from "./types/representative";
-
 //fetch current parties, compare differences and update db
 export const syncParties = async () => {
   try {
     const apiParties = await fetchCurrentParties();
+    console.log(apiParties);
     await prisma.party.deleteMany();
     await prisma.party.createMany({ data: apiParties, skipDuplicates: true });
   } catch (error) {
@@ -18,37 +18,52 @@ export const syncParties = async () => {
   }
 };
 
-export const syncRepresentatives = async () => {
+//Retrieves all accessible politicians from the api
+export const syncPoliticians = async () => {
   try {
-    const apiRepresentatives = await fetchCurrentRepresentatives();
-    const dbRepresentatives =
-      (await prisma.representative.findMany()) as Representative[];
-    //Create the ones in api, not in db, update the ones that are common, delete the ones who are in db but not api
-    const apiMap = new Map(apiRepresentatives.map((p) => [p.id, p]));
-    const dbMap = new Map(dbRepresentatives.map((p) => [p.id, p]));
-    const toCreate = apiRepresentatives.filter((p) => !dbMap.has(p.id));
-    const toUpdate = apiRepresentatives.filter((p) => dbMap.has(p.id));
-    const toDelete = dbRepresentatives.filter((p) => !apiMap.has(p.id));
-    await prisma.representative.createMany({ data: toCreate });
-    for (const r of apiRepresentatives) {
-      await prisma.representative.update({
-        where: { id: r.id },
+    //Politicians are a set consisting of the representatives, and those in elected government positions who are not representatives.
+    const apiPoliticians = await fetchCurrentRepresentatives();
+    const governmentRoles = await fetchGovernmentRoles();
+
+    await prisma.politician.deleteMany();
+    //Create each politician
+    for (const politician of apiPoliticians) {
+      await prisma.politician.create({
         data: {
-          firstName: r.firstName,
-          lastName: r.lastName,
-          birthday: r.birthday,
-          partyId: r.partyId,
+          id: politician.id,
+          firstName: politician.firstName,
+          lastName: politician.lastName,
+          birthday: politician.birthday,
+          partyId: politician.partyId,
         },
       });
     }
-    await prisma.representative.deleteMany({
-      where: {
-        id: {
-          in: toDelete.map((r) => r.id),
+    const politicianIds = new Set(apiPoliticians.map((p) => p.id));
+    //For each govRole, if one with matching id doesnt exist, create one
+    //then create matching govRole
+    for (const govRole of governmentRoles) {
+      if (!politicianIds.has(govRole.id)) {
+        await prisma.politician.create({
+          data: {
+            id: govRole.id,
+            firstName: govRole.fornavn,
+            lastName: govRole.etternavn,
+            birthday: govRole.foedselsdato,
+            partyId: govRole.parti.id,
+          },
+        });
+      }
+      await prisma.governmentRole.create({
+        data: {
+          politicianId: govRole.id,
+          department: govRole.departement,
+          title: govRole.tittel,
+          role: govRole.verv,
         },
-      },
-    });
+      });
+    }
+    console.log("FINISHED POLITICIANS");
   } catch (error) {
-    throw new Error("Could not perform syncing of representatives");
+    throw new Error("Could not perform syncing of Politicians: " + error);
   }
 };

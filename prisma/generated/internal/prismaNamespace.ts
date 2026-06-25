@@ -386,7 +386,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Party: 'Party',
-  Representative: 'Representative'
+  Politician: 'Politician',
+  GovernmentRole: 'GovernmentRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "party" | "representative"
+    modelProps: "user" | "party" | "politician" | "governmentRole"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -554,77 +555,151 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Representative: {
-      payload: Prisma.$RepresentativePayload<ExtArgs>
-      fields: Prisma.RepresentativeFieldRefs
+    Politician: {
+      payload: Prisma.$PoliticianPayload<ExtArgs>
+      fields: Prisma.PoliticianFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.RepresentativeFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload> | null
+          args: Prisma.PoliticianFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.RepresentativeFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>
+          args: Prisma.PoliticianFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>
         }
         findFirst: {
-          args: Prisma.RepresentativeFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload> | null
+          args: Prisma.PoliticianFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.RepresentativeFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>
+          args: Prisma.PoliticianFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>
         }
         findMany: {
-          args: Prisma.RepresentativeFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>[]
+          args: Prisma.PoliticianFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>[]
         }
         create: {
-          args: Prisma.RepresentativeCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>
+          args: Prisma.PoliticianCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>
         }
         createMany: {
-          args: Prisma.RepresentativeCreateManyArgs<ExtArgs>
+          args: Prisma.PoliticianCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.RepresentativeCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>[]
+          args: Prisma.PoliticianCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>[]
         }
         delete: {
-          args: Prisma.RepresentativeDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>
+          args: Prisma.PoliticianDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>
         }
         update: {
-          args: Prisma.RepresentativeUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>
+          args: Prisma.PoliticianUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>
         }
         deleteMany: {
-          args: Prisma.RepresentativeDeleteManyArgs<ExtArgs>
+          args: Prisma.PoliticianDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.RepresentativeUpdateManyArgs<ExtArgs>
+          args: Prisma.PoliticianUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.RepresentativeUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>[]
+          args: Prisma.PoliticianUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>[]
         }
         upsert: {
-          args: Prisma.RepresentativeUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RepresentativePayload>
+          args: Prisma.PoliticianUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PoliticianPayload>
         }
         aggregate: {
-          args: Prisma.RepresentativeAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateRepresentative>
+          args: Prisma.PoliticianAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePolitician>
         }
         groupBy: {
-          args: Prisma.RepresentativeGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RepresentativeGroupByOutputType>[]
+          args: Prisma.PoliticianGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PoliticianGroupByOutputType>[]
         }
         count: {
-          args: Prisma.RepresentativeCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RepresentativeCountAggregateOutputType> | number
+          args: Prisma.PoliticianCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PoliticianCountAggregateOutputType> | number
+        }
+      }
+    }
+    GovernmentRole: {
+      payload: Prisma.$GovernmentRolePayload<ExtArgs>
+      fields: Prisma.GovernmentRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GovernmentRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GovernmentRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>
+        }
+        findFirst: {
+          args: Prisma.GovernmentRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GovernmentRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>
+        }
+        findMany: {
+          args: Prisma.GovernmentRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>[]
+        }
+        create: {
+          args: Prisma.GovernmentRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>
+        }
+        createMany: {
+          args: Prisma.GovernmentRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GovernmentRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>[]
+        }
+        delete: {
+          args: Prisma.GovernmentRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>
+        }
+        update: {
+          args: Prisma.GovernmentRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.GovernmentRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GovernmentRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GovernmentRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.GovernmentRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GovernmentRolePayload>
+        }
+        aggregate: {
+          args: Prisma.GovernmentRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGovernmentRole>
+        }
+        groupBy: {
+          args: Prisma.GovernmentRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GovernmentRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GovernmentRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GovernmentRoleCountAggregateOutputType> | number
         }
       }
     }
@@ -678,14 +753,13 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const PartyScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  logoURL: 'logoURL'
+  name: 'name'
 } as const
 
 export type PartyScalarFieldEnum = (typeof PartyScalarFieldEnum)[keyof typeof PartyScalarFieldEnum]
 
 
-export const RepresentativeScalarFieldEnum = {
+export const PoliticianScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
   lastName: 'lastName',
@@ -693,7 +767,17 @@ export const RepresentativeScalarFieldEnum = {
   partyId: 'partyId'
 } as const
 
-export type RepresentativeScalarFieldEnum = (typeof RepresentativeScalarFieldEnum)[keyof typeof RepresentativeScalarFieldEnum]
+export type PoliticianScalarFieldEnum = (typeof PoliticianScalarFieldEnum)[keyof typeof PoliticianScalarFieldEnum]
+
+
+export const GovernmentRoleScalarFieldEnum = {
+  politicianId: 'politicianId',
+  department: 'department',
+  title: 'title',
+  role: 'role'
+} as const
+
+export type GovernmentRoleScalarFieldEnum = (typeof GovernmentRoleScalarFieldEnum)[keyof typeof GovernmentRoleScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -857,7 +941,8 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   party?: Prisma.PartyOmit
-  representative?: Prisma.RepresentativeOmit
+  politician?: Prisma.PoliticianOmit
+  governmentRole?: Prisma.GovernmentRoleOmit
 }
 
 /* Types for Logging */

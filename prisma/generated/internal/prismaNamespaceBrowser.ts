@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Party: 'Party',
-  Representative: 'Representative'
+  Politician: 'Politician',
+  GovernmentRole: 'GovernmentRole'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -83,14 +84,13 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const PartyScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  logoURL: 'logoURL'
+  name: 'name'
 } as const
 
 export type PartyScalarFieldEnum = (typeof PartyScalarFieldEnum)[keyof typeof PartyScalarFieldEnum]
 
 
-export const RepresentativeScalarFieldEnum = {
+export const PoliticianScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
   lastName: 'lastName',
@@ -98,7 +98,17 @@ export const RepresentativeScalarFieldEnum = {
   partyId: 'partyId'
 } as const
 
-export type RepresentativeScalarFieldEnum = (typeof RepresentativeScalarFieldEnum)[keyof typeof RepresentativeScalarFieldEnum]
+export type PoliticianScalarFieldEnum = (typeof PoliticianScalarFieldEnum)[keyof typeof PoliticianScalarFieldEnum]
+
+
+export const GovernmentRoleScalarFieldEnum = {
+  politicianId: 'politicianId',
+  department: 'department',
+  title: 'title',
+  role: 'role'
+} as const
+
+export type GovernmentRoleScalarFieldEnum = (typeof GovernmentRoleScalarFieldEnum)[keyof typeof GovernmentRoleScalarFieldEnum]
 
 
 export const SortOrder = {

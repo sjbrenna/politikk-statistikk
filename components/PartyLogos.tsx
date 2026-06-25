@@ -1,4 +1,3 @@
-import { fetchCurrentParties } from "@/lib/stortinget/stortingetFetches";
 import PartyLogoButton from "./PartyLogoButton";
 import { prisma } from "@/prisma/prisma";
 

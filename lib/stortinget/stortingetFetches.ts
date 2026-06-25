@@ -1,11 +1,13 @@
 "use server";
 
 import { mapParty } from "./services/mapParties";
-import { mapRepresentative } from "./services/mapRepresentatives";
+import { mapPolitician } from "./services/mapPoliticians";
 import { stortingFetch } from "./stortingetClient";
+import { ApiGovernmentResponse } from "./types/government";
 import { ApiPartyResponse, Party } from "./types/party";
 import { ApiPeriodResponse } from "./types/period";
-import { ApiRepresentativeResponse } from "./types/representative";
+import { ApiPoliticianResponse } from "./types/politician";
+import { mapGovernmentRole } from "./services/mapGovernmentRole";
 
 export const fetchCurrentParties = async () => {
   const curYear = new Date().getFullYear();
@@ -23,10 +25,17 @@ export const fetchPeriods = async () => {
   return response.innevaerende_stortingsperiode.id;
 };
 
-export const fetchCurrentRepresentatives = async () => {
+export const fetchCurrentPoliticians = async () => {
   const currentPeriod = await fetchPeriods();
-  const response = await stortingFetch<ApiRepresentativeResponse>(
+  const response = await stortingFetch<ApiPoliticianResponse>(
     `representanter?stortingsperiodeid=${currentPeriod}`,
   );
-  return response.representanter_liste.map(mapRepresentative);
+
+  return response.representanter_liste.map(mapPolitician);
+};
+
+export const fetchGovernmentRoles = async () => {
+  const governmentResponse =
+    await stortingFetch<ApiGovernmentResponse>("regjering");
+  return governmentResponse.regjeringsmedlemmer_liste.map(mapGovernmentRole);
 };

@@ -6,6 +6,5 @@ export const mapParty = (party: ApiPartyItem): Party => {
   return {
     id: party.id.toUpperCase(),
     name: party.navn,
-    logoURL: getPartyLogo(party.id.toUpperCase() as PartyResourceId)!,
   };
 };

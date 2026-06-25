@@ -1,27 +1,25 @@
 "use client";
-
-import { Representative } from "@/lib/stortinget/types/representative";
+import { Politician } from "@/lib/stortinget/types/politician";
 import ContentCard from "../pageLayout/ContentCard";
 import { Input } from "../ui/input";
-import { Field, FieldLabel } from "../ui/field";
 import useDebounce from "@/app/hooks/useDebounce";
-import { use, useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 type Props = {
-  representativeList: Representative[];
+  PoliticianList: Politician[];
 };
 
-function PartyRepresentativeList({ representativeList }: Props) {
+function PartyPoliticianList({ PoliticianList }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedQuery = useDebounce(searchQuery);
 
-  let repList = representativeList;
+  let repList = PoliticianList;
 
   const query = debouncedQuery.toLowerCase();
 
   if (query !== "") {
-    repList = representativeList.filter((rep) => {
+    repList = PoliticianList.filter((rep) => {
       const fullName = rep.firstName + " " + rep.lastName;
       return fullName.toLowerCase().includes(query);
     });
@@ -43,7 +41,7 @@ function PartyRepresentativeList({ representativeList }: Props) {
           <div className="w-full h-full lg:max-h-128 overflow-auto border-2 rounded-2xl mt-4 flex flex-col gap-y-2">
             {repList.map((rep) => (
               <Link
-                href={`/personer/${rep.firstName}-${rep.lastName}`}
+                href={`/person/${rep.id}`}
                 key={rep.id}
                 className="navLink pl-4"
               >
@@ -57,4 +55,4 @@ function PartyRepresentativeList({ representativeList }: Props) {
   );
 }
 
-export default PartyRepresentativeList;
+export default PartyPoliticianList;

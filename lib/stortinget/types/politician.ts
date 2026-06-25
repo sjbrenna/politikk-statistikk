@@ -1,14 +1,13 @@
 import { ApiPartyItem } from "./party";
+import { Prisma } from "@/prisma/generated/client";
 
-export type Representative = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  birthday: string;
-  partyId: string;
-};
+export type Politician = Prisma.PoliticianGetPayload<{
+  include: {
+    governmentRole: true;
+  };
+}>;
 
-export type ApiRepresentative = {
+export type ApiPolitician = {
   respons_dato_tid: string;
   versjon: string;
   doedsdato: boolean;
@@ -28,9 +27,9 @@ export type ApiRepresentative = {
   vara_representant: boolean;
 };
 
-export type ApiRepresentativeResponse = {
+export type ApiPoliticianResponse = {
   respons_dato_tid: string;
   versjon: string;
-  representanter_liste: ApiRepresentative[];
+  representanter_liste: ApiPolitician[];
   stortingsperiode_id: string;
 };

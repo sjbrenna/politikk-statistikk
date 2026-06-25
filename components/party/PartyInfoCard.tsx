@@ -7,11 +7,11 @@ import {
 import Image from "next/image";
 
 type Props = {
-  representativeCount: number;
+  PoliticianCount: number;
   partyId: PartyResourceId;
 };
 
-async function PartyInfoCard({ representativeCount, partyId }: Props) {
+async function PartyInfoCard({ PoliticianCount, partyId }: Props) {
   return (
     <ContentCard>
       <div className="flex flex-row gap-x-4 flex-1">
@@ -27,7 +27,7 @@ async function PartyInfoCard({ representativeCount, partyId }: Props) {
           </div>
         </div>
         <div className="flex-1 text-2xl flex justify-center items-center break-all">
-          {`${getPartyName(partyId)} har ${representativeCount} representant${representativeCount > 1 && "er"} på Stortinget`}
+          {`${getPartyName(partyId)} har ${PoliticianCount} representant${PoliticianCount > 1 && "er"} på Stortinget`}
         </div>
       </div>
     </ContentCard>
