@@ -25,7 +25,7 @@ export const fetchPeriods = async () => {
   return response.innevaerende_stortingsperiode.id;
 };
 
-export const fetchCurrentPoliticians = async () => {
+export const fetchCurrentRepresentatives = async () => {
   const currentPeriod = await fetchPeriods();
   const response = await stortingFetch<ApiPoliticianResponse>(
     `representanter?stortingsperiodeid=${currentPeriod}`,

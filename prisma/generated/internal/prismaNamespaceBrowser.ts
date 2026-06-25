@@ -95,7 +95,8 @@ export const PoliticianScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   birthday: 'birthday',
-  partyId: 'partyId'
+  partyId: 'partyId',
+  representative: 'representative'
 } as const
 
 export type PoliticianScalarFieldEnum = (typeof PoliticianScalarFieldEnum)[keyof typeof PoliticianScalarFieldEnum]

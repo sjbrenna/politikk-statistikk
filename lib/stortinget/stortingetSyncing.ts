@@ -3,7 +3,7 @@
 import { prisma } from "@/prisma/prisma";
 import {
   fetchCurrentParties,
-  fetchCurrentPoliticians,
+  fetchCurrentRepresentatives,
   fetchGovernmentRoles,
 } from "./stortingetFetches";
 //fetch current parties, compare differences and update db
@@ -35,6 +35,7 @@ export const syncPoliticians = async () => {
           lastName: politician.lastName,
           birthday: politician.birthday,
           partyId: politician.partyId,
+          representative: true,
         },
       });
     }
@@ -50,6 +51,7 @@ export const syncPoliticians = async () => {
             lastName: govRole.etternavn,
             birthday: govRole.foedselsdato,
             partyId: govRole.parti.id,
+            representative: false,
           },
         });
       }
