@@ -13,7 +13,7 @@ async function Header() {
       className="bg-popover shadow-xl
     border-b-2 relative flex h-24 w-full items-center justify-between gap-4 sm:px-3"
     >
-      <div className="flex flex-row *:flex *:flex-row gap-4 items-center *:items-center *:hover:text-ace">
+      <div className="flex flex-row *:flex *:flex-row gap-8 items-center *:items-center *:hover:text-ace">
         <Link href={"/"} className="navLink">
           <Image
             src="/flagg.png"

@@ -18,7 +18,7 @@ type Props = {
 
 async function page({ params }: Props) {
   const personId = (await params).personId;
-  const Politician = await prisma.Politician.findUnique({
+  const Politician = await prisma.politician.findUnique({
     where: {
       id: personId,
     },

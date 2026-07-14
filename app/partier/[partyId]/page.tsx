@@ -16,10 +16,9 @@ async function page({ params }: Props) {
   const partyPoliticians: Politician[] = await prisma.politician.findMany({
     where: {
       partyId: partyId,
+      representative: true,
     },
-    include: {
-      governmentRole: true,
-    },
+    include: { governmentRole: true },
   });
   return (
     <ContentContainer mode="half">

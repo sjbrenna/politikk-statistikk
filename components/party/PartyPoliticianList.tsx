@@ -28,7 +28,7 @@ function PartyPoliticianList({ PoliticianList }: Props) {
   return (
     <ContentCard>
       <div className="flex flex-col w-full h-full">
-        <div className="flex flex-row w-full justify-between pl-4">
+        <div className="flex flex-row w-full justify-between pl-4 text-2xl font-bold">
           Representanter
           <Input
             value={searchQuery}
