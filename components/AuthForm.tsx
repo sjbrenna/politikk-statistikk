@@ -82,93 +82,96 @@ function AuthForm({ mode }: Props) {
   };
 
   return (
-    <div className="max-w-md w-full">
-      <form action={handleSubmit}>
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              {isSignUp ? "Registrer ny bruker" : "Logg inn"}
-            </CardTitle>
-            <CardDescription>Fyll inn brukerinformasjon</CardDescription>
-          </CardHeader>
-          <CardContent className="gap-y-2 flex flex-col">
-            <Label className="pt-2" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              placeholder="Skriv inn email..."
-              type="email"
-              required
-            />
-            <Label className="pt-2" htmlFor="password">
-              Passord
-            </Label>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Skriv inn passord... "
-              required
-              value={password}
-              onChange={(e) => updatePassword(e.target.value)}
-            />
+    <form
+      action={handleSubmit}
+      className="flex w-full max-w-lg max-h-1/2 flex-1"
+    >
+      <Card className="flex w-full flex-1">
+        <CardHeader>
+          <CardTitle className="text-center text-3xl">
+            {isSignUp ? "Registrer ny bruker" : "Logg inn"}
+          </CardTitle>
+          <CardDescription className="text-2xl text-center">
+            Fyll inn brukerinformasjon
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="gap-y-2 flex flex-col">
+          <Label className="pt-2 text-xl" htmlFor="email">
+            Email
+          </Label>
+          <Input
+            id="email"
+            name="email"
+            placeholder="Skriv inn email..."
+            type="email"
+            required
+          />
+          <Label className="pt-2 text-xl" htmlFor="password">
+            Passord
+          </Label>
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Skriv inn passord... "
+            required
+            value={password}
+            onChange={(e) => updatePassword(e.target.value)}
+          />
 
-            {isSignUp && (
-              <div>
-                <Label className="pt-2 pb-2" htmlFor="password-confirmation">
-                  Gjenta passord
-                </Label>
-                <Input
-                  type="password"
-                  value={validationPassword}
-                  name="password-confirmation"
-                  id="password-confirmation"
-                  placeholder="Gjenta passord..."
-                  required
-                  onChange={(e) => updateValidationPassword(e.target.value)}
-                />
-              </div>
-            )}
-          </CardContent>
-          <CardFooter className="flex-col gap-2 flex">
-            <Button>
-              {isPending ? (
-                <Loader2 className="animate-spin" />
-              ) : isSignUp ? (
-                "Registrer Bruker"
-              ) : (
-                "Logg Inn"
-              )}
-            </Button>
-            {validPasswordErrorMsg !== "" && (
-              <div className="text-red-400">{validPasswordErrorMsg}</div>
-            )}
+          {isSignUp && (
             <div>
-              <div className="text-xs">
-                {isSignUp ? (
-                  <div>
-                    Har du bruker?{" "}
-                    <Link href={"/login"} className="infoLink">
-                      {" "}
-                      Logg inn
-                    </Link>
-                  </div>
-                ) : (
-                  <div>
-                    Ingen bruker?{" "}
-                    <Link href={"/sign-up"} className="infoLink">
-                      Registrer bruker
-                    </Link>
-                  </div>
-                )}
-              </div>
+              <Label className="pt-2 pb-2" htmlFor="password-confirmation">
+                Gjenta passord
+              </Label>
+              <Input
+                type="password"
+                value={validationPassword}
+                name="password-confirmation"
+                id="password-confirmation"
+                placeholder="Gjenta passord..."
+                required
+                onChange={(e) => updateValidationPassword(e.target.value)}
+              />
             </div>
-          </CardFooter>
-        </Card>
-      </form>
-    </div>
+          )}
+        </CardContent>
+        <CardFooter className="flex-col gap-2 flex">
+          <Button>
+            {isPending ? (
+              <Loader2 className="animate-spin" />
+            ) : isSignUp ? (
+              "Registrer Bruker"
+            ) : (
+              "Logg Inn"
+            )}
+          </Button>
+          {validPasswordErrorMsg !== "" && (
+            <div className="text-red-400">{validPasswordErrorMsg}</div>
+          )}
+          <div>
+            <div className="text-xs">
+              {isSignUp ? (
+                <div>
+                  Har du bruker?{" "}
+                  <Link href={"/login"} className="infoLink">
+                    {" "}
+                    Logg inn
+                  </Link>
+                </div>
+              ) : (
+                <div>
+                  Ingen bruker?{" "}
+                  <Link href={"/sign-up"} className="infoLink">
+                    Registrer bruker
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </CardFooter>
+      </Card>
+    </form>
   );
 }
 

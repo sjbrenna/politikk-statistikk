@@ -40,7 +40,7 @@ export default function RootLayout({
         notoSans.variable,
       )}
     >
-      <body className="min-h-screen flex flex-col w-screen">
+      <body className="min-h-screen flex flex-col w-full">
         <Toaster />
         <ThemeProvider
           attribute="class"
@@ -49,7 +49,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
+          <main className="flex-1 flex w-full">{children}</main>
         </ThemeProvider>
       </body>
     </html>

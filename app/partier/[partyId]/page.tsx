@@ -1,26 +1,35 @@
-"use client";
-
 import { getPartyName } from "@/lib/stortinget/parties/partyResources";
-import Image from "next/image";
-import { useParams } from "next/navigation";
 import { PartyResourceId } from "@/lib/stortinget/parties/partyResources";
 import ContentContainer from "@/components/pageLayout/ContentContainer";
 import PageTitle from "@/components/pageLayout/PageTitle";
+import PartyInfoCard from "@/components/party/PartyInfoCard";
+import { prisma } from "@/prisma/prisma";
+import PartyPoliticianList from "@/components/party/PartyPoliticianList";
+import { Politician } from "@/lib/stortinget/types/politician";
 
-//Logo, navn, antall representanter
+type Props = {
+  params: Promise<{ partyId: string }>;
+};
 
-function page() {
-  const { partyId } = useParams();
-  const partyName = getPartyName(partyId as PartyResourceId);
+async function page({ params }: Props) {
+  const { partyId } = await params;
+  const partyPoliticians: Politician[] = await prisma.politician.findMany({
+    where: {
+      partyId: partyId,
+      representative: true,
+    },
+    include: { governmentRole: true },
+  });
   return (
-    <ContentContainer>
-      <PageTitle title={partyName} />
-      <Image
-        src={`/logos/${partyId}.png`}
-        alt="error"
-        width={48}
-        height={48}
-      ></Image>
+    <ContentContainer mode="half">
+      <PageTitle title={getPartyName(partyId as PartyResourceId)} />
+      <PartyInfoCard
+        partyId={partyId as PartyResourceId}
+        PoliticianCount={partyPoliticians.length}
+      />
+      <PartyPoliticianList
+        PoliticianList={partyPoliticians}
+      ></PartyPoliticianList>
     </ContentContainer>
   );
 }

@@ -46,3 +46,18 @@ export { Prisma }
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Party
+ * 
+ */
+export type Party = Prisma.PartyModel
+/**
+ * Model Politician
+ * 
+ */
+export type Politician = Prisma.PoliticianModel
+/**
+ * Model GovernmentRole
+ * 
+ */
+export type GovernmentRole = Prisma.GovernmentRoleModel

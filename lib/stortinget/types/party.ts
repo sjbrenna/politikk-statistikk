@@ -1,8 +1,6 @@
-export type Party = {
-  id: string;
-  name: string;
-  logoURL: string;
-};
+import { Prisma } from "@/prisma/generated/client";
+
+export type Party = Prisma.PartyGetPayload<{}>;
 
 export type ApiPartyItem = {
   respons_dato_tid: string;
