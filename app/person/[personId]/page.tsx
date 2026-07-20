@@ -18,20 +18,25 @@ type Props = {
 
 async function page({ params }: Props) {
   const personId = (await params).personId;
-  const Politician = await prisma.politician.findUnique({
+  const politician = await prisma.politician.findUnique({
     where: {
       id: personId,
     },
   });
-  const birthdayArray = Politician?.birthday.split("-");
-
-  if (!Politician) {
-    throw new Error("Could not find Politician");
+  const birthdayArray = politician?.birthday.split("-");
+  const govRole = await prisma.governmentRole.findUnique({
+    where: {
+      politicianId: personId,
+    },
+  });
+  console.log(govRole);
+  if (!politician) {
+    throw new Error("Could not find politician");
   }
   const personImageUrl =
     baseApi + `personbilde?personid=${personId}&storrelse=stort`;
   const partyColor = getPartyColor(
-    Politician.partyId as keyof typeof partyResources,
+    politician.partyId as keyof typeof partyResources,
   );
   return (
     <ContentContainer mode="half">
@@ -50,13 +55,13 @@ async function page({ params }: Props) {
         </div>
         <div className="flex-1 rounded-2xl border-2 flex flex-col p-2 gap-y-4">
           <div className="text-2xl font-bold">
-            {Politician.firstName + " " + Politician.lastName}
+            {politician.firstName + " " + politician.lastName}
           </div>
           <div className="text-2xl flex flex-row items-center gap-x-2">
             Parti:{" "}
             <div className="relative size-12 bg-white border-2 rounded-full">
               <Image
-                src={getPartyLogo(Politician.partyId as PartyResourceId)}
+                src={getPartyLogo(politician.partyId as PartyResourceId)}
                 fill
                 alt="logo"
                 sizes={"(max-width: 32px) 100vw, 64px"}
@@ -64,10 +69,10 @@ async function page({ params }: Props) {
               />
             </div>
             <Link
-              href={`/partier/${Politician.partyId}`}
+              href={`/partier/${politician.partyId}`}
               className="text-2xl hover:text-(--link-hover) flex flex-row items-center gap-x-2"
             >
-              {getPartyName(Politician.partyId as PartyResourceId)}
+              {getPartyName(politician.partyId as PartyResourceId)}
             </Link>
           </div>
           {birthdayArray && (
@@ -78,6 +83,12 @@ async function page({ params }: Props) {
                 birthdayArray[1] +
                 "." +
                 birthdayArray[0]}
+            </div>
+          )}
+          {govRole && (
+            <div className="gap-y-4 flex flex-col text-2xl">
+              <p>Regjeringsposisjon: {govRole.title}</p>
+              <p>Departement: {govRole.department}</p>
             </div>
           )}
         </div>
