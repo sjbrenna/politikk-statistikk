@@ -1,12 +1,8 @@
-import dateTimeXmlToJson from "@/lib/dateTimeXmlToJson";
-import { ApiGovernmentMember, GovernmentRole } from "../types/government";
-export const mapGovernmentRole = (
-  governmentRole: ApiGovernmentMember,
-): ApiGovernmentMember => {
+import formatXmlDate from "@/lib/formatXmlDate";
+import { ApiGovernmentMember } from "../types/government";
+export const mapGovernmentRole = (governmentRole: ApiGovernmentMember) => {
   return {
     ...governmentRole,
-    foedselsdato: dateTimeXmlToJson(governmentRole.foedselsdato)
-      .toISOString()
-      .split("T")[0],
+    foedselsdato: formatXmlDate(governmentRole.foedselsdato),
   };
 };

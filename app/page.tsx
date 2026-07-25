@@ -1,5 +1,10 @@
-import Image from "next/image";
+import CaseBasicList from "@/components/cases/CaseBasicList";
+import ContentContainer from "@/components/pageLayout/ContentContainer";
 
 export default function Home() {
-  return <div>HOME</div>;
+  return (
+    <ContentContainer mode="half">
+      <CaseBasicList></CaseBasicList>
+    </ContentContainer>
+  );
 }

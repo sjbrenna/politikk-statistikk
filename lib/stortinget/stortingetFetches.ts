@@ -8,6 +8,10 @@ import { ApiPartyResponse, Party } from "./types/party";
 import { ApiPeriodResponse } from "./types/period";
 import { ApiPoliticianResponse } from "./types/politician";
 import { mapGovernmentRole } from "./services/mapGovernmentRole";
+import { ApiSessionResponse } from "./types/session";
+import { mapSessions } from "./services/mapSessions";
+import { ApiCaseResponse, ApiDetailedCaseResponse } from "./types/case";
+import { mapCases } from "./services/mapCases";
 
 export const fetchCurrentParties = async () => {
   const curYear = new Date().getFullYear();
@@ -18,6 +22,11 @@ export const fetchCurrentParties = async () => {
   );
 
   return response.partier_liste.map(mapParty);
+};
+
+export const fetchSessions = async () => {
+  const response = await stortingFetch<ApiSessionResponse>("sesjoner");
+  return response.sesjoner_liste.map(mapSessions);
 };
 
 export const fetchPeriods = async () => {
@@ -32,6 +41,26 @@ export const fetchCurrentRepresentatives = async () => {
   );
 
   return response.representanter_liste.map(mapPolitician);
+};
+
+export const fetchCases = async (sessionId?: string) => {
+  const sessions = await fetchSessions();
+  let sessionParam = "";
+  if (sessionId && sessions.includes(sessionId)) {
+    sessionParam = "?sesjonid=" + sessionId;
+  }
+  const response = await stortingFetch<ApiCaseResponse>("saker" + sessionParam);
+  return response.saker_liste
+    .map(mapCases)
+    .sort((a, b) => b.sist_oppdatert_dato.localeCompare(a.sist_oppdatert_dato));
+};
+
+export const fetchCase = async (caseId: string) => {
+  console.log("sak?sakid=" + caseId);
+  const responseCase = await stortingFetch<ApiDetailedCaseResponse>(
+    "sak?sakid=" + caseId,
+  );
+  return responseCase;
 };
 
 export const fetchGovernmentRoles = async () => {

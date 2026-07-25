@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
 import { Toaster } from "sonner";
+import { CasesProvider } from "./providers/casesProvider";
+import { fetchCases } from "@/lib/stortinget/stortingetFetches";
 
 const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -22,11 +24,13 @@ export const metadata: Metadata = {
   title: "PolitikkStatistikk",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cases = await fetchCases();
+
   return (
     <html
       lang="en"
@@ -48,8 +52,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-1 flex w-full">{children}</main>
+          <CasesProvider initialCases={cases}>
+            <Header />
+            <main className="flex-1 flex w-full">{children}</main>
+          </CasesProvider>
         </ThemeProvider>
       </body>
     </html>
