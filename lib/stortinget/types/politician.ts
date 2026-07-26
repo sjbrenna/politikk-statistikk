@@ -1,3 +1,4 @@
+import { ApiCounty } from "./county";
 import { ApiPartyItem } from "./party";
 import { Prisma } from "@/prisma/generated/client";
 
@@ -16,13 +17,7 @@ export type ApiPolitician = {
   fornavn: string;
   id: string;
   kjoenn: string;
-  fylke: {
-    respons_dato_tid: string;
-    versjon: string;
-    historisk_fylke: boolean;
-    id: string;
-    navn: string;
-  };
+  fylke: ApiCounty;
   parti: ApiPartyItem;
   vara_representant: boolean;
 };
