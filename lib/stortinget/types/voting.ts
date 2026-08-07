@@ -1,19 +1,19 @@
 import { ApiPolitician } from "./politician";
 
-export type ApiCaseVotingOverview = {
+export type ApiVotingOverview = {
   respons_dato_tid: string;
   versjon: string;
   sak_id: string;
-  sak_votering_liste: ApiCaseVote[];
+  sak_votering_liste: ApiVote[];
 };
 
-export type ApiCaseVote = {
+export type ApiVote = {
   respons_dato_tid: string;
   versjon: string;
   alternativ_votering_id: string;
-  antall_for: string;
-  antall_ikke_tilstede: string;
-  antall_mot: string;
+  antall_for: number;
+  antall_ikke_tilstede: number;
+  antall_mot: number;
   behandlingsrekkefoelge: string;
   dagsorden_sak_nummer: string;
   fri_votering: string;
@@ -45,4 +45,25 @@ export type ApiVotingResult = {
   versjon: string;
   votering_id: string;
   voteringsvedtak_liste: ApiVotingDecision[];
+};
+
+export type ApiVotingSuggestion = {
+  respons_dato_tid: string;
+  versjon: string;
+  forslag_betegnelse: string;
+  forslag_betegnelse_kort: string;
+  forslag_id: string;
+  forslag_levert_av_parti_liste: string[];
+  forslag_levert_av_representant: string | null;
+  forslag_paa_vegne_av_tekst: string | null;
+  forslag_sorteringsnummer: number;
+  forslag_tekst: string;
+  forslag_type: string;
+};
+
+export type ApiVotingSuggestionOverview = {
+  respons_dato_tid: string;
+  versjon: string;
+  votering_id: string;
+  voteringsforslag_liste: ApiVotingSuggestion[];
 };

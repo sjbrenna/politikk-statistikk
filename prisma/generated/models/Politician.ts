@@ -192,6 +192,7 @@ export type PoliticianWhereInput = {
   representative?: Prisma.BoolFilter<"Politician"> | boolean
   party?: Prisma.XOR<Prisma.PartyScalarRelationFilter, Prisma.PartyWhereInput>
   governmentRole?: Prisma.XOR<Prisma.GovernmentRoleNullableScalarRelationFilter, Prisma.GovernmentRoleWhereInput> | null
+  votes?: Prisma.VoteRecordListRelationFilter
 }
 
 export type PoliticianOrderByWithRelationInput = {
@@ -203,6 +204,7 @@ export type PoliticianOrderByWithRelationInput = {
   representative?: Prisma.SortOrder
   party?: Prisma.PartyOrderByWithRelationInput
   governmentRole?: Prisma.GovernmentRoleOrderByWithRelationInput
+  votes?: Prisma.VoteRecordOrderByRelationAggregateInput
 }
 
 export type PoliticianWhereUniqueInput = Prisma.AtLeast<{
@@ -217,6 +219,7 @@ export type PoliticianWhereUniqueInput = Prisma.AtLeast<{
   representative?: Prisma.BoolFilter<"Politician"> | boolean
   party?: Prisma.XOR<Prisma.PartyScalarRelationFilter, Prisma.PartyWhereInput>
   governmentRole?: Prisma.XOR<Prisma.GovernmentRoleNullableScalarRelationFilter, Prisma.GovernmentRoleWhereInput> | null
+  votes?: Prisma.VoteRecordListRelationFilter
 }, "id">
 
 export type PoliticianOrderByWithAggregationInput = {
@@ -251,6 +254,7 @@ export type PoliticianCreateInput = {
   representative: boolean
   party: Prisma.PartyCreateNestedOneWithoutPoliticiansInput
   governmentRole?: Prisma.GovernmentRoleCreateNestedOneWithoutPoliticianInput
+  votes?: Prisma.VoteRecordCreateNestedManyWithoutPoliticianInput
 }
 
 export type PoliticianUncheckedCreateInput = {
@@ -261,6 +265,7 @@ export type PoliticianUncheckedCreateInput = {
   partyId: string
   representative: boolean
   governmentRole?: Prisma.GovernmentRoleUncheckedCreateNestedOneWithoutPoliticianInput
+  votes?: Prisma.VoteRecordUncheckedCreateNestedManyWithoutPoliticianInput
 }
 
 export type PoliticianUpdateInput = {
@@ -271,6 +276,7 @@ export type PoliticianUpdateInput = {
   representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
   party?: Prisma.PartyUpdateOneRequiredWithoutPoliticiansNestedInput
   governmentRole?: Prisma.GovernmentRoleUpdateOneWithoutPoliticianNestedInput
+  votes?: Prisma.VoteRecordUpdateManyWithoutPoliticianNestedInput
 }
 
 export type PoliticianUncheckedUpdateInput = {
@@ -281,6 +287,7 @@ export type PoliticianUncheckedUpdateInput = {
   partyId?: Prisma.StringFieldUpdateOperationsInput | string
   representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
   governmentRole?: Prisma.GovernmentRoleUncheckedUpdateOneWithoutPoliticianNestedInput
+  votes?: Prisma.VoteRecordUncheckedUpdateManyWithoutPoliticianNestedInput
 }
 
 export type PoliticianCreateManyInput = {
@@ -319,6 +326,11 @@ export type PoliticianOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type PoliticianScalarRelationFilter = {
+  is?: Prisma.PoliticianWhereInput
+  isNot?: Prisma.PoliticianWhereInput
+}
+
 export type PoliticianCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
@@ -344,11 +356,6 @@ export type PoliticianMinOrderByAggregateInput = {
   birthday?: Prisma.SortOrder
   partyId?: Prisma.SortOrder
   representative?: Prisma.SortOrder
-}
-
-export type PoliticianScalarRelationFilter = {
-  is?: Prisma.PoliticianWhereInput
-  isNot?: Prisma.PoliticianWhereInput
 }
 
 export type PoliticianCreateNestedManyWithoutPartyInput = {
@@ -393,6 +400,20 @@ export type PoliticianUncheckedUpdateManyWithoutPartyNestedInput = {
   deleteMany?: Prisma.PoliticianScalarWhereInput | Prisma.PoliticianScalarWhereInput[]
 }
 
+export type PoliticianCreateNestedOneWithoutVotesInput = {
+  create?: Prisma.XOR<Prisma.PoliticianCreateWithoutVotesInput, Prisma.PoliticianUncheckedCreateWithoutVotesInput>
+  connectOrCreate?: Prisma.PoliticianCreateOrConnectWithoutVotesInput
+  connect?: Prisma.PoliticianWhereUniqueInput
+}
+
+export type PoliticianUpdateOneRequiredWithoutVotesNestedInput = {
+  create?: Prisma.XOR<Prisma.PoliticianCreateWithoutVotesInput, Prisma.PoliticianUncheckedCreateWithoutVotesInput>
+  connectOrCreate?: Prisma.PoliticianCreateOrConnectWithoutVotesInput
+  upsert?: Prisma.PoliticianUpsertWithoutVotesInput
+  connect?: Prisma.PoliticianWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PoliticianUpdateToOneWithWhereWithoutVotesInput, Prisma.PoliticianUpdateWithoutVotesInput>, Prisma.PoliticianUncheckedUpdateWithoutVotesInput>
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
@@ -418,6 +439,7 @@ export type PoliticianCreateWithoutPartyInput = {
   birthday: string
   representative: boolean
   governmentRole?: Prisma.GovernmentRoleCreateNestedOneWithoutPoliticianInput
+  votes?: Prisma.VoteRecordCreateNestedManyWithoutPoliticianInput
 }
 
 export type PoliticianUncheckedCreateWithoutPartyInput = {
@@ -427,6 +449,7 @@ export type PoliticianUncheckedCreateWithoutPartyInput = {
   birthday: string
   representative: boolean
   governmentRole?: Prisma.GovernmentRoleUncheckedCreateNestedOneWithoutPoliticianInput
+  votes?: Prisma.VoteRecordUncheckedCreateNestedManyWithoutPoliticianInput
 }
 
 export type PoliticianCreateOrConnectWithoutPartyInput = {
@@ -467,6 +490,62 @@ export type PoliticianScalarWhereInput = {
   representative?: Prisma.BoolFilter<"Politician"> | boolean
 }
 
+export type PoliticianCreateWithoutVotesInput = {
+  id: string
+  firstName: string
+  lastName: string
+  birthday: string
+  representative: boolean
+  party: Prisma.PartyCreateNestedOneWithoutPoliticiansInput
+  governmentRole?: Prisma.GovernmentRoleCreateNestedOneWithoutPoliticianInput
+}
+
+export type PoliticianUncheckedCreateWithoutVotesInput = {
+  id: string
+  firstName: string
+  lastName: string
+  birthday: string
+  partyId: string
+  representative: boolean
+  governmentRole?: Prisma.GovernmentRoleUncheckedCreateNestedOneWithoutPoliticianInput
+}
+
+export type PoliticianCreateOrConnectWithoutVotesInput = {
+  where: Prisma.PoliticianWhereUniqueInput
+  create: Prisma.XOR<Prisma.PoliticianCreateWithoutVotesInput, Prisma.PoliticianUncheckedCreateWithoutVotesInput>
+}
+
+export type PoliticianUpsertWithoutVotesInput = {
+  update: Prisma.XOR<Prisma.PoliticianUpdateWithoutVotesInput, Prisma.PoliticianUncheckedUpdateWithoutVotesInput>
+  create: Prisma.XOR<Prisma.PoliticianCreateWithoutVotesInput, Prisma.PoliticianUncheckedCreateWithoutVotesInput>
+  where?: Prisma.PoliticianWhereInput
+}
+
+export type PoliticianUpdateToOneWithWhereWithoutVotesInput = {
+  where?: Prisma.PoliticianWhereInput
+  data: Prisma.XOR<Prisma.PoliticianUpdateWithoutVotesInput, Prisma.PoliticianUncheckedUpdateWithoutVotesInput>
+}
+
+export type PoliticianUpdateWithoutVotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  birthday?: Prisma.StringFieldUpdateOperationsInput | string
+  representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  party?: Prisma.PartyUpdateOneRequiredWithoutPoliticiansNestedInput
+  governmentRole?: Prisma.GovernmentRoleUpdateOneWithoutPoliticianNestedInput
+}
+
+export type PoliticianUncheckedUpdateWithoutVotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  birthday?: Prisma.StringFieldUpdateOperationsInput | string
+  partyId?: Prisma.StringFieldUpdateOperationsInput | string
+  representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  governmentRole?: Prisma.GovernmentRoleUncheckedUpdateOneWithoutPoliticianNestedInput
+}
+
 export type PoliticianCreateWithoutGovernmentRoleInput = {
   id: string
   firstName: string
@@ -474,6 +553,7 @@ export type PoliticianCreateWithoutGovernmentRoleInput = {
   birthday: string
   representative: boolean
   party: Prisma.PartyCreateNestedOneWithoutPoliticiansInput
+  votes?: Prisma.VoteRecordCreateNestedManyWithoutPoliticianInput
 }
 
 export type PoliticianUncheckedCreateWithoutGovernmentRoleInput = {
@@ -483,6 +563,7 @@ export type PoliticianUncheckedCreateWithoutGovernmentRoleInput = {
   birthday: string
   partyId: string
   representative: boolean
+  votes?: Prisma.VoteRecordUncheckedCreateNestedManyWithoutPoliticianInput
 }
 
 export type PoliticianCreateOrConnectWithoutGovernmentRoleInput = {
@@ -508,6 +589,7 @@ export type PoliticianUpdateWithoutGovernmentRoleInput = {
   birthday?: Prisma.StringFieldUpdateOperationsInput | string
   representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
   party?: Prisma.PartyUpdateOneRequiredWithoutPoliticiansNestedInput
+  votes?: Prisma.VoteRecordUpdateManyWithoutPoliticianNestedInput
 }
 
 export type PoliticianUncheckedUpdateWithoutGovernmentRoleInput = {
@@ -517,6 +599,7 @@ export type PoliticianUncheckedUpdateWithoutGovernmentRoleInput = {
   birthday?: Prisma.StringFieldUpdateOperationsInput | string
   partyId?: Prisma.StringFieldUpdateOperationsInput | string
   representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  votes?: Prisma.VoteRecordUncheckedUpdateManyWithoutPoliticianNestedInput
 }
 
 export type PoliticianCreateManyPartyInput = {
@@ -534,6 +617,7 @@ export type PoliticianUpdateWithoutPartyInput = {
   birthday?: Prisma.StringFieldUpdateOperationsInput | string
   representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
   governmentRole?: Prisma.GovernmentRoleUpdateOneWithoutPoliticianNestedInput
+  votes?: Prisma.VoteRecordUpdateManyWithoutPoliticianNestedInput
 }
 
 export type PoliticianUncheckedUpdateWithoutPartyInput = {
@@ -543,6 +627,7 @@ export type PoliticianUncheckedUpdateWithoutPartyInput = {
   birthday?: Prisma.StringFieldUpdateOperationsInput | string
   representative?: Prisma.BoolFieldUpdateOperationsInput | boolean
   governmentRole?: Prisma.GovernmentRoleUncheckedUpdateOneWithoutPoliticianNestedInput
+  votes?: Prisma.VoteRecordUncheckedUpdateManyWithoutPoliticianNestedInput
 }
 
 export type PoliticianUncheckedUpdateManyWithoutPartyInput = {
@@ -554,6 +639,35 @@ export type PoliticianUncheckedUpdateManyWithoutPartyInput = {
 }
 
 
+/**
+ * Count Type PoliticianCountOutputType
+ */
+
+export type PoliticianCountOutputType = {
+  votes: number
+}
+
+export type PoliticianCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  votes?: boolean | PoliticianCountOutputTypeCountVotesArgs
+}
+
+/**
+ * PoliticianCountOutputType without action
+ */
+export type PoliticianCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PoliticianCountOutputType
+   */
+  select?: Prisma.PoliticianCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PoliticianCountOutputType without action
+ */
+export type PoliticianCountOutputTypeCountVotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.VoteRecordWhereInput
+}
+
 
 export type PoliticianSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -564,6 +678,8 @@ export type PoliticianSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   representative?: boolean
   party?: boolean | Prisma.PartyDefaultArgs<ExtArgs>
   governmentRole?: boolean | Prisma.Politician$governmentRoleArgs<ExtArgs>
+  votes?: boolean | Prisma.Politician$votesArgs<ExtArgs>
+  _count?: boolean | Prisma.PoliticianCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["politician"]>
 
 export type PoliticianSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -599,6 +715,8 @@ export type PoliticianOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type PoliticianInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   party?: boolean | Prisma.PartyDefaultArgs<ExtArgs>
   governmentRole?: boolean | Prisma.Politician$governmentRoleArgs<ExtArgs>
+  votes?: boolean | Prisma.Politician$votesArgs<ExtArgs>
+  _count?: boolean | Prisma.PoliticianCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PoliticianIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   party?: boolean | Prisma.PartyDefaultArgs<ExtArgs>
@@ -612,6 +730,7 @@ export type $PoliticianPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     party: Prisma.$PartyPayload<ExtArgs>
     governmentRole: Prisma.$GovernmentRolePayload<ExtArgs> | null
+    votes: Prisma.$VoteRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1016,6 +1135,7 @@ export interface Prisma__PoliticianClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   party<T extends Prisma.PartyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PartyDefaultArgs<ExtArgs>>): Prisma.Prisma__PartyClient<runtime.Types.Result.GetResult<Prisma.$PartyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   governmentRole<T extends Prisma.Politician$governmentRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Politician$governmentRoleArgs<ExtArgs>>): Prisma.Prisma__GovernmentRoleClient<runtime.Types.Result.GetResult<Prisma.$GovernmentRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  votes<T extends Prisma.Politician$votesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Politician$votesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VoteRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1468,6 +1588,30 @@ export type Politician$governmentRoleArgs<ExtArgs extends runtime.Types.Extensio
    */
   include?: Prisma.GovernmentRoleInclude<ExtArgs> | null
   where?: Prisma.GovernmentRoleWhereInput
+}
+
+/**
+ * Politician.votes
+ */
+export type Politician$votesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the VoteRecord
+   */
+  select?: Prisma.VoteRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the VoteRecord
+   */
+  omit?: Prisma.VoteRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VoteRecordInclude<ExtArgs> | null
+  where?: Prisma.VoteRecordWhereInput
+  orderBy?: Prisma.VoteRecordOrderByWithRelationInput | Prisma.VoteRecordOrderByWithRelationInput[]
+  cursor?: Prisma.VoteRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.VoteRecordScalarFieldEnum | Prisma.VoteRecordScalarFieldEnum[]
 }
 
 /**

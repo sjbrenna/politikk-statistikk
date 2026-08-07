@@ -10,6 +10,8 @@
  */
 export type * from './models/User'
 export type * from './models/Party'
+export type * from './models/VoteRecord'
 export type * from './models/Politician'
 export type * from './models/GovernmentRole'
+export type * from './models/Subject'
 export type * from './commonInputTypes'

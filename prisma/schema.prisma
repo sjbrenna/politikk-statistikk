@@ -54,3 +54,13 @@ model GovernmentRole {
   title String
   role String
 }
+
+model Subject {
+  id            Int   @id
+  name          String   
+  isMainSubject Boolean
+
+  parentId Int?
+  parent   Subject?  @relation("SubjectHierarchy", fields: [parentId], references: [id])
+  children Subject[] @relation("SubjectHierarchy")
+}

@@ -5,6 +5,7 @@ import {
   fetchCurrentParties,
   fetchCurrentRepresentatives,
   fetchGovernmentRoles,
+  fetchSubjects,
 } from "./stortingetFetches";
 //fetch current parties, compare differences and update db
 export const syncParties = async () => {
@@ -67,5 +68,52 @@ export const syncPoliticians = async () => {
     console.log("FINISHED POLITICIANS");
   } catch (error) {
     throw new Error("Could not perform syncing of Politicians: " + error);
+  }
+};
+
+export const syncSubjects = async () => {
+  try {
+    const subjects = (await fetchSubjects()).emne_liste;
+    await Promise.all(
+      subjects.map((subject) =>
+        prisma.subject.upsert({
+          where: { id: subject.id },
+          update: {
+            name: subject.navn,
+            isMainSubject: subject.er_hovedemne,
+            parentId: null,
+          },
+          create: {
+            id: subject.id,
+            name: subject.navn,
+            isMainSubject: subject.er_hovedemne,
+            parentId: null,
+          },
+        }),
+      ),
+    );
+
+    await Promise.all(
+      subjects.flatMap((subject) =>
+        subject.underemne_liste.map((childSubject) =>
+          prisma.subject.upsert({
+            where: { id: childSubject.id },
+            update: {
+              name: childSubject.navn,
+              isMainSubject: false,
+              parentId: subject.id,
+            },
+            create: {
+              id: childSubject.id,
+              name: childSubject.navn,
+              isMainSubject: false,
+              parentId: subject.id,
+            },
+          }),
+        ),
+      ),
+    );
+  } catch (error) {
+    throw new Error("Could not perform syncing of subjects: " + error);
   }
 };

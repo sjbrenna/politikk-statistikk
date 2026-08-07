@@ -46,7 +46,10 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --link-hover: var(--primary);
+  --color-link-hover: var(--link-hover);
+  --color-accepted: var(--color-accepted);
+  --color-rejected: var(--color-rejected);
+  --color-absent: var(--color-absent);
 }
 
 :root {
@@ -82,9 +85,12 @@
   --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
   --sidebar-border: oklch(0.925 0.005 214.3);
   --sidebar-ring: oklch(0.723 0.014 214.4);
-  --link-hover: var(--primary);
+  --link-hover: oklch(0.623 0.214 259.815);
   --border-hover: var(--primary);
   --text-hover: var(--primary);
+  --color-accepted: var(--color-green-500);
+  --color-rejected: var(--color-red-600);
+  --color-absent: var(--color-slate-500);
 }
 
 .dark {
@@ -123,6 +129,7 @@
   --link-hover: oklch(0.715 0.143 215.221);
   --border-hover: var(--link-hover);
   --text-hover: var(--link-hover);
+  --color-absent: var(--color-slate-400);
 }
 
 /*Component specific styling*/
@@ -140,6 +147,15 @@
   }
   .navLink:hover {
     color: var(--link-hover);
+  }
+  .subTitle {
+    font-size: x-large;
+    font-weight: 600;
+  }
+
+  .minorSubTitle {
+    font-size: large;
+    font-weight: 600;
   }
 }
 

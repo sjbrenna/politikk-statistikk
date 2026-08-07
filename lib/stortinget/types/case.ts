@@ -1,10 +1,12 @@
 import { ApiCommittee } from "./committee";
 import { ApiPolitician } from "./politician";
 import { ApiPublication } from "./publication";
+import { ApiSubject } from "./subject";
 
-export const CASE_STATUS: Record<number, string> = {
-  2: "til_behandling",
-  3: "mottatt",
+export const CASE_STATUS: Record<string, string> = {
+  "1": "behandlet",
+  "2": "til_behandling",
+  "3": "mottatt",
 };
 
 export type Committee = {
@@ -14,22 +16,12 @@ export type Committee = {
   navn: string;
 };
 
-export type emne = {
-  respons_dato_tid: string;
-  versjon: string;
-  er_hovedemne: boolean;
-  hovedemne_id: string;
-  id: string;
-  navn: string;
-  underemne_liste: emne[];
-};
-
 export type ApiCase = {
   respons_dato_tid: string;
   versjon: string;
   behandlet_sesjon_id: string | null;
   dokumentgruppe: string;
-  emne_liste: emne[];
+  emne_liste: ApiSubject[];
   forslagstiller_liste: ApiPolitician[];
   henvisning: string;
   id: string;
@@ -55,7 +47,7 @@ export type ApiDetailedCaseResponse = {
   respons_dato_tid: string;
   versjon: string;
   dokumentgruppe: string;
-  emne_liste: emne[];
+  emne_liste: ApiSubject[];
   ferdigbehandlet: boolean;
   henvisning: string;
   id: string;

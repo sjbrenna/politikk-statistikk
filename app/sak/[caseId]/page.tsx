@@ -1,8 +1,9 @@
 import CasePageClient from "@/components/cases/CasePageClient";
 import {
   fetchCase,
-  fetchVoting,
+  fetchVotingOverview,
   fetchVotingResult,
+  fetchVotingSuggestionOverview,
 } from "@/lib/stortinget/stortingetFetches";
 
 type Props = {
@@ -16,9 +17,28 @@ export default async function CasePage({ params }: Props) {
 
   const sourceCase = await fetchCase(caseId);
 
-  const [votings, caseStatus] = sourceCase.ferdigbehandlet
-    ? await Promise.all([fetchVoting(caseId), fetchVotingResult(caseId)])
-    : [[], null];
+  const [votingOverview, votingResult] = sourceCase.ferdigbehandlet
+    ? await Promise.all([
+        fetchVotingOverview(caseId),
+        fetchVotingResult(caseId),
+      ])
+    : [null, null];
 
-  return <CasePageClient sourceCase={sourceCase} />;
+  const votingSuggestionOverview =
+    votingOverview !== null
+      ? await Promise.all(
+          votingOverview.sak_votering_liste.map((voting) =>
+            fetchVotingSuggestionOverview(voting.votering_id),
+          ),
+        )
+      : [];
+
+  return (
+    <CasePageClient
+      sourceCase={sourceCase}
+      votingOverview={votingOverview}
+      votingResult={votingResult}
+      votingSuggestionOverview={votingSuggestionOverview}
+    />
+  );
 }

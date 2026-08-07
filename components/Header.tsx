@@ -31,6 +31,9 @@ async function Header() {
         <Link href={"/temaer"} className="navLink">
           Temaer
         </Link>
+        <Link href={"/saker"} className="navLink">
+          Saker
+        </Link>
       </div>
       <div className="gap-x-2 flex flex-row">
         <Button hidden={user !== null}>

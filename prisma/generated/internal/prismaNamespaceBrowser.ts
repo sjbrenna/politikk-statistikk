@@ -53,8 +53,10 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Party: 'Party',
+  VoteRecord: 'VoteRecord',
   Politician: 'Politician',
-  GovernmentRole: 'GovernmentRole'
+  GovernmentRole: 'GovernmentRole',
+  Subject: 'Subject'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,6 +92,15 @@ export const PartyScalarFieldEnum = {
 export type PartyScalarFieldEnum = (typeof PartyScalarFieldEnum)[keyof typeof PartyScalarFieldEnum]
 
 
+export const VoteRecordScalarFieldEnum = {
+  politicianId: 'politicianId',
+  caseId: 'caseId',
+  voting: 'voting'
+} as const
+
+export type VoteRecordScalarFieldEnum = (typeof VoteRecordScalarFieldEnum)[keyof typeof VoteRecordScalarFieldEnum]
+
+
 export const PoliticianScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
@@ -112,6 +123,16 @@ export const GovernmentRoleScalarFieldEnum = {
 export type GovernmentRoleScalarFieldEnum = (typeof GovernmentRoleScalarFieldEnum)[keyof typeof GovernmentRoleScalarFieldEnum]
 
 
+export const SubjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  isMainSubject: 'isMainSubject',
+  parentId: 'parentId'
+} as const
+
+export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -126,4 +147,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

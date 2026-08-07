@@ -12,7 +12,12 @@ import { ApiSessionResponse } from "./types/session";
 import { mapSessions } from "./services/mapSessions";
 import { ApiCaseResponse, ApiDetailedCaseResponse } from "./types/case";
 import { mapCases } from "./services/mapCases";
-import { ApiCaseVotingOverview, ApiVotingResult } from "./types/voting";
+import {
+  ApiVotingOverview,
+  ApiVotingResult,
+  ApiVotingSuggestionOverview,
+} from "./types/voting";
+import { ApiSubjects } from "./types/subject";
 
 export const fetchCurrentParties = async () => {
   const curYear = new Date().getFullYear();
@@ -68,8 +73,8 @@ export const fetchGovernmentRoles = async () => {
   return response.regjeringsmedlemmer_liste.map(mapGovernmentRole);
 };
 
-export const fetchVoting = async (caseId: string) => {
-  const response = await stortingFetch<ApiCaseVotingOverview>(
+export const fetchVotingOverview = async (caseId: string) => {
+  const response = await stortingFetch<ApiVotingOverview>(
     "voteringer?sakid=" + caseId,
   );
   return response;
@@ -79,4 +84,17 @@ export const fetchVotingResult = async (votingId: string) => {
   const response = await stortingFetch<ApiVotingResult>(
     "voteringsvedtak?voteringid=" + votingId,
   );
+  return response;
+};
+
+export const fetchSubjects = async () => {
+  const response = await stortingFetch<ApiSubjects>("emner");
+  return response;
+};
+
+export const fetchVotingSuggestionOverview = async (votingId: string) => {
+  const response = await stortingFetch<ApiVotingSuggestionOverview>(
+    "/voteringsforslag?voteringid=" + votingId,
+  );
+  return response;
 };
