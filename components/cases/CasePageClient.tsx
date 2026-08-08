@@ -50,12 +50,17 @@ export default function CasePageClient({
     <ContentContainer mode="half">
       <PageTitle
         header={
-          <Link
-            href={"/saker"}
-            className="infoLink flex flex-row flex-wrap text-xl"
-          >
-            <ArrowLeft /> Tilbake til oversikten over saker
-          </Link>
+          <div className="flex flex-col gap-y-2">
+            <Link
+              href={"/saker"}
+              className="infoLink flex flex-row flex-wrap text-xl"
+            >
+              <ArrowLeft /> Tilbake til oversikten over saker
+            </Link>
+            <p className="text-4xl font-semibold flex flex-row flex-wrap break-all">
+              {sourceCase.korttittel}
+            </p>
+          </div>
         }
         title={sourceCase.korttittel}
       >
