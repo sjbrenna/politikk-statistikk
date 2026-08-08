@@ -9,7 +9,9 @@ type Props = {
 function SubjectButton({ subjectId, subjectName }: Props) {
   return (
     <Link href={"/temaer/" + subjectId.toString()}>
-      <Button>{subjectName}</Button>
+      <Button className="flex h-auto min-w-0 flex-wrap whitespace-normal">
+        {subjectName}
+      </Button>
     </Link>
   );
 }

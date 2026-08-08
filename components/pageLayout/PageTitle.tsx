@@ -3,9 +3,10 @@ import { ReactNode } from "react";
 type Props = {
   title: String;
   children?: ReactNode;
+  header?: React.ReactNode;
 };
 
-function PageTitle({ title, children }: Props) {
+function PageTitle({ title, children, header }: Props) {
   return (
     <div
       className="
@@ -15,12 +16,16 @@ function PageTitle({ title, children }: Props) {
         justify-center p-4 gap-y-6 text-primary-foreground
       "
     >
-      <p
-        className="text-3xl font-semibold wrap-break-word min-w-0
+      {header ? (
+        header
+      ) : (
+        <p
+          className="text-3xl font-semibold wrap-break-word min-w-0
       "
-      >
-        {title}
-      </p>
+        >
+          {title}
+        </p>
+      )}
 
       {children}
     </div>

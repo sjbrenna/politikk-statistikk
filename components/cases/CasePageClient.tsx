@@ -1,6 +1,11 @@
 "use client";
 
-import { Calendar, Hash, LucideSquareArrowOutUpRight } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  Hash,
+  LucideSquareArrowOutUpRight,
+} from "lucide-react";
 import ContentContainer from "../pageLayout/ContentContainer";
 import PageTitle from "../pageLayout/PageTitle";
 import { useContext } from "react";
@@ -19,6 +24,7 @@ import ContentCard from "../pageLayout/ContentCard";
 import SubjectButton from "../SubjectButton";
 import CaseVotingMissing from "./CaseVotingMissing";
 import CaseVote from "./CaseVote";
+import Link from "next/link";
 
 type Props = {
   sourceCase: ApiDetailedCaseResponse;
@@ -42,7 +48,17 @@ export default function CasePageClient({
   )!.sist_oppdatert_dato;
   return (
     <ContentContainer mode="half">
-      <PageTitle title={sourceCase.korttittel}>
+      <PageTitle
+        header={
+          <Link
+            href={"/saker"}
+            className="infoLink flex flex-row flex-wrap text-xl"
+          >
+            <ArrowLeft /> Tilbake til oversikten over saker
+          </Link>
+        }
+        title={sourceCase.korttittel}
+      >
         <div className="flex flex-col gap-y-2 *">
           <InfoRow icon={<Calendar />}>Sist behandlet: {caseDate}</InfoRow>
           <InfoRow icon={<Hash />}>ID: {sourceCase.id}</InfoRow>
@@ -50,7 +66,7 @@ export default function CasePageClient({
           <InfoRow icon={<LucideSquareArrowOutUpRight />}>
             <a
               href={`https://www.stortinget.no/no/Saker-og-publikasjoner/Saker/Sak/?p=${sourceCase.id}`}
-              className="underline hover:text-(--link-hover) min-w-0 wrap-break-word"
+              className="underline hover:text-link-hover min-w-0 wrap-break-word"
             >
               Full dokumentasjon på Stortingets side
             </a>
