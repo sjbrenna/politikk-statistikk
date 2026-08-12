@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 type Props = {
-  title: String;
+  title?: String;
   children?: ReactNode;
   header?: React.ReactNode;
 };
@@ -16,16 +16,16 @@ function PageTitle({ title, children, header }: Props) {
         justify-center p-4 gap-y-6 text-primary-foreground
       "
     >
-      {header ? (
-        header
-      ) : (
-        <p
-          className="text-3xl font-semibold wrap-break-word min-w-0
+      {header
+        ? header
+        : title && (
+            <p
+              className="text-center text-3xl font-semibold wrap-break-word min-w-0
       "
-        >
-          {title}
-        </p>
-      )}
+            >
+              {title}
+            </p>
+          )}
 
       {children}
     </div>

@@ -10,8 +10,10 @@ function CaseCard({ caseSource }: Props) {
     <Link href={`/sak/${caseSource.id}`}>
       {" "}
       <div
-        className="flex flex-col w-full flex-1 border-2 min-h-24 rounded-2xl p-4 hover:border-(--border-hover) justify-between
-      group"
+        className="flex flex-col w-full flex-1 border-2 min-h-24 rounded-2xl p-4 
+        hover:border-(--border-hover) justify-between
+      group
+      bg-white"
       >
         <div className="flex flex-row justify-between">
           <p>ID: {caseSource.id}</p>

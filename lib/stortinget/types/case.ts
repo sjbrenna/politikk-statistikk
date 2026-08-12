@@ -5,7 +5,7 @@ import { ApiSubject } from "./subject";
 
 export const CASE_STATUS: Record<string, string> = {
   "1": "behandlet",
-  "2": "til_behandling",
+  "2": "til behandling",
   "3": "mottatt",
 };
 

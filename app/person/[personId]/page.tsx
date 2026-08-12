@@ -76,7 +76,7 @@ async function page({ params }: Props) {
               </div>
               <Link
                 href={`/partier/${politician.partyId}`}
-                className="text-2xl hover:text-(--link-hover) flex flex-row items-center gap-x-2"
+                className="text-2xl hover:text-link-hover flex flex-row items-center gap-x-2"
               >
                 {getPartyName(politician.partyId as PartyResourceId)}
               </Link>
@@ -94,18 +94,18 @@ async function page({ params }: Props) {
             </InfoRow>
           )}
           {govRole && (
-            <InfoRow>
-              <div>
+            <div className="flex flex-col gap-2">
+              <InfoRow>
                 <div>
                   <p className="font-semibold">Regjeringsposisjon:</p>
                   {govRole.title}
                 </div>
-                <div>
-                  <p className="font-semibold">Departement:</p>
-                  {govRole.department}
-                </div>
-              </div>
-            </InfoRow>
+              </InfoRow>
+              <InfoRow>
+                <p className="font-semibold">Departement:</p>
+                {govRole.department}
+              </InfoRow>
+            </div>
           )}
         </div>
       </ContentCard>

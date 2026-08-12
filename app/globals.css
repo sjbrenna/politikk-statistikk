@@ -148,14 +148,13 @@
   .navLink:hover {
     color: var(--link-hover);
   }
-  .subTitle {
-    font-size: x-large;
-    font-weight: 600;
+
+  .mainTitle {
+    @apply text-center text-6xl font-semibold w-full;
   }
 
-  .minorSubTitle {
-    font-size: large;
-    font-weight: 600;
+  .subTitle {
+    @apply text-2xl font-semibold;
   }
 }
 

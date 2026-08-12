@@ -11,9 +11,10 @@ async function Header() {
   return (
     <div
       className="bg-popover shadow-xl
-    border-b-2 relative flex h-24 w-full items-center justify-between gap-4 sm:px-3"
+    border-b-2  flex min-h-24 w-full items-center 
+    justify-between gap-4 sm:px-3"
     >
-      <div className="flex flex-row *:flex *:flex-row gap-8 items-center *:items-center *:hover:text-ace">
+      <div className="flex flex-row *:flex *:flex-row gap-8 items-center *:items-center *:hover:text-ace min-w-0 ">
         <Link href={"/"} className="navLink">
           <Image
             src="/flagg.png"
@@ -28,14 +29,14 @@ async function Header() {
         <Link href={"/partier"} className="navLink">
           Partier
         </Link>
-        <Link href={"/temaer"} className="navLink">
-          Temaer
-        </Link>
         <Link href={"/saker"} className="navLink">
           Saker
         </Link>
+        <Link href={"/regjeringen"} className="navLink">
+          Regjeringen
+        </Link>
       </div>
-      <div className="gap-x-2 flex flex-row">
+      <div className="gap-x-2 flex flex-row min-w-0">
         <Button hidden={user !== null}>
           <Link href={"/sign-up"}>Registrer Bruker</Link>
         </Button>
