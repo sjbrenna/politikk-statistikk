@@ -16,15 +16,16 @@ function PartyLogoButton({ partyId }: Props) {
       key={partyId}
       asChild
       size="icon"
-      className="sm:size-18 relative rounded-full p-0 flex items-center justify-center"
-      variant="white"
+      className="sm:size-18 relative rounded-full flex items-center justify-center"
+      variant={"white"}
     >
       <Link href={`/partier/${partyId.toUpperCase()}`}>
         <Image
           src={getPartyLogo(partyId as PartyResourceId)}
           alt={partyId}
-          className="object-fill p-2"
+          className="object-fill p-3"
           fill
+          sizes="(min-width: 640px) 72px, 40px"
         />
       </Link>
     </Button>

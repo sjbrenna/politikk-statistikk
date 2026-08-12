@@ -26,11 +26,11 @@ async function Header() {
           />
           <p>Politikk Statistikk</p>
         </Link>
-        <Link href={"/partier"} className="navLink">
-          Partier
-        </Link>
         <Link href={"/saker"} className="navLink">
           Saker
+        </Link>
+        <Link href={"/temaer"} className="navLink">
+          Temaer
         </Link>
         <Link href={"/regjeringen"} className="navLink">
           Regjeringen

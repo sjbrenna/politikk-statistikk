@@ -7,11 +7,17 @@ export default function Home() {
   return (
     <ContentContainer mode="half">
       <ContentCard
-        header={<div className="pl-4">Partier representert på Stortinget</div>}
+        header={
+          <div className="pl-4 wrap-break-word">
+            Partier representert på Stortinget
+          </div>
+        }
       >
         <PartyLogos />
       </ContentCard>
-      <ContentCard header={<div className="pl-4">Nyeste saker</div>}>
+      <ContentCard
+        header={<div className="pl-4 wrap-break-word">Nyeste saker</div>}
+      >
         <CaseBasicList />
       </ContentCard>
     </ContentContainer>
