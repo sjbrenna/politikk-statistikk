@@ -50,6 +50,7 @@
   --color-accepted: var(--color-accepted);
   --color-rejected: var(--color-rejected);
   --color-absent: var(--color-absent);
+  --color-div-hover: var(--div-hover);
 }
 
 :root {
@@ -65,7 +66,7 @@
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.963 0.002 197.1);
   --muted-foreground: oklch(91.738% 0.02198 211.286);
-  --accent: oklch(0.52 0.105 223.128);
+  --accent: oklch(63.276% 0.10429 220.73);
   --accent-foreground: oklch(0.984 0.019 200.873);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.925 0.005 214.3);
@@ -91,6 +92,7 @@
   --color-accepted: var(--color-green-500);
   --color-rejected: var(--color-red-600);
   --color-absent: var(--color-slate-500);
+  --div-hover: oklch(84.947% 0.07735 250.529);
 }
 
 .dark {
@@ -130,6 +132,7 @@
   --border-hover: var(--link-hover);
   --text-hover: var(--link-hover);
   --color-absent: var(--color-slate-400);
+  --div-hover: oklch(35.36% 0.03067 248.743 / 0.836);
 }
 
 /*Component specific styling*/

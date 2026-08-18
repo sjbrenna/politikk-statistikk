@@ -36,7 +36,6 @@ type Props = {
 export default function CasePageClient({
   sourceCase,
   votingOverview,
-  votingResult,
   votingSuggestionOverview,
 }: Props) {
   console.log(votingSuggestionOverview);

@@ -1,5 +1,4 @@
 "use client";
-//Basic overview page, basic information for each case of the latest cases, cutoff at a given number with a link for total list
 
 import { CasesProviderContext } from "@/app/providers/casesProvider";
 import { useContext, useState } from "react";
@@ -8,18 +7,14 @@ import { ApiCase } from "@/lib/stortinget/types/case";
 
 type Props = {
   propsCases?: ApiCase[];
-  pageSettings?: { paginated: boolean; casesPerPage: number };
 };
-//If paginated render pages and cutoff
-function CaseBasicList({ propsCases, pageSettings }: Props) {
+function OverviewCaseList({ propsCases }: Props) {
   const cases = useContext(CasesProviderContext);
-  const [curPage, setCurPage] = useState(1);
   const renderedCases = propsCases ?? cases.cases ?? null;
-  const pageCases = pageSettings && renderedCases.slice();
-  //slice renderedCases based on curpage
+  console.log("CASES: ", renderedCases);
   return (
-    <div className="flex flex-col m-2 p-2 w-full gap-y-2">
-      {renderedCases ? (
+    <div className="flex flex-col w-full gap-y-2">
+      {renderedCases.length !== 0 ? (
         renderedCases.map((c) => (
           <CaseCard caseSource={c} key={c.id}></CaseCard>
         ))
@@ -30,4 +25,4 @@ function CaseBasicList({ propsCases, pageSettings }: Props) {
   );
 }
 
-export default CaseBasicList;
+export default OverviewCaseList;

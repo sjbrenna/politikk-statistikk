@@ -34,7 +34,7 @@ function PartyPoliticianList({ PoliticianList }: Props) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Søk etter representant..."
-            className="w-1/2 self-end"
+            className="w-1/2 self-end placeholder:text-foreground h-10"
           />
         </div>
         {repList && (

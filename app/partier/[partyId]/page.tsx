@@ -27,9 +27,7 @@ async function page({ params }: Props) {
         partyId={partyId as PartyResourceId}
         PoliticianCount={partyPoliticians.length}
       />
-      <PartyPoliticianList
-        PoliticianList={partyPoliticians}
-      ></PartyPoliticianList>
+      <PartyPoliticianList PoliticianList={partyPoliticians} />{" "}
     </ContentContainer>
   );
 }

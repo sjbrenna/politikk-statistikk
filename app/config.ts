@@ -1,4 +1,4 @@
 export const config = {
   homepageCases: 10,
-  searchPageSize: 25,
+  caseOverviewPageSize: 20,
 };

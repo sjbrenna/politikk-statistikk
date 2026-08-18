@@ -1,3 +1,7 @@
+import { Prisma } from "@/prisma/generated/client";
+
+export type Subject = Prisma.SubjectGetPayload<{}>;
+
 export type ApiSubject = {
   respons_dato_tid: string;
   versjon: string;
