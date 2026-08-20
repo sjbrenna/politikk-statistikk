@@ -5,7 +5,7 @@ async function PartyLogos() {
   try {
     const parties = await prisma.party.findMany();
     return (
-      <div className="flex flex-row flex-wrap w-full items-center gap-x-4 justify-between">
+      <div className="flex flex-row flex-wrap w-full items-center gap-2 justify-between">
         {parties.map((party) => (
           <PartyLogoButton key={party.id} partyId={party.id} />
         ))}

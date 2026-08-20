@@ -21,8 +21,8 @@ function SubjectDropdown({ subjects, content, handleSubjectChange }: Props) {
       <DropdownMenuTrigger asChild>
         <Button
           className="bg-background border 
-          border-accent wrap-anywhere w-full 
-           whitespace-normal lg:h-10 h-10 text-foreground
+          border-accent overflow-hidden w-full 
+           whitespace-nowrap lg:h-10 h-10 text-foreground
            flex flex-row hover:bg-muted-foreground
           "
         >

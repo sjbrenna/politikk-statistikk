@@ -54,7 +54,17 @@ function CaseOverviewPageClient({ subjects }: Props) {
 
   return (
     <ContentContainer mode="half">
-      <PageTitle title={"Sakoversikt"} />
+      <PageTitle
+        header={
+          <div className="flex flex-col gap-y-4">
+            <p className="pageTitle self-center ">Sakoversikt</p>
+            <p>
+              Sakene er hentet fra Stortingets API. Sakene gjelder fra
+              stortingsperioden 2026-2027
+            </p>
+          </div>
+        }
+      />
       <ContentCard>
         <div
           className="flex flex-col lg:flex-row 

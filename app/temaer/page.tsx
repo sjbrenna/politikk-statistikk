@@ -1,6 +1,11 @@
-import SubjectOverviewClient from "@/components/SubjectOverviewClient";
+import SubjectOverviewClient from "@/components/clients/SubjectOverviewClient";
+import { prisma } from "@/prisma/prisma";
 
-function page() {
+async function page() {
+  const mainSubjects = prisma.subject.findMany({
+    where: { isMainSubject: true },
+  });
+  console.log(mainSubjects);
   return <SubjectOverviewClient></SubjectOverviewClient>;
 }
 

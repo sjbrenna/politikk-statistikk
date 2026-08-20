@@ -11,7 +11,7 @@ function PageTitle({ title, children, header }: Props) {
     <div
       className="
         flex flex-col
-        min-h-16 lg:min-h-24 h-fit w-full
+        min-h-24 lg:min-h-24 h-fit w-full
         rounded-b-xl bg-primary
         justify-center p-4 gap-y-6 text-primary-foreground
       "

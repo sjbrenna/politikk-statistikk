@@ -22,7 +22,13 @@ async function page({ params }: Props) {
   });
   return (
     <ContentContainer mode="half">
-      <PageTitle title={getPartyName(partyId as PartyResourceId)} />
+      <PageTitle
+        header={
+          <p className="pageTitle self-center">
+            {getPartyName(partyId as PartyResourceId)}
+          </p>
+        }
+      />
       <PartyInfoCard
         partyId={partyId as PartyResourceId}
         PoliticianCount={partyPoliticians.length}

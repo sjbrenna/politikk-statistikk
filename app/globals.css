@@ -151,13 +151,8 @@
   .navLink:hover {
     color: var(--link-hover);
   }
-
-  .mainTitle {
-    @apply text-center text-6xl font-semibold w-full;
-  }
-
-  .subTitle {
-    @apply text-2xl font-semibold;
+  .pageTitle {
+    @apply text-4xl font-semibold;
   }
 }
 

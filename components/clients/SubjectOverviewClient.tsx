@@ -1,5 +1,5 @@
-import ContentContainer from "./pageLayout/ContentContainer";
-import PageTitle from "./pageLayout/PageTitle";
+import ContentContainer from "../pageLayout/ContentContainer";
+import PageTitle from "../pageLayout/PageTitle";
 
 function SubjectOverviewClient() {
   return (
