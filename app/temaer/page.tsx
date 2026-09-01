@@ -2,11 +2,37 @@ import SubjectOverviewClient from "@/components/clients/SubjectOverviewClient";
 import { prisma } from "@/prisma/prisma";
 
 async function page() {
-  const mainSubjects = prisma.subject.findMany({
-    where: { isMainSubject: true },
+  const [mainSubjects, subSubjects] = await Promise.all([
+    prisma.subject.findMany({
+      where: { isMainSubject: true },
+    }),
+    prisma.subject.findMany({
+      where: { isMainSubject: false },
+    }),
+  ]);
+
+  const sortedMainSubjects = mainSubjects.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    } else {
+      return 1;
+    }
   });
-  console.log(mainSubjects);
-  return <SubjectOverviewClient></SubjectOverviewClient>;
+
+  const sortedSubSubjects = subSubjects.sort((a, b) => {
+    if (a.name < b.name) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+
+  return (
+    <SubjectOverviewClient
+      mainSubjects={sortedMainSubjects}
+      subSubjects={sortedSubSubjects}
+    />
+  );
 }
 
 export default page;

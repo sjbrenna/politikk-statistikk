@@ -5,12 +5,12 @@ import useDebounce from "@/app/hooks/useDebounce";
 import { CasesProviderContext } from "@/app/providers/casesProvider";
 import ContentContainer from "@/components/pageLayout/ContentContainer";
 import PageTitle from "@/components/pageLayout/PageTitle";
-import { Input } from "@/components/ui/input";
 import OverviewCaseList from "@/components/cases/OverviewCaseList";
 import FuncPagination from "@/components/FuncPagination";
 import { config } from "@/app/config";
 import ContentCard from "@/components/pageLayout/ContentCard";
 import SubjectDropdown from "@/components/SubjectDropdown";
+import SearchInput from "../SearchInput";
 
 type Props = {
   subjects: string[];
@@ -70,15 +70,12 @@ function CaseOverviewPageClient({ subjects }: Props) {
           className="flex flex-col lg:flex-row 
         flex-wrap gap-2 items-center"
         >
-          <Input
+          <SearchInput
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={setSearchQuery}
             placeholder="Søk etter tittel på sak..."
-            className="placeholder:text-foreground border 
-              border-accent w-full lg:flex-2
-          bg-background lg:min-h-10 min-h-10
-        "
           />
+
           <div className="lg:flex-1 w-full">
             {subjects.length !== 0 && (
               <SubjectDropdown

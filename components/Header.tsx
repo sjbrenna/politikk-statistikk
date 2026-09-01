@@ -3,11 +3,33 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DarkModeToggle } from "@/components/ui/darkModeToggle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { List } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const pathName = usePathname();
+
+  const isActive = (href: string) =>
+    pathName === href || pathName.startsWith(`${href}/`);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+
+    const handleResize = () => {
+      if (mediaQuery.matches) {
+        setOpen(false);
+      }
+    };
+
+    handleResize();
+    mediaQuery.addEventListener("change", handleResize);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -29,13 +51,22 @@ function Header() {
             <p>Politikk Statistikk</p>
           </Link>
           <div className="hidden lg:flex gap-x-4  pl-4">
-            <Link href={"/saker"} className="navLink ">
+            <Link
+              href={"/saker"}
+              className={`navLink ${isActive("/saker") && "text-link-hover"}`}
+            >
               Saker
             </Link>
-            <Link href={"/temaer"} className="navLink">
+            <Link
+              href={"/temaer"}
+              className={`navLink ${isActive("/temaer") && "text-link-hover"}`}
+            >
               Temaer
             </Link>
-            <Link href={"/regjeringen"} className="navLink">
+            <Link
+              href={"/regjeringen"}
+              className={`navLink ${isActive("/regjeringen") && "text-link-hover"}`}
+            >
               Regjeringen
             </Link>
           </div>
@@ -54,17 +85,31 @@ function Header() {
         </>
       </div>
       <div
-        className={`${open ? "flex flex-row gap-x-4 pl-4" : "hidden"} h-24 w-full bg-popover items-center`}
+        className={`${open ? "flex flex-row pl-4 justify-between" : "hidden"} h-24 w-full bg-popover items-center`}
       >
-        <Link href={"/saker"} className="navLink ">
-          Saker
-        </Link>
-        <Link href={"/temaer"} className="navLink">
-          Temaer
-        </Link>
-        <Link href={"/regjeringen"} className="navLink">
-          Regjeringen
-        </Link>
+        <div className="flex flex-row gap-x-4">
+          <Link
+            href={"/saker"}
+            className={`navLink ${isActive("/saker") && "text-link-hover"}`}
+          >
+            Saker
+          </Link>
+          <Link
+            href={"/temaer"}
+            className={`navLink ${isActive("/temaer") && "text-link-hover"}`}
+          >
+            Temaer
+          </Link>
+          <Link
+            href={"/regjeringen"}
+            className={`navLink ${isActive("/regjeringen") && "text-link-hover"}`}
+          >
+            Regjeringen
+          </Link>
+        </div>
+        <div className="mr-6">
+          <DarkModeToggle />
+        </div>
       </div>
     </div>
   );

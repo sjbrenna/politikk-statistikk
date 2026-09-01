@@ -58,14 +58,14 @@
   --foreground: oklch(0.148 0.004 228.8);
   --card: oklch(1 0 0);
   --card-foreground: oklch(97.565% 0.01425 231.493);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.97 0.01 250);
   --popover-foreground: oklch(0.148 0.004 228.8);
   --primary: oklch(28.648% 0.1272 265.008);
   --primary-foreground: oklch(0.984 0.019 200.873);
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.963 0.002 197.1);
-  --muted-foreground: oklch(91.738% 0.02198 211.286);
+  --muted-foreground: oklch(75.111% 0.07084 209.925);
   --accent: oklch(63.276% 0.10429 220.73);
   --accent-foreground: oklch(0.984 0.019 200.873);
   --destructive: oklch(0.577 0.245 27.325);
@@ -132,7 +132,7 @@
   --border-hover: var(--link-hover);
   --text-hover: var(--link-hover);
   --color-absent: var(--color-slate-400);
-  --div-hover: oklch(35.36% 0.03067 248.743 / 0.836);
+  --div-hover: oklch(50.858% 0.11908 251.389 / 0.836);
 }
 
 /*Component specific styling*/
@@ -153,6 +153,10 @@
   }
   .pageTitle {
     @apply text-4xl font-semibold;
+  }
+
+  .cardTitle {
+    @apply text-2xl font-semibold;
   }
 }
 

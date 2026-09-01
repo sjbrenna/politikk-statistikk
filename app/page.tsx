@@ -11,7 +11,7 @@ export default function Home() {
     <ContentContainer mode="half" className="mt-4">
       <ContentCard
         header={
-          <div className="pl-4 wrap-break-word">
+          <div className="pl-4 wrap-break-word cardTitle">
             Partier representert på Stortinget
           </div>
         }
@@ -20,7 +20,10 @@ export default function Home() {
       </ContentCard>
       <ContentCard
         header={
-          <div className="pl-4 wrap-break-word flex flex-row justify-between items-center flex-wrap">
+          <div
+            className="pl-4 wrap-break-word flex flex-row justify-between items-center 
+          flex-wrap cardTitle"
+          >
             <p>Nyeste saker</p>
             <Link
               href={"/saker"}

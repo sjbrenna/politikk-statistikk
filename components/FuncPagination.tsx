@@ -89,6 +89,7 @@ function FuncPagination({
                         onSubmit={(e) => {
                           e.preventDefault();
                           handlePageChange(Number(inputPage));
+                          window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
                       >
                         <Input
@@ -108,7 +109,10 @@ function FuncPagination({
               return (
                 <PaginationItem key={i}>
                   <PaginationNext
-                    onClick={() => handlePageChange(Number(currentPage) + 1)}
+                    onClick={() => {
+                      handlePageChange(Number(currentPage) + 1);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                   />
                 </PaginationItem>
               );
@@ -116,7 +120,10 @@ function FuncPagination({
               return (
                 <PaginationItem key={i}>
                   <PaginationPrevious
-                    onClick={() => handlePageChange(Number(currentPage) - 1)}
+                    onClick={() => {
+                      handlePageChange(Number(currentPage) - 1);
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                   />
                 </PaginationItem>
               );
@@ -125,7 +132,10 @@ function FuncPagination({
                 <PaginationItem key={i}>
                   <PaginationLink
                     isActive={pageNr === currentPage}
-                    onClick={() => handlePageChange(Number(pageNr))}
+                    onClick={() => {
+                      handlePageChange(Number(pageNr));
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
                   >
                     {pageNr}
                   </PaginationLink>
