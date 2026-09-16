@@ -1,12 +1,15 @@
 import { ApiCase } from "@/lib/stortinget/types/case";
 import Link from "next/link";
 import SubjectButton from "../SubjectButton";
+import VoteIndicator from "../votes/VoteIndicator";
+import { Voting } from "@/prisma/generated/enums";
 
 type Props = {
   caseSource: ApiCase;
+  vote?: Voting;
 };
 
-function CaseCard({ caseSource }: Props) {
+function CaseCard({ caseSource, vote }: Props) {
   return (
     <div
       className="flex flex-col w-full flex-1 border-2 min-h-24 rounded-2xl p-4 
@@ -15,8 +18,9 @@ function CaseCard({ caseSource }: Props) {
       bg-background
       "
     >
-      <div className="flex flex-row justify-between border-b-2">
+      <div className="flex flex-row justify-between border-b-2 items-center pb-2">
         <p>ID: {caseSource.id}</p>
+        {vote && <VoteIndicator vote={vote} />}
         <p>{caseSource.sist_oppdatert_dato}</p>
       </div>
       <Link href={`/sak/${caseSource.id}`}>

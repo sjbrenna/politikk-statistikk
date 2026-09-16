@@ -5,7 +5,7 @@ import PageTitle from "@/components/pageLayout/PageTitle";
 import PartyInfoCard from "@/components/party/PartyInfoCard";
 import { prisma } from "@/prisma/prisma";
 import PartyPoliticianList from "@/components/party/PartyPoliticianList";
-import { Politician } from "@/lib/stortinget/types/politician";
+import { PrismaPolitician } from "@/lib/stortinget/types/politician";
 
 type Props = {
   params: Promise<{ partyId: string }>;
@@ -13,13 +13,15 @@ type Props = {
 
 async function page({ params }: Props) {
   const { partyId } = await params;
-  const partyPoliticians: Politician[] = await prisma.politician.findMany({
-    where: {
-      partyId: partyId,
-      representative: true,
+  const partyPoliticians: PrismaPolitician[] = await prisma.politician.findMany(
+    {
+      where: {
+        partyId: partyId,
+        representative: true,
+      },
+      include: { governmentRole: true },
     },
-    include: { governmentRole: true },
-  });
+  );
   return (
     <ContentContainer mode="half">
       <PageTitle

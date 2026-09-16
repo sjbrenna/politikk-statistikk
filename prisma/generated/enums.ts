@@ -10,9 +10,9 @@
 */
 
 export const Voting = {
-  YES: 'YES',
-  NO: 'NO',
-  ABSTAINED: 'ABSTAINED'
+  FOR: 'FOR',
+  AGAINST: 'AGAINST',
+  ABSENT: 'ABSENT'
 } as const
 
 export type Voting = (typeof Voting)[keyof typeof Voting]

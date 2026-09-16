@@ -3,13 +3,19 @@
 
 import { Button } from "@/components/ui/button";
 import {
+  syncCaseVote,
   syncParties,
   syncPoliticians,
   syncSubjects,
+  syncAllCaseVotes,
 } from "@/lib/stortinget/stortingetSyncing";
 import { fetchCases, fetchSessions } from "@/lib/stortinget/stortingetFetches";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 function page() {
+  const [caseValue, setCaseValue] = useState("");
+
   const handlePartyClick = async () => {
     await syncParties();
   };
@@ -29,6 +35,15 @@ function page() {
   const handleSubjectsClick = async () => {
     await syncSubjects();
   };
+
+  const handleVotingClick = async () => {
+    await syncCaseVote(caseValue);
+  };
+
+  const handleAllVotingClick = async () => {
+    await syncAllCaseVotes();
+  };
+
   return (
     <div>
       <Button onClick={handlePartyClick}>Sync Parties</Button>
@@ -36,6 +51,15 @@ function page() {
       <Button onClick={handleSessionClick}>Sessions</Button>
       <Button onClick={handleCasesClick}>Cases</Button>
       <Button onClick={handleSubjectsClick}>Subjects</Button>
+      <div className="flex flex-col gap-2">
+        <Input
+          value={caseValue}
+          onChange={(e) => setCaseValue(e.target.value)}
+          className="w-20"
+        />
+        <Button onClick={handleVotingClick}>Voting</Button>
+      </div>
+      <Button onClick={handleAllVotingClick}>Sync All Case Votes</Button>
     </div>
   );
 }

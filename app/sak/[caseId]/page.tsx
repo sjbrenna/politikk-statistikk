@@ -1,4 +1,4 @@
-import CasePageClient from "@/components/cases/CasePageClient";
+import CasePageClient from "@/components/clients/CasePageClient";
 import {
   fetchCase,
   fetchVotingOverview,
@@ -37,7 +37,6 @@ export default async function CasePage({ params }: Props) {
     <CasePageClient
       sourceCase={sourceCase}
       votingOverview={votingOverview}
-      votingResult={votingResult}
       votingSuggestionOverview={votingSuggestionOverview}
     />
   );

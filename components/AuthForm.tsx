@@ -16,7 +16,7 @@ import { logInAction, signUpAction } from "@/app/server-actions/users";
 import { startTransition, useMemo, useState, useTransition } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import useDebounce from "@/app/hooks/useDebounce";
+import useDebounce from "@/hooks/useDebounce";
 import { MIN_PASSWORD_LENGTH } from "@/lib/consts";
 import { useRouter } from "next/navigation";
 

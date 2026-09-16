@@ -1,3 +1,4 @@
+import { Voting } from "@/prisma/generated/enums";
 import { ApiPolitician } from "./politician";
 
 export type ApiVotingOverview = {
@@ -40,11 +41,33 @@ export type ApiVotingDecision = {
   vedtak_tekst: string;
 };
 
+type VaraFor = {
+  respons_dato_tid: string;
+  versjon: string;
+  doedsdato: string | null;
+  etternavn: string;
+  foedselsdato: string;
+  fornavn: string;
+  id: string;
+  kjoenn: string;
+};
+
+type JSONVotingPossibilities = 1 | 2 | 3;
+
+type ApiRepresentativeVotingResult = {
+  respons_dato_tid: string;
+  versjon: string;
+  fast_vara_for: VaraFor | null;
+  representant: ApiPolitician;
+  vara_for: VaraFor | null;
+  votering: JSONVotingPossibilities;
+};
+
 export type ApiVotingResult = {
   respons_dato_tid: string;
   versjon: string;
   votering_id: string;
-  voteringsvedtak_liste: ApiVotingDecision[];
+  voteringsresultat_liste: ApiRepresentativeVotingResult[];
 };
 
 export type ApiVotingSuggestion = {
@@ -66,4 +89,11 @@ export type ApiVotingSuggestionOverview = {
   versjon: string;
   votering_id: string;
   voteringsforslag_liste: ApiVotingSuggestion[];
+};
+
+export type PrismaVoteRecord = {
+  polID: string;
+  vote: Voting;
+  caseID: string;
+  voteID: string;
 };

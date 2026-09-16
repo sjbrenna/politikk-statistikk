@@ -16,20 +16,18 @@ import {
 } from "@/lib/stortinget/types/case";
 import {
   ApiVotingOverview,
-  ApiVotingResult,
   ApiVotingSuggestionOverview,
 } from "@/lib/stortinget/types/voting";
 import InfoRow from "../InfoRow";
 import ContentCard from "../pageLayout/ContentCard";
 import SubjectButton from "../SubjectButton";
-import CaseVotingMissing from "./CaseVotingMissing";
-import CaseVote from "./CaseVote";
+import CaseVotingMissing from "../cases/CaseVotingMissing";
+import CaseVote from "../cases/CaseVote";
 import Link from "next/link";
 
 type Props = {
   sourceCase: ApiDetailedCaseResponse;
   votingOverview: ApiVotingOverview | null;
-  votingResult: ApiVotingResult | null;
   votingSuggestionOverview: ApiVotingSuggestionOverview[] | [];
 };
 

@@ -7,6 +7,7 @@ import ContentCard from "../pageLayout/ContentCard";
 import { useMemo, useState } from "react";
 import SearchInput from "../SearchInput";
 import SubjectOverviewCard from "../SubjectOverviewCard";
+import useDebounce from "@/hooks/useDebounce";
 
 type Props = {
   mainSubjects: Subject[];
@@ -15,6 +16,7 @@ type Props = {
 
 function SubjectOverviewClient({ mainSubjects, subSubjects }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
+
   const subjectHierarchy = useMemo(() => {
     const hierarchy = new Map<Subject, Subject[]>();
 
@@ -33,6 +35,18 @@ function SubjectOverviewClient({ mainSubjects, subSubjects }: Props) {
 
     return hierarchy;
   }, [mainSubjects, subSubjects]);
+  const debouncedQuery = useDebounce(searchQuery);
+
+  const filterSubjects = (subjects: [Subject, Subject[]][]) => {
+    let filtered = subjects.filter(
+      ([mainSub, subSubs]) =>
+        mainSub.name.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+        subSubs.some((subject) =>
+          subject.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
+        ),
+    );
+    return filtered;
+  };
 
   return (
     <ContentContainer mode="half">
@@ -59,10 +73,10 @@ function SubjectOverviewClient({ mainSubjects, subSubjects }: Props) {
       <ContentCard centered={true} className="pt-4">
         {" "}
         {subjectHierarchy.size !== 0 &&
-          Array.from(subjectHierarchy.entries()).map(
+          filterSubjects(Array.from(subjectHierarchy.entries())).map(
             ([keySubject, subSubjects], index) => (
               <SubjectOverviewCard
-                key={keySubject.id}
+                key={index}
                 sourceSubject={keySubject}
                 subSubjects={subSubjects}
               />

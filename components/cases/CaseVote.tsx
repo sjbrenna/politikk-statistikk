@@ -3,7 +3,7 @@
 import { ApiVote } from "@/lib/stortinget/types/voting";
 import ContentCard from "../pageLayout/ContentCard";
 import formatXmlDate from "@/lib/formatXmlDate";
-import VoteResults from "./VoteResults";
+import VoteResults from "../votes/VoteResults";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { SquareChevronDown, SquareChevronRight } from "lucide-react";

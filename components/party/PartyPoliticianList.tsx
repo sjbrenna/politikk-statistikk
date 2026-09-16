@@ -1,13 +1,13 @@
 "use client";
-import { Politician } from "@/lib/stortinget/types/politician";
+import { PrismaPolitician } from "@/lib/stortinget/types/politician";
 import ContentCard from "../pageLayout/ContentCard";
 import { Input } from "../ui/input";
-import useDebounce from "@/app/hooks/useDebounce";
+import useDebounce from "@/hooks/useDebounce";
 import { useState } from "react";
 import Link from "next/link";
 
 type Props = {
-  PoliticianList: Politician[];
+  PoliticianList: PrismaPolitician[];
 };
 
 function PartyPoliticianList({ PoliticianList }: Props) {
@@ -25,6 +25,9 @@ function PartyPoliticianList({ PoliticianList }: Props) {
     });
   }
 
+  repList = repList.sort((a, b) => {
+    return a.firstName < b.firstName ? -1 : 1;
+  });
   return (
     <ContentCard>
       <div className="flex flex-col w-full h-full">

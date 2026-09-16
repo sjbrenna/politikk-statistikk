@@ -40,12 +40,11 @@ export const fetchPeriods = async () => {
   return response.innevaerende_stortingsperiode.id;
 };
 
-export const fetchCurrentRepresentatives = async () => {
+export const fetchAllRepresentatives = async () => {
   const currentPeriod = await fetchPeriods();
   const response = await stortingFetch<ApiPoliticianResponse>(
-    `representanter?stortingsperiodeid=${currentPeriod}`,
+    `representanter?stortingsperiodeid=${currentPeriod}&vararepresentanter=true`,
   );
-
   return response.representanter_liste.map(mapPolitician);
 };
 
@@ -80,9 +79,9 @@ export const fetchVotingOverview = async (caseId: string) => {
   return response;
 };
 
-export const fetchVotingResult = async (votingId: string) => {
+export const fetchVotingResult = async (votingID: string) => {
   const response = await stortingFetch<ApiVotingResult>(
-    "voteringsvedtak?voteringid=" + votingId,
+    "voteringsresultat?voteringid=" + votingID,
   );
   return response;
 };

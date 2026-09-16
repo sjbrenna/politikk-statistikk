@@ -2,11 +2,7 @@ import { ApiCounty } from "./county";
 import { ApiPartyItem } from "./party";
 import { Prisma } from "@/prisma/generated/client";
 
-export type Politician = Prisma.PoliticianGetPayload<{
-  include: {
-    governmentRole: true;
-  };
-}>;
+export type PrismaPolitician = Prisma.PoliticianGetPayload<{}>;
 
 export type ApiPolitician = {
   respons_dato_tid: string;

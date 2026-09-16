@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import useDebounce from "@/app/hooks/useDebounce";
+import useDebounce from "@/hooks/useDebounce";
 import { CasesProviderContext } from "@/app/providers/casesProvider";
 import ContentContainer from "@/components/pageLayout/ContentContainer";
 import PageTitle from "@/components/pageLayout/PageTitle";
@@ -11,6 +11,7 @@ import { config } from "@/app/config";
 import ContentCard from "@/components/pageLayout/ContentCard";
 import SubjectDropdown from "@/components/SubjectDropdown";
 import SearchInput from "../SearchInput";
+import usePagination from "@/hooks/usePagination";
 
 type Props = {
   subjects: string[];
@@ -23,10 +24,6 @@ function CaseOverviewPageClient({ subjects }: Props) {
   const [selectedSubject, setSelectedSubject] = useState(
     subjectsWithDefault[0],
   );
-  const debouncedQuery = useDebounce(searchQuery);
-  const [curPage, setCurPage] = useState(1);
-  const cases = useContext(CasesProviderContext).cases;
-
   const filterCases = () => {
     let filteredCases = cases.filter((listCase) =>
       listCase.korttittel.toLowerCase().includes(debouncedQuery.toLowerCase()),
@@ -41,16 +38,19 @@ function CaseOverviewPageClient({ subjects }: Props) {
 
     return filteredCases;
   };
-
+  const debouncedQuery = useDebounce(searchQuery);
   const filteredCases = filterCases();
 
-  const startIndex = (curPage - 1) * config.caseOverviewPageSize;
-  const endIndex = startIndex + config.caseOverviewPageSize;
-  const casesToShow = filteredCases.slice(startIndex, endIndex);
+  const {
+    curPage,
+    setCurPage,
+    itemsToShow: casesToShow,
+  } = usePagination({ items: filteredCases, pageSize: config.pageSize });
+  const cases = useContext(CasesProviderContext).cases;
 
   useEffect(() => {
     setCurPage(1);
-  }, [debouncedQuery]);
+  }, [debouncedQuery, selectedSubject]);
 
   return (
     <ContentContainer mode="half">
@@ -92,7 +92,7 @@ function CaseOverviewPageClient({ subjects }: Props) {
           currentPage={curPage}
           handlePageChange={setCurPage}
           totalCases={filteredCases.length}
-          pageSize={config.caseOverviewPageSize}
+          pageSize={config.pageSize}
         />
       </ContentCard>
     </ContentContainer>

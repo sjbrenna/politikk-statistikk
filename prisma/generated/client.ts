@@ -52,11 +52,6 @@ export type User = Prisma.UserModel
  */
 export type Party = Prisma.PartyModel
 /**
- * Model VoteRecord
- * 
- */
-export type VoteRecord = Prisma.VoteRecordModel
-/**
  * Model Politician
  * 
  */
@@ -66,6 +61,11 @@ export type Politician = Prisma.PoliticianModel
  * 
  */
 export type GovernmentRole = Prisma.GovernmentRoleModel
+/**
+ * Model VoteRecord
+ * 
+ */
+export type VoteRecord = Prisma.VoteRecordModel
 /**
  * Model Subject
  * 

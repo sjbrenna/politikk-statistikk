@@ -53,9 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Party: 'Party',
-  VoteRecord: 'VoteRecord',
   Politician: 'Politician',
   GovernmentRole: 'GovernmentRole',
+  VoteRecord: 'VoteRecord',
   Subject: 'Subject'
 } as const
 
@@ -92,22 +92,14 @@ export const PartyScalarFieldEnum = {
 export type PartyScalarFieldEnum = (typeof PartyScalarFieldEnum)[keyof typeof PartyScalarFieldEnum]
 
 
-export const VoteRecordScalarFieldEnum = {
-  politicianId: 'politicianId',
-  caseId: 'caseId',
-  voting: 'voting'
-} as const
-
-export type VoteRecordScalarFieldEnum = (typeof VoteRecordScalarFieldEnum)[keyof typeof VoteRecordScalarFieldEnum]
-
-
 export const PoliticianScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
   lastName: 'lastName',
   birthday: 'birthday',
   partyId: 'partyId',
-  representative: 'representative'
+  representative: 'representative',
+  vara_representative: 'vara_representative'
 } as const
 
 export type PoliticianScalarFieldEnum = (typeof PoliticianScalarFieldEnum)[keyof typeof PoliticianScalarFieldEnum]
@@ -121,6 +113,16 @@ export const GovernmentRoleScalarFieldEnum = {
 } as const
 
 export type GovernmentRoleScalarFieldEnum = (typeof GovernmentRoleScalarFieldEnum)[keyof typeof GovernmentRoleScalarFieldEnum]
+
+
+export const VoteRecordScalarFieldEnum = {
+  politicianID: 'politicianID',
+  vote: 'vote',
+  caseID: 'caseID',
+  votingID: 'votingID'
+} as const
+
+export type VoteRecordScalarFieldEnum = (typeof VoteRecordScalarFieldEnum)[keyof typeof VoteRecordScalarFieldEnum]
 
 
 export const SubjectScalarFieldEnum = {

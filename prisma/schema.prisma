@@ -9,9 +9,9 @@ datasource db {
 }
 
 enum Voting {
-  YES @map("for")
-  NO @map("mot")
-  ABSTAINED @map("ikke_tilstede")
+  FOR @map("for")
+  AGAINST @map("mot")
+  ABSENT @map("ikke_tilstede")
 }
 model User {
   id String @id @default(uuid())
@@ -27,14 +27,6 @@ model Party {
   politicians Politician[]
 }
 
-model VoteRecord {
-  politicianId String
-  caseId String
-  politician Politician @relation(fields: [politicianId], references: [id])
-  voting Voting
-  @@id([politicianId, caseId])
-}
-
 model Politician {
   id String @id
   firstName String
@@ -44,6 +36,7 @@ model Politician {
   party Party @relation(fields: [partyId], references: [id])
   governmentRole GovernmentRole?
   representative Boolean
+  vara_representative Boolean @default(false)
   votes VoteRecord[]
 }
 
@@ -53,6 +46,15 @@ model GovernmentRole {
   department String
   title String
   role String
+}
+
+model VoteRecord {
+  politicianID String
+  politician Politician @relation(fields: [politicianID], references: [id])
+  vote Voting
+  caseID String
+  votingID String
+  @@unique([politicianID, votingID])
 }
 
 model Subject {
