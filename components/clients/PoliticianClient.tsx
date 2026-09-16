@@ -18,13 +18,15 @@ import {
   Politician,
   VoteRecord,
 } from "@/prisma/generated/client";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import OverviewCaseList from "../cases/OverviewCaseList";
 import FuncPagination from "../FuncPagination";
 import { config } from "@/app/config";
 import { CasesProviderContext } from "@/app/providers/casesProvider";
 import CaseCard from "../cases/CaseCard";
 import usePagination from "@/hooks/usePagination";
+import useSearch from "@/hooks/useSearch";
+import useDebounce from "@/hooks/useDebounce";
 
 type Props = {
   votes: VoteRecord[];
@@ -37,15 +39,22 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
   const politiciansCases = useContext(CasesProviderContext).cases.filter(
     (baseCase) => voteCaseIDs.has(baseCase.id.toString()),
   );
+  const { searchQuery, setSearchQuery, filteredItems } = useSearch({
+    filterFunc: (polCase, query) =>
+      polCase.korttittel.toLowerCase().includes(query.toLowerCase()),
+    items: politiciansCases,
+  });
 
   const {
     curPage,
     setCurPage,
     itemsToShow: casesToShow,
   } = usePagination({
-    items: politiciansCases,
+    items: filteredItems,
     pageSize: config.pageSize,
   });
+
+  const debouncedQuery = useDebounce(searchQuery);
 
   const personImageUrl =
     baseApi + `personbilde?personid=${politician.id}&storrelse=stort`;
@@ -53,6 +62,10 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
     politician.partyId as keyof typeof partyResources,
   );
   const birthdayArray = politician?.birthday.split("-");
+
+  useEffect(() => {
+    setCurPage(1);
+  }, [debouncedQuery]);
 
   return (
     <ContentContainer mode="half" className="mt-4">

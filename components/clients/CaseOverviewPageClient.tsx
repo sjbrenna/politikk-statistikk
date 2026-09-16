@@ -24,6 +24,8 @@ function CaseOverviewPageClient({ subjects }: Props) {
   const [selectedSubject, setSelectedSubject] = useState(
     subjectsWithDefault[0],
   );
+  const cases = useContext(CasesProviderContext).cases;
+
   const filterCases = () => {
     let filteredCases = cases.filter((listCase) =>
       listCase.korttittel.toLowerCase().includes(debouncedQuery.toLowerCase()),
@@ -46,7 +48,6 @@ function CaseOverviewPageClient({ subjects }: Props) {
     setCurPage,
     itemsToShow: casesToShow,
   } = usePagination({ items: filteredCases, pageSize: config.pageSize });
-  const cases = useContext(CasesProviderContext).cases;
 
   useEffect(() => {
     setCurPage(1);
