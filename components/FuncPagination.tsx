@@ -71,8 +71,9 @@ function FuncPagination({
     return pages;
   };
   const pages = getPageNumbers(currentPage, maxPages);
-
-  return (
+  return totalCases === 0 ? (
+    <p></p>
+  ) : (
     <Pagination>
       <PaginationContent>
         {pages.map((pageNr, i) => {

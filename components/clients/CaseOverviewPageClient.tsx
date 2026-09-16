@@ -51,7 +51,7 @@ function CaseOverviewPageClient({ subjects }: Props) {
 
   useEffect(() => {
     setCurPage(1);
-  }, [debouncedQuery, selectedSubject]);
+  }, [filteredCases, selectedSubject]);
 
   return (
     <ContentContainer mode="half">
@@ -92,7 +92,7 @@ function CaseOverviewPageClient({ subjects }: Props) {
         <FuncPagination
           currentPage={curPage}
           handlePageChange={setCurPage}
-          totalCases={filteredCases.length}
+          totalCases={casesToShow.length}
           pageSize={config.pageSize}
         />
       </ContentCard>

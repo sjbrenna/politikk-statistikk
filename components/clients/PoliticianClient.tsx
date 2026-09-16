@@ -27,6 +27,7 @@ import CaseCard from "../cases/CaseCard";
 import usePagination from "@/hooks/usePagination";
 import useSearch from "@/hooks/useSearch";
 import useDebounce from "@/hooks/useDebounce";
+import SearchInput from "../SearchInput";
 
 type Props = {
   votes: VoteRecord[];
@@ -54,8 +55,6 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
     pageSize: config.pageSize,
   });
 
-  const debouncedQuery = useDebounce(searchQuery);
-
   const personImageUrl =
     baseApi + `personbilde?personid=${politician.id}&storrelse=stort`;
   const partyColor = getPartyColor(
@@ -65,7 +64,7 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
 
   useEffect(() => {
     setCurPage(1);
-  }, [debouncedQuery]);
+  }, [searchQuery]);
 
   return (
     <ContentContainer mode="half" className="mt-4">
@@ -140,6 +139,16 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
         </div>
       </ContentCard>
       <ContentCard header={<p className="cardTitle pl-2">Siste stemmer:</p>}>
+        <div
+          className="className=flex flex-col lg:flex-row 
+        flex-wrap gap-2 items-center"
+        >
+          <SearchInput
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Søk etter tittel på sak..."
+          />
+        </div>
         <OverviewCaseList
           propsCases={casesToShow}
           renderCase={(caseItem) => {
@@ -158,7 +167,7 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
         <FuncPagination
           currentPage={curPage}
           handlePageChange={setCurPage}
-          totalCases={politiciansCases.length}
+          totalCases={filteredItems.length}
           pageSize={config.pageSize}
         />
       </ContentCard>
