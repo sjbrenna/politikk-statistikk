@@ -7,44 +7,46 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 type Props = {
-  subjects: string[];
-  content: string;
-  handleSubjectChange: React.Dispatch<React.SetStateAction<string>>;
+  items: string[];
+  selectedItem: string;
+  handleItemChange: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function SubjectDropdown({ subjects, content, handleSubjectChange }: Props) {
+function ItemDropdown({ items, selectedItem, handleItemChange }: Props) {
+  const [open, setOpen] = useState(false);
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button
           className="bg-background border 
           border-accent overflow-hidden w-full 
-           whitespace-nowrap lg:h-10 h-10 text-foreground
-           flex flex-row hover:bg-muted-foreground
+           whitespace-nowrap h-10 text-foreground
+           flex flex-row hover:bg-muted-foreground flex-1
           "
         >
-          {content}
-          <ArrowDown />
+          {selectedItem}
+          {open ? <ArrowDown /> : <ArrowRight />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {subjects.map((subjectName, i) => {
+        {items.map((item, i) => {
           return (
             <DropdownMenuItem
               key={i}
               className="border-b group hover:bg-div-hover"
               onClick={() => {
-                handleSubjectChange(subjectName);
+                handleItemChange(item);
               }}
             >
               <p
                 className="wrap-break-word text-xl
               text-foreground group-hover:text-link-hover"
               >
-                {subjectName}
+                {item}
               </p>
             </DropdownMenuItem>
           );
@@ -54,4 +56,4 @@ function SubjectDropdown({ subjects, content, handleSubjectChange }: Props) {
   );
 }
 
-export default SubjectDropdown;
+export default ItemDropdown;

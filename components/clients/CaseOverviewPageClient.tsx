@@ -9,7 +9,7 @@ import OverviewCaseList from "@/components/cases/OverviewCaseList";
 import FuncPagination from "@/components/FuncPagination";
 import { config } from "@/app/config";
 import ContentCard from "@/components/pageLayout/ContentCard";
-import SubjectDropdown from "@/components/SubjectDropdown";
+import SubjectDropdown from "@/components/ItemDropdown";
 import SearchInput from "../SearchInput";
 import usePagination from "@/hooks/usePagination";
 
@@ -80,9 +80,9 @@ function CaseOverviewPageClient({ subjects }: Props) {
           <div className="lg:flex-1 w-full">
             {subjects.length !== 0 && (
               <SubjectDropdown
-                subjects={subjectsWithDefault}
-                content={selectedSubject}
-                handleSubjectChange={setSelectedSubject}
+                items={subjectsWithDefault}
+                selectedItem={selectedSubject}
+                handleItemChange={setSelectedSubject}
               />
             )}
           </div>

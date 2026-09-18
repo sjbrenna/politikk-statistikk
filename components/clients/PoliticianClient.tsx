@@ -26,8 +26,9 @@ import { CasesProviderContext } from "@/app/providers/casesProvider";
 import CaseCard from "../cases/CaseCard";
 import usePagination from "@/hooks/usePagination";
 import useSearch from "@/hooks/useSearch";
-import useDebounce from "@/hooks/useDebounce";
 import SearchInput from "../SearchInput";
+import ItemDropdown from "../ItemDropdown";
+import VotingStatistics from "../votes/VotingStatistics";
 
 type Props = {
   votes: VoteRecord[];
@@ -36,16 +37,38 @@ type Props = {
 };
 
 function PoliticianClient({ votes, politician, govRole }: Props) {
+  const dropdownOptions = [
+    { label: "Filtrer basert på stemme...", value: null },
+    { label: "For", value: "FOR" },
+    { label: "Mot", value: "AGAINST" },
+    { label: "Ikke tilstede", value: "ABSENT" },
+  ];
+  const [curVoting, setCurVoting] = useState(dropdownOptions[0].label);
+  console.log(votes[1].vote);
+
   const voteCaseIDs = new Set(votes.map((vote) => vote.caseID));
   const politiciansCases = useContext(CasesProviderContext).cases.filter(
     (baseCase) => voteCaseIDs.has(baseCase.id.toString()),
   );
-  const { searchQuery, setSearchQuery, filteredItems } = useSearch({
+
+  let { searchQuery, setSearchQuery, filteredItems } = useSearch({
     filterFunc: (polCase, query) =>
       polCase.korttittel.toLowerCase().includes(query.toLowerCase()),
     items: politiciansCases,
   });
 
+  //Filter based on selected subject
+  if (curVoting !== dropdownOptions[0].label) {
+    const votingValue = dropdownOptions.find(
+      (option) => option.label === curVoting,
+    )?.value;
+
+    filteredItems = filteredItems.filter((item) => {
+      const vote = votes.find((vote) => vote.caseID === item.id);
+
+      return vote?.vote === votingValue;
+    });
+  }
   const {
     curPage,
     setCurPage,
@@ -138,15 +161,21 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
           )}
         </div>
       </ContentCard>
+      <VotingStatistics votes={votes} />
       <ContentCard header={<p className="cardTitle pl-2">Siste stemmer:</p>}>
         <div
-          className="className=flex flex-col lg:flex-row 
+          className="flex flex-col lg:flex-row 
         flex-wrap gap-2 items-center"
         >
           <SearchInput
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder="Søk etter tittel på sak..."
+          />
+          <ItemDropdown
+            items={dropdownOptions.map((option) => option.label)}
+            selectedItem={curVoting}
+            handleItemChange={setCurVoting}
           />
         </div>
         <OverviewCaseList
