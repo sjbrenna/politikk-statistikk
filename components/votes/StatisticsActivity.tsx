@@ -4,7 +4,7 @@ type Props = {
   votes: VoteRecord[];
 };
 
-function StatisticsPresence({ votes }: Props) {
+function StatisticsActivity({ votes }: Props) {
   const presenceCount = votes.filter((vote) => vote.vote !== "ABSENT").length;
 
   return (
@@ -15,4 +15,4 @@ function StatisticsPresence({ votes }: Props) {
   );
 }
 
-export default StatisticsPresence;
+export default StatisticsActivity;

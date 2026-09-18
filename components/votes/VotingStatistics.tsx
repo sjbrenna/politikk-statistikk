@@ -1,6 +1,6 @@
 import { VoteRecord } from "@/prisma/generated/client";
 import ContentCard from "../pageLayout/ContentCard";
-import StatisticsPresence from "./StatisticsPresence";
+import StatisticsActivity from "./StatisticsActivity";
 
 type Props = {
   votes: VoteRecord[];
@@ -9,7 +9,7 @@ type Props = {
 function VotingStatistics({ votes }: Props) {
   return (
     <ContentCard>
-      <StatisticsPresence votes={votes} />
+      <StatisticsActivity votes={votes} />
     </ContentCard>
   );
 }
