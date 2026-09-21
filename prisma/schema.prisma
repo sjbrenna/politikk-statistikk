@@ -38,6 +38,7 @@ model Politician {
   representative Boolean
   vara_representative Boolean @default(false)
   votes VoteRecord[]
+  committees Committee[]
 }
 
 model GovernmentRole {
@@ -62,7 +63,21 @@ model Subject {
   name          String   
   isMainSubject Boolean
 
+  caseMetadata CaseMetadata[] @relation("Subjects")
   parentId Int?
   parent   Subject?  @relation("SubjectHierarchy", fields: [parentId], references: [id])
   children Subject[] @relation("SubjectHierarchy")
+}
+
+model Committee {
+  id String @id
+  name String
+  members Politician[]
+}
+
+model CaseMetadata {
+  id String @id
+
+  subjects Subject[] @relation("Subjects")
+   
 }

@@ -389,7 +389,9 @@ export const ModelName = {
   Politician: 'Politician',
   GovernmentRole: 'GovernmentRole',
   VoteRecord: 'VoteRecord',
-  Subject: 'Subject'
+  Subject: 'Subject',
+  Committee: 'Committee',
+  CaseMetadata: 'CaseMetadata'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "party" | "politician" | "governmentRole" | "voteRecord" | "subject"
+    modelProps: "user" | "party" | "politician" | "governmentRole" | "voteRecord" | "subject" | "committee" | "caseMetadata"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +855,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Committee: {
+      payload: Prisma.$CommitteePayload<ExtArgs>
+      fields: Prisma.CommitteeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CommitteeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CommitteeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>
+        }
+        findFirst: {
+          args: Prisma.CommitteeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CommitteeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>
+        }
+        findMany: {
+          args: Prisma.CommitteeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>[]
+        }
+        create: {
+          args: Prisma.CommitteeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>
+        }
+        createMany: {
+          args: Prisma.CommitteeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CommitteeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>[]
+        }
+        delete: {
+          args: Prisma.CommitteeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>
+        }
+        update: {
+          args: Prisma.CommitteeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>
+        }
+        deleteMany: {
+          args: Prisma.CommitteeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CommitteeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CommitteeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>[]
+        }
+        upsert: {
+          args: Prisma.CommitteeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommitteePayload>
+        }
+        aggregate: {
+          args: Prisma.CommitteeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCommittee>
+        }
+        groupBy: {
+          args: Prisma.CommitteeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommitteeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CommitteeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CommitteeCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseMetadata: {
+      payload: Prisma.$CaseMetadataPayload<ExtArgs>
+      fields: Prisma.CaseMetadataFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseMetadataFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseMetadataFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseMetadataFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseMetadataFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>
+        }
+        findMany: {
+          args: Prisma.CaseMetadataFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>[]
+        }
+        create: {
+          args: Prisma.CaseMetadataCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>
+        }
+        createMany: {
+          args: Prisma.CaseMetadataCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseMetadataCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseMetadataDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>
+        }
+        update: {
+          args: Prisma.CaseMetadataUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseMetadataDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseMetadataUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseMetadataUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseMetadataUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseMetadataPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseMetadataAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseMetadata>
+        }
+        groupBy: {
+          args: Prisma.CaseMetadataGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseMetadataGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseMetadataCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseMetadataCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -950,6 +1100,21 @@ export const SubjectScalarFieldEnum = {
 } as const
 
 export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
+
+
+export const CommitteeScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type CommitteeScalarFieldEnum = (typeof CommitteeScalarFieldEnum)[keyof typeof CommitteeScalarFieldEnum]
+
+
+export const CaseMetadataScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type CaseMetadataScalarFieldEnum = (typeof CaseMetadataScalarFieldEnum)[keyof typeof CaseMetadataScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1160,6 +1325,8 @@ export type GlobalOmitConfig = {
   governmentRole?: Prisma.GovernmentRoleOmit
   voteRecord?: Prisma.VoteRecordOmit
   subject?: Prisma.SubjectOmit
+  committee?: Prisma.CommitteeOmit
+  caseMetadata?: Prisma.CaseMetadataOmit
 }
 
 /* Types for Logging */

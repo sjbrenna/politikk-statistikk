@@ -4,6 +4,7 @@
 import { Button } from "@/components/ui/button";
 import {
   syncCaseVote,
+  syncCommittees,
   syncParties,
   syncPoliticians,
   syncSubjects,
@@ -36,6 +37,10 @@ function page() {
     await syncSubjects();
   };
 
+  const handleCommitteesClick = async () => {
+    await syncCommittees();
+  };
+
   const handleVotingClick = async () => {
     await syncCaseVote(caseValue);
   };
@@ -51,6 +56,7 @@ function page() {
       <Button onClick={handleSessionClick}>Sessions</Button>
       <Button onClick={handleCasesClick}>Cases</Button>
       <Button onClick={handleSubjectsClick}>Subjects</Button>
+      <Button onClick={handleCommitteesClick}>Sync Committees</Button>
       <div className="flex flex-col gap-2">
         <Input
           value={caseValue}

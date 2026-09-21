@@ -9,6 +9,8 @@ import {
   fetchVotingOverview,
   fetchVotingResult,
   fetchCases,
+  fetchCommittees,
+  fetchCurrentRepresentatives,
 } from "./stortingetFetches";
 import { PrismaVoteRecord } from "./types/voting";
 Voting;
@@ -16,6 +18,8 @@ import { mapApiVoting } from "./services/mapVoting";
 import { ApiCase } from "./types/case";
 import { config } from "@/app/config";
 import { Voting } from "@/prisma/generated/enums";
+import { Politician } from "@/prisma/generated/client";
+import { ApiCurrentPolitician } from "./types/politician";
 
 //fetch current parties, compare differences and update db
 export const syncParties = async () => {
@@ -34,10 +38,20 @@ export const syncPoliticians = async () => {
   try {
     //Politicians are a set consisting of the representatives, and those in elected government positions who are not representatives.
     //In addition, fetch all vara-representatives
-    const apiPoliticians = await fetchAllRepresentatives();
-    const governmentRoles = await fetchGovernmentRoles();
+    const [apiPoliticians, governmentRoles, currentPoliticians] =
+      await Promise.all([
+        fetchAllRepresentatives(),
+        fetchGovernmentRoles(),
+        fetchCurrentRepresentatives(),
+      ]);
+
+    const currentPoliticianById = new Map(
+      currentPoliticians.map((pol) => [pol.id, pol]),
+    );
+
     await Promise.all(
       apiPoliticians.map((politician) => {
+        const current = currentPoliticianById.get(politician.id);
         const data = {
           firstName: politician.firstName,
           lastName: politician.lastName,
@@ -54,12 +68,26 @@ export const syncPoliticians = async () => {
           create: {
             id: politician.id,
             ...data,
+
+            committees: {
+              connect:
+                current?.komiteer_liste.map((committe) => ({
+                  id: committe.id,
+                })) ?? [],
+            },
           },
-          update: data,
+          update: {
+            ...data,
+            committees: {
+              connect:
+                current?.komiteer_liste.map((committe) => ({
+                  id: committe.id,
+                })) ?? [],
+            },
+          },
         });
       }),
     );
-    const politicianIds = new Set(apiPoliticians.map((p) => p.id));
 
     await Promise.all(
       governmentRoles.map((govRole) => {
@@ -231,4 +259,16 @@ export const syncAllCaseVotes = async () => {
   console.log("All cases vote sync votes: ", performance.now() - start);
 };
 
-export const syncVotings = async () => {};
+export const syncCaseMetadata = async (caseID: string) => {};
+
+export const syncAllCaseMetadata = async () => {};
+
+export const syncCommittees = async () => {
+  const committees = await fetchCommittees();
+  await prisma.committee.createMany({
+    data: committees.map((committee) => {
+      return { id: committee.id, name: committee.navn };
+    }),
+    skipDuplicates: true,
+  });
+};

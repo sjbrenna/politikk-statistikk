@@ -56,7 +56,9 @@ export const ModelName = {
   Politician: 'Politician',
   GovernmentRole: 'GovernmentRole',
   VoteRecord: 'VoteRecord',
-  Subject: 'Subject'
+  Subject: 'Subject',
+  Committee: 'Committee',
+  CaseMetadata: 'CaseMetadata'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -133,6 +135,21 @@ export const SubjectScalarFieldEnum = {
 } as const
 
 export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
+
+
+export const CommitteeScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type CommitteeScalarFieldEnum = (typeof CommitteeScalarFieldEnum)[keyof typeof CommitteeScalarFieldEnum]
+
+
+export const CaseMetadataScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type CaseMetadataScalarFieldEnum = (typeof CaseMetadataScalarFieldEnum)[keyof typeof CaseMetadataScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -5,3 +5,8 @@ export type ApiCounty = {
   id: string;
   navn: string;
 };
+
+export type ApiBasicCounty = {
+  id: string;
+  navn: string;
+};

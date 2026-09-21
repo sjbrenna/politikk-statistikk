@@ -212,6 +212,7 @@ export type SubjectWhereInput = {
   name?: Prisma.StringFilter<"Subject"> | string
   isMainSubject?: Prisma.BoolFilter<"Subject"> | boolean
   parentId?: Prisma.IntNullableFilter<"Subject"> | number | null
+  caseMetadata?: Prisma.CaseMetadataListRelationFilter
   parent?: Prisma.XOR<Prisma.SubjectNullableScalarRelationFilter, Prisma.SubjectWhereInput> | null
   children?: Prisma.SubjectListRelationFilter
 }
@@ -221,6 +222,7 @@ export type SubjectOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   isMainSubject?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  caseMetadata?: Prisma.CaseMetadataOrderByRelationAggregateInput
   parent?: Prisma.SubjectOrderByWithRelationInput
   children?: Prisma.SubjectOrderByRelationAggregateInput
 }
@@ -233,6 +235,7 @@ export type SubjectWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Subject"> | string
   isMainSubject?: Prisma.BoolFilter<"Subject"> | boolean
   parentId?: Prisma.IntNullableFilter<"Subject"> | number | null
+  caseMetadata?: Prisma.CaseMetadataListRelationFilter
   parent?: Prisma.XOR<Prisma.SubjectNullableScalarRelationFilter, Prisma.SubjectWhereInput> | null
   children?: Prisma.SubjectListRelationFilter
 }, "id">
@@ -263,6 +266,7 @@ export type SubjectCreateInput = {
   id: number
   name: string
   isMainSubject: boolean
+  caseMetadata?: Prisma.CaseMetadataCreateNestedManyWithoutSubjectsInput
   parent?: Prisma.SubjectCreateNestedOneWithoutChildrenInput
   children?: Prisma.SubjectCreateNestedManyWithoutParentInput
 }
@@ -272,6 +276,7 @@ export type SubjectUncheckedCreateInput = {
   name: string
   isMainSubject: boolean
   parentId?: number | null
+  caseMetadata?: Prisma.CaseMetadataUncheckedCreateNestedManyWithoutSubjectsInput
   children?: Prisma.SubjectUncheckedCreateNestedManyWithoutParentInput
 }
 
@@ -279,6 +284,7 @@ export type SubjectUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  caseMetadata?: Prisma.CaseMetadataUpdateManyWithoutSubjectsNestedInput
   parent?: Prisma.SubjectUpdateOneWithoutChildrenNestedInput
   children?: Prisma.SubjectUpdateManyWithoutParentNestedInput
 }
@@ -288,6 +294,7 @@ export type SubjectUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
   parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  caseMetadata?: Prisma.CaseMetadataUncheckedUpdateManyWithoutSubjectsNestedInput
   children?: Prisma.SubjectUncheckedUpdateManyWithoutParentNestedInput
 }
 
@@ -431,10 +438,49 @@ export type SubjectUncheckedUpdateManyWithoutParentNestedInput = {
   deleteMany?: Prisma.SubjectScalarWhereInput | Prisma.SubjectScalarWhereInput[]
 }
 
+export type SubjectCreateNestedManyWithoutCaseMetadataInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutCaseMetadataInput, Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput> | Prisma.SubjectCreateWithoutCaseMetadataInput[] | Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput[]
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput | Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput[]
+  connect?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+}
+
+export type SubjectUncheckedCreateNestedManyWithoutCaseMetadataInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutCaseMetadataInput, Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput> | Prisma.SubjectCreateWithoutCaseMetadataInput[] | Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput[]
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput | Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput[]
+  connect?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+}
+
+export type SubjectUpdateManyWithoutCaseMetadataNestedInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutCaseMetadataInput, Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput> | Prisma.SubjectCreateWithoutCaseMetadataInput[] | Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput[]
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput | Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput[]
+  upsert?: Prisma.SubjectUpsertWithWhereUniqueWithoutCaseMetadataInput | Prisma.SubjectUpsertWithWhereUniqueWithoutCaseMetadataInput[]
+  set?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  disconnect?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  delete?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  connect?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  update?: Prisma.SubjectUpdateWithWhereUniqueWithoutCaseMetadataInput | Prisma.SubjectUpdateWithWhereUniqueWithoutCaseMetadataInput[]
+  updateMany?: Prisma.SubjectUpdateManyWithWhereWithoutCaseMetadataInput | Prisma.SubjectUpdateManyWithWhereWithoutCaseMetadataInput[]
+  deleteMany?: Prisma.SubjectScalarWhereInput | Prisma.SubjectScalarWhereInput[]
+}
+
+export type SubjectUncheckedUpdateManyWithoutCaseMetadataNestedInput = {
+  create?: Prisma.XOR<Prisma.SubjectCreateWithoutCaseMetadataInput, Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput> | Prisma.SubjectCreateWithoutCaseMetadataInput[] | Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput[]
+  connectOrCreate?: Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput | Prisma.SubjectCreateOrConnectWithoutCaseMetadataInput[]
+  upsert?: Prisma.SubjectUpsertWithWhereUniqueWithoutCaseMetadataInput | Prisma.SubjectUpsertWithWhereUniqueWithoutCaseMetadataInput[]
+  set?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  disconnect?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  delete?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  connect?: Prisma.SubjectWhereUniqueInput | Prisma.SubjectWhereUniqueInput[]
+  update?: Prisma.SubjectUpdateWithWhereUniqueWithoutCaseMetadataInput | Prisma.SubjectUpdateWithWhereUniqueWithoutCaseMetadataInput[]
+  updateMany?: Prisma.SubjectUpdateManyWithWhereWithoutCaseMetadataInput | Prisma.SubjectUpdateManyWithWhereWithoutCaseMetadataInput[]
+  deleteMany?: Prisma.SubjectScalarWhereInput | Prisma.SubjectScalarWhereInput[]
+}
+
 export type SubjectCreateWithoutChildrenInput = {
   id: number
   name: string
   isMainSubject: boolean
+  caseMetadata?: Prisma.CaseMetadataCreateNestedManyWithoutSubjectsInput
   parent?: Prisma.SubjectCreateNestedOneWithoutChildrenInput
 }
 
@@ -443,6 +489,7 @@ export type SubjectUncheckedCreateWithoutChildrenInput = {
   name: string
   isMainSubject: boolean
   parentId?: number | null
+  caseMetadata?: Prisma.CaseMetadataUncheckedCreateNestedManyWithoutSubjectsInput
 }
 
 export type SubjectCreateOrConnectWithoutChildrenInput = {
@@ -454,6 +501,7 @@ export type SubjectCreateWithoutParentInput = {
   id: number
   name: string
   isMainSubject: boolean
+  caseMetadata?: Prisma.CaseMetadataCreateNestedManyWithoutSubjectsInput
   children?: Prisma.SubjectCreateNestedManyWithoutParentInput
 }
 
@@ -461,6 +509,7 @@ export type SubjectUncheckedCreateWithoutParentInput = {
   id: number
   name: string
   isMainSubject: boolean
+  caseMetadata?: Prisma.CaseMetadataUncheckedCreateNestedManyWithoutSubjectsInput
   children?: Prisma.SubjectUncheckedCreateNestedManyWithoutParentInput
 }
 
@@ -489,6 +538,7 @@ export type SubjectUpdateWithoutChildrenInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  caseMetadata?: Prisma.CaseMetadataUpdateManyWithoutSubjectsNestedInput
   parent?: Prisma.SubjectUpdateOneWithoutChildrenNestedInput
 }
 
@@ -497,6 +547,7 @@ export type SubjectUncheckedUpdateWithoutChildrenInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
   parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  caseMetadata?: Prisma.CaseMetadataUncheckedUpdateManyWithoutSubjectsNestedInput
 }
 
 export type SubjectUpsertWithWhereUniqueWithoutParentInput = {
@@ -525,6 +576,43 @@ export type SubjectScalarWhereInput = {
   parentId?: Prisma.IntNullableFilter<"Subject"> | number | null
 }
 
+export type SubjectCreateWithoutCaseMetadataInput = {
+  id: number
+  name: string
+  isMainSubject: boolean
+  parent?: Prisma.SubjectCreateNestedOneWithoutChildrenInput
+  children?: Prisma.SubjectCreateNestedManyWithoutParentInput
+}
+
+export type SubjectUncheckedCreateWithoutCaseMetadataInput = {
+  id: number
+  name: string
+  isMainSubject: boolean
+  parentId?: number | null
+  children?: Prisma.SubjectUncheckedCreateNestedManyWithoutParentInput
+}
+
+export type SubjectCreateOrConnectWithoutCaseMetadataInput = {
+  where: Prisma.SubjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubjectCreateWithoutCaseMetadataInput, Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput>
+}
+
+export type SubjectUpsertWithWhereUniqueWithoutCaseMetadataInput = {
+  where: Prisma.SubjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.SubjectUpdateWithoutCaseMetadataInput, Prisma.SubjectUncheckedUpdateWithoutCaseMetadataInput>
+  create: Prisma.XOR<Prisma.SubjectCreateWithoutCaseMetadataInput, Prisma.SubjectUncheckedCreateWithoutCaseMetadataInput>
+}
+
+export type SubjectUpdateWithWhereUniqueWithoutCaseMetadataInput = {
+  where: Prisma.SubjectWhereUniqueInput
+  data: Prisma.XOR<Prisma.SubjectUpdateWithoutCaseMetadataInput, Prisma.SubjectUncheckedUpdateWithoutCaseMetadataInput>
+}
+
+export type SubjectUpdateManyWithWhereWithoutCaseMetadataInput = {
+  where: Prisma.SubjectScalarWhereInput
+  data: Prisma.XOR<Prisma.SubjectUpdateManyMutationInput, Prisma.SubjectUncheckedUpdateManyWithoutCaseMetadataInput>
+}
+
 export type SubjectCreateManyParentInput = {
   id: number
   name: string
@@ -535,6 +623,7 @@ export type SubjectUpdateWithoutParentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  caseMetadata?: Prisma.CaseMetadataUpdateManyWithoutSubjectsNestedInput
   children?: Prisma.SubjectUpdateManyWithoutParentNestedInput
 }
 
@@ -542,6 +631,7 @@ export type SubjectUncheckedUpdateWithoutParentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  caseMetadata?: Prisma.CaseMetadataUncheckedUpdateManyWithoutSubjectsNestedInput
   children?: Prisma.SubjectUncheckedUpdateManyWithoutParentNestedInput
 }
 
@@ -551,16 +641,41 @@ export type SubjectUncheckedUpdateManyWithoutParentInput = {
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
+export type SubjectUpdateWithoutCaseMetadataInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parent?: Prisma.SubjectUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.SubjectUpdateManyWithoutParentNestedInput
+}
+
+export type SubjectUncheckedUpdateWithoutCaseMetadataInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  children?: Prisma.SubjectUncheckedUpdateManyWithoutParentNestedInput
+}
+
+export type SubjectUncheckedUpdateManyWithoutCaseMetadataInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
 
 /**
  * Count Type SubjectCountOutputType
  */
 
 export type SubjectCountOutputType = {
+  caseMetadata: number
   children: number
 }
 
 export type SubjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  caseMetadata?: boolean | SubjectCountOutputTypeCountCaseMetadataArgs
   children?: boolean | SubjectCountOutputTypeCountChildrenArgs
 }
 
@@ -577,6 +692,13 @@ export type SubjectCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * SubjectCountOutputType without action
  */
+export type SubjectCountOutputTypeCountCaseMetadataArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseMetadataWhereInput
+}
+
+/**
+ * SubjectCountOutputType without action
+ */
 export type SubjectCountOutputTypeCountChildrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SubjectWhereInput
 }
@@ -587,6 +709,7 @@ export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   isMainSubject?: boolean
   parentId?: boolean
+  caseMetadata?: boolean | Prisma.Subject$caseMetadataArgs<ExtArgs>
   parent?: boolean | Prisma.Subject$parentArgs<ExtArgs>
   children?: boolean | Prisma.Subject$childrenArgs<ExtArgs>
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -617,6 +740,7 @@ export type SubjectSelectScalar = {
 
 export type SubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "isMainSubject" | "parentId", ExtArgs["result"]["subject"]>
 export type SubjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  caseMetadata?: boolean | Prisma.Subject$caseMetadataArgs<ExtArgs>
   parent?: boolean | Prisma.Subject$parentArgs<ExtArgs>
   children?: boolean | Prisma.Subject$childrenArgs<ExtArgs>
   _count?: boolean | Prisma.SubjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -631,6 +755,7 @@ export type SubjectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $SubjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Subject"
   objects: {
+    caseMetadata: Prisma.$CaseMetadataPayload<ExtArgs>[]
     parent: Prisma.$SubjectPayload<ExtArgs> | null
     children: Prisma.$SubjectPayload<ExtArgs>[]
   }
@@ -1033,6 +1158,7 @@ readonly fields: SubjectFieldRefs;
  */
 export interface Prisma__SubjectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  caseMetadata<T extends Prisma.Subject$caseMetadataArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$caseMetadataArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parent<T extends Prisma.Subject$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$parentArgs<ExtArgs>>): Prisma.Prisma__SubjectClient<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   children<T extends Prisma.Subject$childrenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subject$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1466,6 +1592,30 @@ export type SubjectDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Subjects to delete.
    */
   limit?: number
+}
+
+/**
+ * Subject.caseMetadata
+ */
+export type Subject$caseMetadataArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseMetadata
+   */
+  select?: Prisma.CaseMetadataSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseMetadata
+   */
+  omit?: Prisma.CaseMetadataOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseMetadataInclude<ExtArgs> | null
+  where?: Prisma.CaseMetadataWhereInput
+  orderBy?: Prisma.CaseMetadataOrderByWithRelationInput | Prisma.CaseMetadataOrderByWithRelationInput[]
+  cursor?: Prisma.CaseMetadataWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseMetadataScalarFieldEnum | Prisma.CaseMetadataScalarFieldEnum[]
 }
 
 /**

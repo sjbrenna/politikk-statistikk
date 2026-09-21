@@ -71,3 +71,13 @@ export type VoteRecord = Prisma.VoteRecordModel
  * 
  */
 export type Subject = Prisma.SubjectModel
+/**
+ * Model Committee
+ * 
+ */
+export type Committee = Prisma.CommitteeModel
+/**
+ * Model CaseMetadata
+ * 
+ */
+export type CaseMetadata = Prisma.CaseMetadataModel

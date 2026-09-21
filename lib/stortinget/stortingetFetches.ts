@@ -6,7 +6,10 @@ import { stortingFetch } from "./stortingetClient";
 import { ApiGovernmentResponse } from "./types/government";
 import { ApiPartyResponse, Party } from "./types/party";
 import { ApiPeriodResponse } from "./types/period";
-import { ApiPoliticianResponse } from "./types/politician";
+import {
+  ApiCurrentPoliticianResponse,
+  ApiPoliticianResponse,
+} from "./types/politician";
 import { mapGovernmentRole } from "./services/mapGovernmentRole";
 import { ApiSessionResponse } from "./types/session";
 import { mapSessions } from "./services/mapSessions";
@@ -18,6 +21,7 @@ import {
   ApiVotingSuggestionOverview,
 } from "./types/voting";
 import { ApiSubjects } from "./types/subject";
+import { ApiCommitteeResponse } from "./types/committee";
 
 export const fetchCurrentParties = async () => {
   const curYear = new Date().getFullYear();
@@ -38,6 +42,13 @@ export const fetchSessions = async () => {
 export const fetchPeriods = async () => {
   const response = await stortingFetch<ApiPeriodResponse>("stortingsperioder");
   return response.innevaerende_stortingsperiode.id;
+};
+
+export const fetchCurrentRepresentatives = async () => {
+  const response = await stortingFetch<ApiCurrentPoliticianResponse>(
+    "/dagensrepresentanter",
+  );
+  return response.dagensrepresentanter_liste;
 };
 
 export const fetchAllRepresentatives = async () => {
@@ -96,4 +107,9 @@ export const fetchVotingSuggestionOverview = async (votingId: string) => {
     "/voteringsforslag?voteringid=" + votingId,
   );
   return response;
+};
+
+export const fetchCommittees = async () => {
+  const response = await stortingFetch<ApiCommitteeResponse>("/komiteer");
+  return response.komiteer_liste;
 };

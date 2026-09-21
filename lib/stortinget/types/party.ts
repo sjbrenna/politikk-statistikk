@@ -17,3 +17,8 @@ export type ApiPartyResponse = {
   sesjon_id: string | null;
   stortingsperiode_id: string;
 };
+
+export type ApiBasicParty = {
+  id: string;
+  navn: string;
+};
