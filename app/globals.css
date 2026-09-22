@@ -158,6 +158,10 @@
   .cardTitle {
     @apply text-xl font-semibold;
   }
+
+  .subCardTitle {
+    @apply font-semibold;
+  }
 }
 
 @layer base {

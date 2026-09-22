@@ -54,7 +54,7 @@ export default function CasePageClient({
             >
               <ArrowLeft /> Tilbake til oversikten over saker
             </Link>
-            <p className="text-4xl font-semibold flex flex-row flex-wrap break-all">
+            <p className="text-4xl font-semibold flex flex-row flex-wrap wrap-break-word">
               {sourceCase.korttittel}
             </p>
           </div>

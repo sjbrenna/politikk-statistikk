@@ -13,12 +13,7 @@ import {
   PartyResourceId,
   partyResources,
 } from "@/lib/stortinget/parties/partyResources";
-import {
-  GovernmentRole,
-  Politician,
-  Prisma,
-  VoteRecord,
-} from "@/prisma/generated/client";
+import { GovernmentRole, Prisma, VoteRecord } from "@/prisma/generated/client";
 import { useContext, useEffect, useState } from "react";
 import OverviewCaseList from "../cases/OverviewCaseList";
 import FuncPagination from "../FuncPagination";
@@ -30,7 +25,15 @@ import useSearch from "@/hooks/useSearch";
 import SearchInput from "../SearchInput";
 import ItemDropdown from "../ItemDropdown";
 import VotingStatistics from "../votes/VotingStatistics";
-
+type CaseMetadataWithSubjects = Prisma.CaseMetadataGetPayload<{
+  include: {
+    subjects: {
+      include: {
+        subject: true;
+      };
+    };
+  };
+}>;
 type PoliticianWithCommittees = Prisma.PoliticianGetPayload<{
   include: { committees: true };
 }>;
@@ -38,9 +41,10 @@ type Props = {
   votes: VoteRecord[];
   politician: PoliticianWithCommittees;
   govRole?: GovernmentRole | null;
+  metadata: CaseMetadataWithSubjects[];
 };
 
-function PoliticianClient({ votes, politician, govRole }: Props) {
+function PoliticianClient({ votes, politician, govRole, metadata }: Props) {
   const dropdownOptions = [
     { label: "Filtrer basert på stemme...", value: null },
     { label: "For", value: "FOR" },
@@ -60,8 +64,6 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
       polCase.korttittel.toLowerCase().includes(query.toLowerCase()),
     items: politiciansCases,
   });
-
-  const committees = politician.committees;
 
   if (curVoting !== dropdownOptions[0].label) {
     const votingValue = dropdownOptions.find(
@@ -142,12 +144,15 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
 
           {birthdayArray && (
             <InfoRow>
-              Fødselsdato:{" "}
-              {birthdayArray[2] +
-                "." +
-                birthdayArray[1] +
-                "." +
-                birthdayArray[0]}
+              <div className="flex flex-row text-xl gap-x-2">
+                {" "}
+                <p className="font-bold">Fødselsdato:</p>
+                {birthdayArray[2] +
+                  "." +
+                  birthdayArray[1] +
+                  "." +
+                  birthdayArray[0]}
+              </div>
             </InfoRow>
           )}
 
@@ -167,7 +172,7 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
           )}
         </div>
       </ContentCard>
-      <VotingStatistics votes={votes} />
+      <VotingStatistics votes={votes} metadata={metadata} />
       <ContentCard header={<p className="cardTitle pl-2">Siste stemmer:</p>}>
         <div
           className="flex flex-col lg:flex-row 

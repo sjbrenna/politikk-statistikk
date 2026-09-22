@@ -26,6 +26,7 @@ function CaseVote({ sourceVote, index, suggestionText }: Props) {
 
   return (
     <ContentCard
+      className="bg-background"
       header={
         <div
           className="flex flex-row justify-between 

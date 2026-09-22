@@ -30,6 +30,22 @@ async function page({ params }: Props) {
     },
   });
 
+  //for each vote, get the associated metadata
+  const caseMetadata = await prisma.caseMetadata.findMany({
+    where: {
+      id: {
+        in: votes.map((vote) => vote.caseID),
+      },
+    },
+    include: {
+      subjects: {
+        include: {
+          subject: true,
+        },
+      },
+    },
+  });
+
   if (!politician) {
     return notFound();
   } else {
@@ -38,6 +54,7 @@ async function page({ params }: Props) {
         votes={votes}
         politician={politician}
         govRole={govRole}
+        metadata={caseMetadata}
       />
     );
   }
