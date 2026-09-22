@@ -36,13 +36,13 @@ export default function CasePageClient({
   votingOverview,
   votingSuggestionOverview,
 }: Props) {
-  console.log(votingSuggestionOverview);
-
   const cases = useContext(CasesProviderContext).cases;
   const subjects = sourceCase.emne_liste;
   const caseDate = cases.find(
-    (p) => p.id === sourceCase.id,
+    (p) => p.id === sourceCase.id.toString(),
   )!.sist_oppdatert_dato;
+  const ids = cases.map((p) => p.id);
+
   return (
     <ContentContainer mode="half">
       <PageTitle

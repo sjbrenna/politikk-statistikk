@@ -39,6 +39,7 @@ model Politician {
   vara_representative Boolean @default(false)
   votes VoteRecord[]
   committees Committee[]
+  proposedCases CaseProposer[]
 }
 
 model GovernmentRole {
@@ -64,6 +65,7 @@ model Subject {
   isMainSubject Boolean
 
   caseMetadata CaseMetadata[] @relation("Subjects")
+
   parentId Int?
   parent   Subject?  @relation("SubjectHierarchy", fields: [parentId], references: [id])
   children Subject[] @relation("SubjectHierarchy")
@@ -75,9 +77,20 @@ model Committee {
   members Politician[]
 }
 
+model CaseProposer {
+  caseMetadataId String
+  politicianId String
+
+  caseMetadata CaseMetadata @relation(fields: [caseMetadataId], references: [id], onDelete: Cascade)
+  politician Politician @relation(fields: [politicianId], references: [id], onDelete: Cascade)
+
+  @@id([caseMetadataId, politicianId])
+}
+
+//TODO: Make CaseMetadata <-> Subject an explicit relation similar to proposer, to support createMany.
 model CaseMetadata {
   id String @id
 
   subjects Subject[] @relation("Subjects")
-   
+  proposers CaseProposer[]
 }

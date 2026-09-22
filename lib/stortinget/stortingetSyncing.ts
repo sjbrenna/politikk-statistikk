@@ -2,7 +2,7 @@
 
 import { prisma } from "@/prisma/prisma";
 import {
-  fetchCurrentParties,
+  fetchParties,
   fetchAllRepresentatives,
   fetchGovernmentRoles,
   fetchSubjects,
@@ -18,16 +18,28 @@ import { mapApiVoting } from "./services/mapVoting";
 import { ApiCase } from "./types/case";
 import { config } from "@/app/config";
 import { Voting } from "@/prisma/generated/enums";
-import { Politician } from "@/prisma/generated/client";
-import { ApiCurrentPolitician } from "./types/politician";
 
 //fetch current parties, compare differences and update db
 export const syncParties = async () => {
   try {
-    const apiParties = await fetchCurrentParties();
+    const apiParties = await fetchParties();
     console.log(apiParties);
-    await prisma.party.deleteMany();
-    await prisma.party.createMany({ data: apiParties, skipDuplicates: true });
+    await Promise.all(
+      apiParties.map((apiParty) =>
+        prisma.party.upsert({
+          where: {
+            id: apiParty.id,
+          },
+          create: {
+            id: apiParty.id,
+            name: apiParty.name,
+          },
+          update: {
+            name: apiParty.name,
+          },
+        }),
+      ),
+    );
   } catch (error) {
     throw new Error("Could not perform syncing of parties");
   }
@@ -259,9 +271,70 @@ export const syncAllCaseVotes = async () => {
   console.log("All cases vote sync votes: ", performance.now() - start);
 };
 
-export const syncCaseMetadata = async (caseID: string) => {};
+export const syncCaseMetadata = async () => {
+  const cases = await fetchCases();
 
-export const syncAllCaseMetadata = async () => {};
+  //create metadata records
+  await prisma.caseMetadata.createMany({
+    data: cases.map((apiCase) => ({
+      id: apiCase.id,
+    })),
+    skipDuplicates: true,
+  });
+
+  const proposers = cases.flatMap((apiCase) =>
+    apiCase.forslagstiller_liste.map((proposer) => ({
+      caseMetadataId: apiCase.id,
+      politicianId: proposer.id,
+    })),
+  );
+  const politicianIds = await prisma.politician.findMany({
+    select: { id: true },
+  });
+
+  const existingIds = new Set(politicianIds.map((p) => p.id));
+
+  const missing = proposers.filter(
+    (proposer) => !existingIds.has(proposer.politicianId),
+  );
+
+  console.log("Missing politicians:", missing);
+  await Promise.all([
+    cases.map((apiCase) =>
+      prisma.caseMetadata.update({
+        where: { id: apiCase.id },
+        data: {
+          subjects: {
+            set: apiCase.emne_liste.map((subject) => ({
+              id: subject.id,
+            })),
+          },
+        },
+      }),
+    ),
+    prisma.caseProposer.createMany({
+      data: proposers,
+      skipDuplicates: true,
+    }),
+  ]);
+};
+
+export const getCaseMetadata = async (caseId: string) => {
+  const caseMetadata = await prisma.caseMetadata.findUnique({
+    where: { id: caseId },
+    include: {
+      subjects: true,
+      proposers: {
+        include: {
+          politician: true,
+        },
+      },
+    },
+  });
+
+  console.log(caseMetadata);
+  return caseMetadata;
+};
 
 export const syncCommittees = async () => {
   const committees = await fetchCommittees();

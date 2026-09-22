@@ -23,6 +23,32 @@ import {
 import { ApiSubjects } from "./types/subject";
 import { ApiCommitteeResponse } from "./types/committee";
 
+export const fetchParties = async () => {
+  const periods = await fetchPeriods();
+
+  const currentPeriod = periods.innevaerende_stortingsperiode.id;
+  const previousPeriod = periods.stortingsperioder_liste[1].id;
+
+  const [currentResponse, previousResponse] = await Promise.all([
+    stortingFetch<ApiPartyResponse>(
+      `partier?stortingsperiodeid=${currentPeriod}`,
+    ),
+    stortingFetch<ApiPartyResponse>(
+      `partier?stortingsperiodeid=${previousPeriod}`,
+    ),
+  ]);
+
+  const parties = [
+    ...previousResponse.partier_liste,
+    ...currentResponse.partier_liste,
+  ];
+
+  const uniqueParties = [
+    ...new Map(parties.map((party) => [party.id, party])).values(),
+  ];
+
+  return uniqueParties.map(mapParty);
+};
 export const fetchCurrentParties = async () => {
   const curYear = new Date().getFullYear();
   const yearParam = `${curYear - 1}-${curYear}`;
@@ -41,7 +67,7 @@ export const fetchSessions = async () => {
 
 export const fetchPeriods = async () => {
   const response = await stortingFetch<ApiPeriodResponse>("stortingsperioder");
-  return response.innevaerende_stortingsperiode.id;
+  return response;
 };
 
 export const fetchCurrentRepresentatives = async () => {
@@ -52,11 +78,32 @@ export const fetchCurrentRepresentatives = async () => {
 };
 
 export const fetchAllRepresentatives = async () => {
-  const currentPeriod = await fetchPeriods();
-  const response = await stortingFetch<ApiPoliticianResponse>(
-    `representanter?stortingsperiodeid=${currentPeriod}&vararepresentanter=true`,
-  );
-  return response.representanter_liste.map(mapPolitician);
+  const periods = await fetchPeriods();
+
+  const currentPeriod = periods.innevaerende_stortingsperiode.id;
+  const previousPeriod = periods.stortingsperioder_liste[1].id;
+
+  const [currentResponse, previousResponse] = await Promise.all([
+    stortingFetch<ApiPoliticianResponse>(
+      `representanter?stortingsperiodeid=${currentPeriod}&vararepresentanter=true`,
+    ),
+    stortingFetch<ApiPoliticianResponse>(
+      `representanter?stortingsperiodeid=${previousPeriod}&vararepresentanter=true`,
+    ),
+  ]);
+
+  const politicians = [
+    ...previousResponse.representanter_liste,
+    ...currentResponse.representanter_liste,
+  ];
+
+  const uniquePoliticians = [
+    ...new Map(
+      politicians.map((politician) => [politician.id, politician]),
+    ).values(),
+  ];
+
+  return uniquePoliticians.map(mapPolitician);
 };
 
 export const fetchCases = async (sessionId?: string) => {

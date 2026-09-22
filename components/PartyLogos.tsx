@@ -1,9 +1,9 @@
+import { fetchCurrentParties } from "@/lib/stortinget/stortingetFetches";
 import PartyLogoButton from "./PartyLogoButton";
-import { prisma } from "@/prisma/prisma";
 
 async function PartyLogos() {
   try {
-    const parties = await prisma.party.findMany();
+    const parties = await fetchCurrentParties();
     return (
       <div className="flex flex-row flex-wrap w-full items-center gap-2 justify-between">
         {parties.map((party) => (

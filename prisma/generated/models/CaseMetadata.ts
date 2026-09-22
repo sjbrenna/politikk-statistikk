@@ -151,11 +151,13 @@ export type CaseMetadataWhereInput = {
   NOT?: Prisma.CaseMetadataWhereInput | Prisma.CaseMetadataWhereInput[]
   id?: Prisma.StringFilter<"CaseMetadata"> | string
   subjects?: Prisma.SubjectListRelationFilter
+  proposers?: Prisma.CaseProposerListRelationFilter
 }
 
 export type CaseMetadataOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   subjects?: Prisma.SubjectOrderByRelationAggregateInput
+  proposers?: Prisma.CaseProposerOrderByRelationAggregateInput
 }
 
 export type CaseMetadataWhereUniqueInput = Prisma.AtLeast<{
@@ -164,6 +166,7 @@ export type CaseMetadataWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CaseMetadataWhereInput[]
   NOT?: Prisma.CaseMetadataWhereInput | Prisma.CaseMetadataWhereInput[]
   subjects?: Prisma.SubjectListRelationFilter
+  proposers?: Prisma.CaseProposerListRelationFilter
 }, "id">
 
 export type CaseMetadataOrderByWithAggregationInput = {
@@ -183,21 +186,25 @@ export type CaseMetadataScalarWhereWithAggregatesInput = {
 export type CaseMetadataCreateInput = {
   id: string
   subjects?: Prisma.SubjectCreateNestedManyWithoutCaseMetadataInput
+  proposers?: Prisma.CaseProposerCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataUncheckedCreateInput = {
   id: string
   subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutCaseMetadataInput
+  proposers?: Prisma.CaseProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   subjects?: Prisma.SubjectUpdateManyWithoutCaseMetadataNestedInput
+  proposers?: Prisma.CaseProposerUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   subjects?: Prisma.SubjectUncheckedUpdateManyWithoutCaseMetadataNestedInput
+  proposers?: Prisma.CaseProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataCreateManyInput = {
@@ -220,6 +227,11 @@ export type CaseMetadataListRelationFilter = {
 
 export type CaseMetadataOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type CaseMetadataScalarRelationFilter = {
+  is?: Prisma.CaseMetadataWhereInput
+  isNot?: Prisma.CaseMetadataWhereInput
 }
 
 export type CaseMetadataCountOrderByAggregateInput = {
@@ -272,12 +284,28 @@ export type CaseMetadataUncheckedUpdateManyWithoutSubjectsNestedInput = {
   deleteMany?: Prisma.CaseMetadataScalarWhereInput | Prisma.CaseMetadataScalarWhereInput[]
 }
 
+export type CaseMetadataCreateNestedOneWithoutProposersInput = {
+  create?: Prisma.XOR<Prisma.CaseMetadataCreateWithoutProposersInput, Prisma.CaseMetadataUncheckedCreateWithoutProposersInput>
+  connectOrCreate?: Prisma.CaseMetadataCreateOrConnectWithoutProposersInput
+  connect?: Prisma.CaseMetadataWhereUniqueInput
+}
+
+export type CaseMetadataUpdateOneRequiredWithoutProposersNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseMetadataCreateWithoutProposersInput, Prisma.CaseMetadataUncheckedCreateWithoutProposersInput>
+  connectOrCreate?: Prisma.CaseMetadataCreateOrConnectWithoutProposersInput
+  upsert?: Prisma.CaseMetadataUpsertWithoutProposersInput
+  connect?: Prisma.CaseMetadataWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseMetadataUpdateToOneWithWhereWithoutProposersInput, Prisma.CaseMetadataUpdateWithoutProposersInput>, Prisma.CaseMetadataUncheckedUpdateWithoutProposersInput>
+}
+
 export type CaseMetadataCreateWithoutSubjectsInput = {
   id: string
+  proposers?: Prisma.CaseProposerCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataUncheckedCreateWithoutSubjectsInput = {
   id: string
+  proposers?: Prisma.CaseProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataCreateOrConnectWithoutSubjectsInput = {
@@ -308,12 +336,50 @@ export type CaseMetadataScalarWhereInput = {
   id?: Prisma.StringFilter<"CaseMetadata"> | string
 }
 
+export type CaseMetadataCreateWithoutProposersInput = {
+  id: string
+  subjects?: Prisma.SubjectCreateNestedManyWithoutCaseMetadataInput
+}
+
+export type CaseMetadataUncheckedCreateWithoutProposersInput = {
+  id: string
+  subjects?: Prisma.SubjectUncheckedCreateNestedManyWithoutCaseMetadataInput
+}
+
+export type CaseMetadataCreateOrConnectWithoutProposersInput = {
+  where: Prisma.CaseMetadataWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseMetadataCreateWithoutProposersInput, Prisma.CaseMetadataUncheckedCreateWithoutProposersInput>
+}
+
+export type CaseMetadataUpsertWithoutProposersInput = {
+  update: Prisma.XOR<Prisma.CaseMetadataUpdateWithoutProposersInput, Prisma.CaseMetadataUncheckedUpdateWithoutProposersInput>
+  create: Prisma.XOR<Prisma.CaseMetadataCreateWithoutProposersInput, Prisma.CaseMetadataUncheckedCreateWithoutProposersInput>
+  where?: Prisma.CaseMetadataWhereInput
+}
+
+export type CaseMetadataUpdateToOneWithWhereWithoutProposersInput = {
+  where?: Prisma.CaseMetadataWhereInput
+  data: Prisma.XOR<Prisma.CaseMetadataUpdateWithoutProposersInput, Prisma.CaseMetadataUncheckedUpdateWithoutProposersInput>
+}
+
+export type CaseMetadataUpdateWithoutProposersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  subjects?: Prisma.SubjectUpdateManyWithoutCaseMetadataNestedInput
+}
+
+export type CaseMetadataUncheckedUpdateWithoutProposersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  subjects?: Prisma.SubjectUncheckedUpdateManyWithoutCaseMetadataNestedInput
+}
+
 export type CaseMetadataUpdateWithoutSubjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  proposers?: Prisma.CaseProposerUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataUncheckedUpdateWithoutSubjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  proposers?: Prisma.CaseProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataUncheckedUpdateManyWithoutSubjectsInput = {
@@ -327,10 +393,12 @@ export type CaseMetadataUncheckedUpdateManyWithoutSubjectsInput = {
 
 export type CaseMetadataCountOutputType = {
   subjects: number
+  proposers: number
 }
 
 export type CaseMetadataCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subjects?: boolean | CaseMetadataCountOutputTypeCountSubjectsArgs
+  proposers?: boolean | CaseMetadataCountOutputTypeCountProposersArgs
 }
 
 /**
@@ -350,10 +418,18 @@ export type CaseMetadataCountOutputTypeCountSubjectsArgs<ExtArgs extends runtime
   where?: Prisma.SubjectWhereInput
 }
 
+/**
+ * CaseMetadataCountOutputType without action
+ */
+export type CaseMetadataCountOutputTypeCountProposersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseProposerWhereInput
+}
+
 
 export type CaseMetadataSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   subjects?: boolean | Prisma.CaseMetadata$subjectsArgs<ExtArgs>
+  proposers?: boolean | Prisma.CaseMetadata$proposersArgs<ExtArgs>
   _count?: boolean | Prisma.CaseMetadataCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseMetadata"]>
 
@@ -372,6 +448,7 @@ export type CaseMetadataSelectScalar = {
 export type CaseMetadataOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["caseMetadata"]>
 export type CaseMetadataInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subjects?: boolean | Prisma.CaseMetadata$subjectsArgs<ExtArgs>
+  proposers?: boolean | Prisma.CaseMetadata$proposersArgs<ExtArgs>
   _count?: boolean | Prisma.CaseMetadataCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseMetadataIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -381,6 +458,7 @@ export type $CaseMetadataPayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "CaseMetadata"
   objects: {
     subjects: Prisma.$SubjectPayload<ExtArgs>[]
+    proposers: Prisma.$CaseProposerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -779,6 +857,7 @@ readonly fields: CaseMetadataFieldRefs;
 export interface Prisma__CaseMetadataClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   subjects<T extends Prisma.CaseMetadata$subjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseMetadata$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  proposers<T extends Prisma.CaseMetadata$proposersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseMetadata$proposersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseProposerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1223,6 +1302,30 @@ export type CaseMetadata$subjectsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.SubjectScalarFieldEnum | Prisma.SubjectScalarFieldEnum[]
+}
+
+/**
+ * CaseMetadata.proposers
+ */
+export type CaseMetadata$proposersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseProposer
+   */
+  select?: Prisma.CaseProposerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseProposer
+   */
+  omit?: Prisma.CaseProposerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseProposerInclude<ExtArgs> | null
+  where?: Prisma.CaseProposerWhereInput
+  orderBy?: Prisma.CaseProposerOrderByWithRelationInput | Prisma.CaseProposerOrderByWithRelationInput[]
+  cursor?: Prisma.CaseProposerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseProposerScalarFieldEnum | Prisma.CaseProposerScalarFieldEnum[]
 }
 
 /**

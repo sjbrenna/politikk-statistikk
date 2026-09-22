@@ -58,6 +58,7 @@ export const ModelName = {
   VoteRecord: 'VoteRecord',
   Subject: 'Subject',
   Committee: 'Committee',
+  CaseProposer: 'CaseProposer',
   CaseMetadata: 'CaseMetadata'
 } as const
 
@@ -143,6 +144,14 @@ export const CommitteeScalarFieldEnum = {
 } as const
 
 export type CommitteeScalarFieldEnum = (typeof CommitteeScalarFieldEnum)[keyof typeof CommitteeScalarFieldEnum]
+
+
+export const CaseProposerScalarFieldEnum = {
+  caseMetadataId: 'caseMetadataId',
+  politicianId: 'politicianId'
+} as const
+
+export type CaseProposerScalarFieldEnum = (typeof CaseProposerScalarFieldEnum)[keyof typeof CaseProposerScalarFieldEnum]
 
 
 export const CaseMetadataScalarFieldEnum = {
