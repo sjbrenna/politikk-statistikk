@@ -15,6 +15,7 @@ async function page({ params }: Props) {
       where: {
         id: personId,
       },
+      include: { committees: true },
     }),
     prisma.governmentRole.findUnique({
       where: {

@@ -16,6 +16,7 @@ import {
 import {
   GovernmentRole,
   Politician,
+  Prisma,
   VoteRecord,
 } from "@/prisma/generated/client";
 import { useContext, useEffect, useState } from "react";
@@ -30,9 +31,12 @@ import SearchInput from "../SearchInput";
 import ItemDropdown from "../ItemDropdown";
 import VotingStatistics from "../votes/VotingStatistics";
 
+type PoliticianWithCommittees = Prisma.PoliticianGetPayload<{
+  include: { committees: true };
+}>;
 type Props = {
   votes: VoteRecord[];
-  politician: Politician;
+  politician: PoliticianWithCommittees;
   govRole?: GovernmentRole | null;
 };
 
@@ -57,7 +61,8 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
     items: politiciansCases,
   });
 
-  //Filter based on selected subject
+  const committees = politician.committees;
+
   if (curVoting !== dropdownOptions[0].label) {
     const votingValue = dropdownOptions.find(
       (option) => option.label === curVoting,
@@ -145,6 +150,7 @@ function PoliticianClient({ votes, politician, govRole }: Props) {
                 birthdayArray[0]}
             </InfoRow>
           )}
+
           {govRole && (
             <div className="flex flex-col gap-2">
               <InfoRow>

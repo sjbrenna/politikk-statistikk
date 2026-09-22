@@ -75,6 +75,7 @@ model Committee {
   id String @id
   name String
   members Politician[]
+  proposedCases CaseCommitteProposer[]
 }
 
 model CaseProposer {
@@ -85,6 +86,16 @@ model CaseProposer {
   politician Politician @relation(fields: [politicianId], references: [id], onDelete: Cascade)
 
   @@id([caseMetadataId, politicianId])
+}
+
+model CaseCommitteProposer {
+  caseMetadataId String
+  committeeId String
+
+  caseMetadata CaseMetadata @relation(fields: [caseMetadataId], references: [id])
+  committe Committee @relation(fields: [committeeId], references: [id])
+
+  @@id([caseMetadataId, committeeId])
 }
 
 model CaseSubject {
@@ -101,7 +112,7 @@ model CaseSubject {
 model CaseMetadata {
   id String @id
 
-
+  committeeProposer CaseCommitteProposer[]
   subjects CaseSubject[]
   proposers CaseProposer[]
 }
