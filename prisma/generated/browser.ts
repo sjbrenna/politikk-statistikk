@@ -58,6 +58,11 @@ export type Committee = Prisma.CommitteeModel
  */
 export type CaseProposer = Prisma.CaseProposerModel
 /**
+ * Model CaseSubject
+ * 
+ */
+export type CaseSubject = Prisma.CaseSubjectModel
+/**
  * Model CaseMetadata
  * 
  */

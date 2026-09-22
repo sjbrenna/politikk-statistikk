@@ -392,6 +392,7 @@ export const ModelName = {
   Subject: 'Subject',
   Committee: 'Committee',
   CaseProposer: 'CaseProposer',
+  CaseSubject: 'CaseSubject',
   CaseMetadata: 'CaseMetadata'
 } as const
 
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "party" | "politician" | "governmentRole" | "voteRecord" | "subject" | "committee" | "caseProposer" | "caseMetadata"
+    modelProps: "user" | "party" | "politician" | "governmentRole" | "voteRecord" | "subject" | "committee" | "caseProposer" | "caseSubject" | "caseMetadata"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1004,6 +1005,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CaseSubject: {
+      payload: Prisma.$CaseSubjectPayload<ExtArgs>
+      fields: Prisma.CaseSubjectFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseSubjectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseSubjectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseSubjectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseSubjectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>
+        }
+        findMany: {
+          args: Prisma.CaseSubjectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>[]
+        }
+        create: {
+          args: Prisma.CaseSubjectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>
+        }
+        createMany: {
+          args: Prisma.CaseSubjectCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseSubjectCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseSubjectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>
+        }
+        update: {
+          args: Prisma.CaseSubjectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseSubjectDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseSubjectUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseSubjectUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseSubjectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSubjectPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseSubjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseSubject>
+        }
+        groupBy: {
+          args: Prisma.CaseSubjectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseSubjectGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseSubjectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseSubjectCountAggregateOutputType> | number
+        }
+      }
+    }
     CaseMetadata: {
       payload: Prisma.$CaseMetadataPayload<ExtArgs>
       fields: Prisma.CaseMetadataFieldRefs
@@ -1191,6 +1266,14 @@ export const CaseProposerScalarFieldEnum = {
 } as const
 
 export type CaseProposerScalarFieldEnum = (typeof CaseProposerScalarFieldEnum)[keyof typeof CaseProposerScalarFieldEnum]
+
+
+export const CaseSubjectScalarFieldEnum = {
+  caseMetadataId: 'caseMetadataId',
+  subjectId: 'subjectId'
+} as const
+
+export type CaseSubjectScalarFieldEnum = (typeof CaseSubjectScalarFieldEnum)[keyof typeof CaseSubjectScalarFieldEnum]
 
 
 export const CaseMetadataScalarFieldEnum = {
@@ -1410,6 +1493,7 @@ export type GlobalOmitConfig = {
   subject?: Prisma.SubjectOmit
   committee?: Prisma.CommitteeOmit
   caseProposer?: Prisma.CaseProposerOmit
+  caseSubject?: Prisma.CaseSubjectOmit
   caseMetadata?: Prisma.CaseMetadataOmit
 }
 

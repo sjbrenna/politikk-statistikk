@@ -64,7 +64,7 @@ model Subject {
   name          String   
   isMainSubject Boolean
 
-  caseMetadata CaseMetadata[] @relation("Subjects")
+  caseSubject CaseSubject[]
 
   parentId Int?
   parent   Subject?  @relation("SubjectHierarchy", fields: [parentId], references: [id])
@@ -87,10 +87,21 @@ model CaseProposer {
   @@id([caseMetadataId, politicianId])
 }
 
+model CaseSubject {
+  caseMetadataId String
+  subjectId Int
+
+  caseMetadata CaseMetadata @relation(fields: [caseMetadataId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id])
+
+  @@id([caseMetadataId, subjectId])
+}
+
 //TODO: Make CaseMetadata <-> Subject an explicit relation similar to proposer, to support createMany.
 model CaseMetadata {
   id String @id
 
-  subjects Subject[] @relation("Subjects")
+
+  subjects CaseSubject[]
   proposers CaseProposer[]
 }
