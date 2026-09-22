@@ -282,38 +282,28 @@ export const syncCaseMetadata = async () => {
     skipDuplicates: true,
   });
 
+  //Data object for proposers on each case
   const proposers = cases.flatMap((apiCase) =>
     apiCase.forslagstiller_liste.map((proposer) => ({
       caseMetadataId: apiCase.id,
       politicianId: proposer.id,
     })),
   );
-  const politicianIds = await prisma.politician.findMany({
-    select: { id: true },
-  });
 
-  const existingIds = new Set(politicianIds.map((p) => p.id));
-
-  const missing = proposers.filter(
-    (proposer) => !existingIds.has(proposer.politicianId),
+  const caseSubjects = cases.flatMap((apiCase) =>
+    apiCase.emne_liste.map((subject) => ({
+      caseMetadataId: apiCase.id,
+      subjectId: subject.id,
+    })),
   );
 
-  console.log("Missing politicians:", missing);
   await Promise.all([
-    cases.map((apiCase) =>
-      prisma.caseMetadata.update({
-        where: { id: apiCase.id },
-        data: {
-          subjects: {
-            set: apiCase.emne_liste.map((subject) => ({
-              id: subject.id,
-            })),
-          },
-        },
-      }),
-    ),
     prisma.caseProposer.createMany({
       data: proposers,
+      skipDuplicates: true,
+    }),
+    prisma.caseSubject.createMany({
+      data: caseSubjects,
       skipDuplicates: true,
     }),
   ]);
