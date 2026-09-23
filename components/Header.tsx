@@ -63,12 +63,13 @@ function Header() {
             >
               Temaer
             </Link>
-            <Link
+            {/*            <Link
               href={"/regjeringen"}
               className={`navLink ${isActive("/regjeringen") && "text-link-hover"}`}
             >
               Regjeringen
             </Link>
+              */}
           </div>
         </div>
         <div className="lg:inline hidden">
