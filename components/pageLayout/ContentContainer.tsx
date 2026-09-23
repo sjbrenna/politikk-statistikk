@@ -10,7 +10,7 @@ function ContentContainer({ children, mode, className }: Props) {
   return (
     <div
       className={`flex flex-col h-full items-center gap-y-4 ${className ?? ""}
-                ${mode === "half" ? "w-1/2 mx-auto" : "w-full"}`}
+                ${mode === "half" ? "w-full md:w-1/2 mx-auto" : "w-full"}`}
     >
       {children}
     </div>

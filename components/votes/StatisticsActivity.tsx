@@ -8,10 +8,17 @@ type Props = {
 function StatisticsActivity({ votes }: Props) {
   const presenceCount = votes.filter((vote) => vote.vote !== "ABSENT").length;
 
+  console.log(presenceCount);
   return (
     <ContentCard className="flex flex-row gap-x-2 bg-background w-fit">
-      <strong>Oppmøte:</strong>{" "}
-      {((presenceCount / votes.length) * 100).toFixed(2)}%
+      {presenceCount !== 0 ? (
+        <>
+          <strong>Oppmøte:</strong>
+          {((presenceCount / votes.length) * 100).toFixed(2)}%
+        </>
+      ) : (
+        <p>Politikeren har ikke stemt i noen saker i denne perioden</p>
+      )}
     </ContentCard>
   );
 }

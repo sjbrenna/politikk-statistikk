@@ -52,7 +52,6 @@ function PoliticianClient({ votes, politician, govRole, metadata }: Props) {
     { label: "Ikke tilstede", value: "ABSENT" },
   ];
   const [curVoting, setCurVoting] = useState(dropdownOptions[0].label);
-  console.log(votes[1].vote);
 
   const voteCaseIDs = new Set(votes.map((vote) => vote.caseID));
   const politiciansCases = useContext(CasesProviderContext).cases.filter(
