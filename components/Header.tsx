@@ -50,7 +50,7 @@ function Header() {
             />
             <p>Politikk Statistikk</p>
           </Link>
-          <div className="hidden lg:flex gap-x-4  pl-4">
+          <div className="hidden lg:flex gap-x-8  pl-4">
             <Link
               href={"/saker"}
               className={`navLink ${isActive("/saker") && "text-link-hover"}`}
