@@ -5,7 +5,11 @@ async function PartyLogos() {
   try {
     const parties = await fetchCurrentParties();
     return (
-      <div className="flex flex-row flex-wrap w-full items-center gap-2 justify-between">
+      <div
+        className="grid grid-cols-[repeat(auto-fit,minmax(40px,1fr))] 
+      sm:grid-cols-[repeat(auto-fit,minmax(72px,1fr))] w-full gap-2"
+      >
+        {" "}
         {parties.map((party) => (
           <PartyLogoButton key={party.id} partyId={party.id} />
         ))}

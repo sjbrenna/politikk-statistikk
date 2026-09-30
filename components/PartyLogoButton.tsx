@@ -16,7 +16,7 @@ function PartyLogoButton({ partyId }: Props) {
       key={partyId}
       asChild
       size="icon"
-      className="sm:size-18 size-10 relative rounded-full flex items-center justify-center"
+      className="sm:size-18 size-10 relative rounded-full items-center justify-center"
       variant={"white"}
     >
       <Link href={`/partier/${partyId.toUpperCase()}`}>

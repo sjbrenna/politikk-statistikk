@@ -31,13 +31,13 @@ function PartyPoliticianList({ PoliticianList }: Props) {
   return (
     <ContentCard>
       <div className="flex flex-col w-full h-full">
-        <div className="flex flex-row w-full justify-between pl-4 text-2xl font-bold">
+        <div className="flex flex-col lg:flex-row w-full items-center gap-y-2 lg:justify-between pl-4 text-2xl font-bold">
           Representanter
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Søk etter representant..."
-            className="w-1/2 self-end placeholder:text-foreground h-10"
+            className="w-full lg:w-1/2 lg:self-end placeholder:text-foreground h-10 "
           />
         </div>
         {repList && (

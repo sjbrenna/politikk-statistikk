@@ -13,7 +13,7 @@ function SearchInput({ value, onChange, placeholder }: Props) {
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       className="placeholder:text-foreground border 
-              border-accent w-full lg:flex-2
+              border-accent w-full
           bg-background lg:min-h-10 min-h-10
         "
     />

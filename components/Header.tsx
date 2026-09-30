@@ -72,23 +72,21 @@ function Header() {
               */}
           </div>
         </div>
-        <div className="lg:inline hidden">
+        <div className="flex flex-row gap-x-2">
           <DarkModeToggle />
-        </div>
-        <>
           <div
-            className=" rounded-2xl border-2 mr-4 p-2
-      hover:bg-muted lg:hidden block"
+            className=" rounded-2xl border-2 p-2
+      hover:bg-muted lg:hidden block size-12"
             onClick={() => setOpen((prev) => !prev)}
           >
             <List className="size-8" />
           </div>
-        </>
+        </div>
       </div>
       <div
-        className={`${open ? "flex flex-row pl-4 justify-between" : "hidden"} h-24 w-full bg-popover items-center`}
+        className={`${open ? "flex flex-row pl-4 justify-between" : "hidden"} h-fit w-full bg-popover items-center`}
       >
-        <div className="flex flex-row gap-x-4">
+        <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-x-4">
           <Link
             href={"/saker"}
             className={`navLink ${isActive("/saker") && "text-link-hover"}`}
@@ -101,15 +99,12 @@ function Header() {
           >
             Temaer
           </Link>
-          <Link
+          {/*           <Link
             href={"/regjeringen"}
             className={`navLink ${isActive("/regjeringen") && "text-link-hover"}`}
           >
             Regjeringen
-          </Link>
-        </div>
-        <div className="mr-6">
-          <DarkModeToggle />
+          </Link> */}
         </div>
       </div>
     </div>

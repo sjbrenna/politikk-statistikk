@@ -177,16 +177,20 @@ function PoliticianClient({ votes, politician, govRole, metadata }: Props) {
           className="flex flex-col lg:flex-row 
         flex-wrap gap-2 items-center"
         >
-          <SearchInput
-            value={searchQuery}
-            onChange={setSearchQuery}
-            placeholder="Søk etter tittel på sak..."
-          />
-          <ItemDropdown
-            items={dropdownOptions.map((option) => option.label)}
-            selectedItem={curVoting}
-            handleItemChange={setCurVoting}
-          />
+          <div className="w-full lg:flex-2">
+            <SearchInput
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder="Søk etter tittel på sak..."
+            />
+          </div>
+          <div className="w-full lg:flex-1">
+            <ItemDropdown
+              items={dropdownOptions.map((option) => option.label)}
+              selectedItem={curVoting}
+              handleItemChange={setCurVoting}
+            />
+          </div>
         </div>
         <OverviewCaseList
           propsCases={casesToShow}

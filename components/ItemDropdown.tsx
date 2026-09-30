@@ -25,7 +25,7 @@ function ItemDropdown({ items, selectedItem, handleItemChange }: Props) {
           className="bg-background border 
           border-accent overflow-hidden w-full 
            whitespace-nowrap h-10 text-foreground
-           flex flex-row hover:bg-muted-foreground flex-1
+           flex flex-row hover:bg-muted-foreground
           "
         >
           {selectedItem}
