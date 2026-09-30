@@ -55,24 +55,28 @@ function StatisticsSubjects({ votes, metadata }: Props) {
     (item) => item.against + item.for >= config.minVotesStatistic,
   );
 
-  const topAgainst = subjects
-    .sort((a, b) => b.against - a.against)
+  //Calculate by percentage, not total votes
+  const topAgainst = [...subjects]
+    .sort(
+      (a, b) =>
+        b.against / (b.for + b.against) - a.against / (a.for + a.against),
+    )
     .slice(0, config.noOfSubjectsStats);
 
-  const topFor = subjects
-    .sort((a, b) => b.for - a.for)
+  const topFor = [...subjects]
+    .sort((a, b) => b.for / (b.for + b.against) - a.for / (a.for + a.against))
     .slice(0, config.noOfSubjectsStats);
 
   return (
-    <div className="w-full justify-between flex flex-row gap-x-10">
+    <div className="w-full flex lg:flex-row flex-col gap-y-2 items-center lg:items-stretch gap-x-10 flex-wrap justify-center">
       <ContentCard
         header={<p className="subCardTitle">Temaer mest for:</p>}
-        className="bg-background"
+        className="bg-background w-full flex-1"
       >
         <SubjectVoteRanking type="for" subjectEntries={topFor} />
       </ContentCard>
       <ContentCard
-        className="bg-background"
+        className="bg-background w-full flex-1"
         header={<p className="subCardTitle">Temaer mest mot:</p>}
       >
         <SubjectVoteRanking type="against" subjectEntries={topAgainst} />

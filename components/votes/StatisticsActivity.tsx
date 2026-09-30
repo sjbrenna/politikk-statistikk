@@ -10,7 +10,7 @@ function StatisticsActivity({ votes }: Props) {
 
   console.log(presenceCount);
   return (
-    <ContentCard className="flex flex-row gap-x-2 bg-background w-fit">
+    <ContentCard className="flex lg:flex-row flex-col gap-x-2 bg-background w-fit">
       {presenceCount !== 0 ? (
         <>
           <strong>Oppmøte:</strong>
