@@ -1,24 +1,27 @@
 # Politikk Statistikk
 
-Politikk Statistikk er en webapplikasjon for å utforske og analysere informasjon om politisk arbeid på Stortinget.
+Politikk Statistikk er en webapplikasjon for å utforske og visualisere informasjon om politisk arbeid på Stortinget.
 
-Applikasjonen henter data fra Stortingets åpne API og presenterer informasjon om partier, politikere, saker, voteringer og politiske temaer på en mer oversiktlig måte.
+Prosjektet bruker data fra Stortingets åpne API og presenterer informasjon om blant annet politikere, partier, saker og voteringer. Applikasjonen beregner også statistikk basert på stemmegivning, slik at det er mulig å utforske hvordan politikere og partier har stemt over ulike politiske temaer.
+
+## Demo
+
+Du kan teste applikasjonen her:
+
+**[Politikk Statistikk](https://politikk-statistikk.vercel.app/)**
 
 ## Funksjonalitet
 
-- Oversikt over partiene på Stortinget
-- Oversikt over politikere og deres tilhørighet
+- Oversikt over partier og politikere
 - Søk og filtrering av politiske saker
-- Informasjon om voteringer og stemmegivning
+- Oversikt over voteringer og stemmegivning
 - Statistikk over politikeres stemmegivning
 - Statistikk fordelt på politiske temaer
-- Egne profilsider for politikere
+- Profilsider for individuelle politikere
 - Oversikt over politikeres deltakelse i voteringer
 - Responsivt grensesnitt for desktop og mobil
 
 ## Teknologier
-
-Prosjektet er utviklet med:
 
 - **TypeScript**
 - **React**
@@ -29,40 +32,14 @@ Prosjektet er utviklet med:
 - **Supabase**
 - **Vercel**
 
-Data om Stortinget hentes fra **Stortingets åpne API**, mens Supabase brukes som database og for autentisering.
+## Om prosjektet
 
-## Arkitektur
+Prosjektet er utviklet fra bunnen av med utgangspunkt i Stortingets åpne API.
 
-Applikasjonen bruker Next.js som rammeverk og er bygget med en kombinasjon av server- og klientkomponenter.
+Data fra API-et organiseres og lagres i en relasjonsdatabase ved hjelp av Prisma og Supabase. Dette gjør det mulig å kombinere data fra API-et og utføre egne beregninger for å presentere statistikk i applikasjonen.
 
-Data fra Stortingets API synkroniseres til en relasjonsdatabase. Prisma brukes som ORM for å håndtere datamodellen og kommunikasjonen med databasen.
+Frontend er utviklet med React og Next.js, med Tailwind CSS og shadcn/ui for brukergrensesnittet.
 
-For eksempel lagres informasjon om politikere, partier, politiske temaer og stemmegivning i databasen. Dette gjør det mulig å utføre beregninger og lage statistikk uten å måtte hente all informasjon direkte fra Stortingets API hver gang en side lastes inn.
+## Status
 
-## Datakilde
-
-Prosjektet benytter **Stortingets åpne API** som kilde for informasjon om blant annet:
-
-- Politikere
-- Partier
-- Saker
-- Voteringer
-- Politiske temaer
-
-Dataene er bearbeidet og organisert i prosjektets database for å gjøre dem tilgjengelige for applikasjonens statistikk og visninger.
-
-### Forutsetninger
-
-Du trenger:
-
-- Node.js
-- En Supabase-database
-- Miljøvariabler for database og autentisering
-
-### Installering
-
-Klon repositoriet:
-
-```bash
-git clone <repository-url>
-cd <repository-name>
+Prosjektet er under utvikling, og funksjonalitet og design videreutvikles fortløpende.
