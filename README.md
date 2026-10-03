@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Politikk Statistikk
 
-## Getting Started
+Politikk Statistikk er en webapplikasjon for å utforske og visualisere informasjon om politisk arbeid på Stortinget.
 
-First, run the development server:
+Prosjektet bruker data fra Stortingets åpne API og presenterer informasjon om blant annet politikere, partier, saker og voteringer. Applikasjonen beregner også statistikk basert på stemmegivning, slik at det er mulig å utforske hvordan politikere og partier har stemt over ulike politiske temaer.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Du kan teste applikasjonen her:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**[Politikk Statistikk](https://politikk-statistikk.vercel.app/)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Funksjonalitet
 
-## Learn More
+- Oversikt over partier og politikere
+- Søk og filtrering av politiske saker
+- Oversikt over voteringer og stemmegivning
+- Statistikk over politikeres stemmegivning
+- Statistikk fordelt på politiske temaer
+- Profilsider for individuelle politikere
+- Oversikt over politikeres deltakelse i voteringer
+- Responsivt grensesnitt for desktop og mobil
 
-To learn more about Next.js, take a look at the following resources:
+## Teknologier
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **TypeScript**
+- **React**
+- **Next.js**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **Prisma**
+- **Supabase**
+- **Vercel**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Om prosjektet
 
-## Deploy on Vercel
+Prosjektet er utviklet fra bunnen av med utgangspunkt i Stortingets åpne API.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Data fra API-et organiseres og lagres i en relasjonsdatabase ved hjelp av Prisma og Supabase. Dette gjør det mulig å kombinere data fra API-et og utføre egne beregninger for å presentere statistikk i applikasjonen.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Frontend er utviklet med React og Next.js, med Tailwind CSS og shadcn/ui for brukergrensesnittet.
+
+## Status
+
+Prosjektet er under utvikling, og funksjonalitet og design videreutvikles fortløpende.
