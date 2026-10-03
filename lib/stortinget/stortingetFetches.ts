@@ -22,6 +22,7 @@ import {
 } from "./types/voting";
 import { ApiSubjects } from "./types/subject";
 import { ApiCommitteeResponse } from "./types/committee";
+import { config } from "@/app/config";
 
 export const fetchParties = async () => {
   const periods = await fetchPeriods();
@@ -50,11 +51,8 @@ export const fetchParties = async () => {
   return uniqueParties.map(mapParty);
 };
 export const fetchCurrentParties = async () => {
-  const curYear = new Date().getFullYear();
-  const yearParam = `${curYear - 1}-${curYear}`;
-
   const response = await stortingFetch<ApiPartyResponse>(
-    `partier?sesjonid=${yearParam}`,
+    `partier?stortingsperiodeid=${config.currentPeriod}`,
   );
 
   return response.partier_liste.map(mapParty);
@@ -78,42 +76,24 @@ export const fetchCurrentRepresentatives = async () => {
 };
 
 export const fetchAllRepresentatives = async () => {
-  const periods = await fetchPeriods();
+  const response = await stortingFetch<ApiPoliticianResponse>(
+    `representanter?stortingsperiodeid=${config.currentPeriod}&vararepresentanter=true`,
+  );
 
-  const currentPeriod = periods.innevaerende_stortingsperiode.id;
-  const previousPeriod = periods.stortingsperioder_liste[1].id;
-
-  const [currentResponse, previousResponse] = await Promise.all([
-    stortingFetch<ApiPoliticianResponse>(
-      `representanter?stortingsperiodeid=${currentPeriod}&vararepresentanter=true`,
-    ),
-    stortingFetch<ApiPoliticianResponse>(
-      `representanter?stortingsperiodeid=${previousPeriod}&vararepresentanter=true`,
-    ),
-  ]);
-
-  const politicians = [
-    ...previousResponse.representanter_liste,
-    ...currentResponse.representanter_liste,
-  ];
-
-  const uniquePoliticians = [
-    ...new Map(
-      politicians.map((politician) => [politician.id, politician]),
-    ).values(),
-  ];
-
-  return uniquePoliticians.map(mapPolitician);
+  const politicians = response.representanter_liste;
+  return politicians.map(mapPolitician);
 };
 
-export const fetchCases = async (sessionId?: string) => {
-  const sessions = await fetchSessions();
-  let sessionParam = "";
-  if (sessionId && sessions.includes(sessionId)) {
-    sessionParam = "?sesjonid=" + sessionId;
-  }
-  const response = await stortingFetch<ApiCaseResponse>("saker" + sessionParam);
-  return response.saker_liste
+export const fetchCases = async () => {
+  const response = await Promise.all(
+    config.currentSessions.map((session) =>
+      stortingFetch<ApiCaseResponse>(`saker?sesjonid=${session}`),
+    ),
+  );
+
+  const cases = response.flatMap((casesList) => casesList.saker_liste);
+
+  return cases
     .map(mapCases)
     .sort((a, b) => b.sist_oppdatert_dato.localeCompare(a.sist_oppdatert_dato));
 };
@@ -157,6 +137,11 @@ export const fetchVotingSuggestionOverview = async (votingId: string) => {
 };
 
 export const fetchCommittees = async () => {
-  const response = await stortingFetch<ApiCommitteeResponse>("/komiteer");
-  return response.komiteer_liste;
+  const response = await Promise.all(
+    config.currentSessions.map((session) =>
+      stortingFetch<ApiCommitteeResponse>(`/komiteer?sesjonid=${session}`),
+    ),
+  );
+  const committees = response.flatMap((committee) => committee.komiteer_liste);
+  return committees;
 };

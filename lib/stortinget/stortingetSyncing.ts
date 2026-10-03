@@ -209,7 +209,10 @@ export const syncSubjects = async () => {
   }
 };
 
-export const syncCaseVote = async (caseID: string) => {
+export const syncCaseVote = async (
+  caseID: string,
+  syncedVotings: Set<string>,
+) => {
   const start = performance.now();
   //Fetch the votings for a case
   const votingOverview = (await fetchVotingOverview(caseID)).sak_votering_liste;
@@ -221,7 +224,12 @@ export const syncCaseVote = async (caseID: string) => {
   // Stortinget uses -1 for votings without recorded for/mot counts,
   // which we don't want to include in voting statistics.
   const votingIDs = votingOverview
-    .filter((apiVote) => apiVote.antall_for !== -1 && apiVote.antall_mot !== -1)
+    .filter(
+      (apiVote) =>
+        apiVote.antall_for !== -1 &&
+        apiVote.antall_mot !== -1 &&
+        !syncedVotings.has(apiVote.votering_id.toString()),
+    )
     .map((apiVote) => apiVote.votering_id);
   if (votingIDs.length === 0) {
     return;
@@ -259,14 +267,27 @@ export const syncAllCaseVotes = async () => {
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
-  const cases: ApiCase[] = await fetchCases();
+  const [cases, syncedVotings] = await Promise.all([
+    fetchCases(),
+    prisma.voteRecord.findMany({
+      distinct: ["votingID"],
+      select: {
+        votingID: true,
+      },
+    }),
+  ]);
+  const syncedVotingIds = new Set(
+    syncedVotings.map((voting) => voting.votingID),
+  );
+
   const start = performance.now();
   for (let i = 0; i < cases.length; i += config.caseSyncConcurrently) {
     const curCases = cases.slice(i, i + config.caseSyncConcurrently);
     await Promise.allSettled(
-      curCases.map((apiCase) => syncCaseVote(apiCase.id)),
+      curCases.map((apiCase) => syncCaseVote(apiCase.id, syncedVotingIds)),
     );
     await sleep(4000);
+    console.log("FINISHED CASE ", i);
   }
   console.log("All cases vote sync votes: ", performance.now() - start);
 };

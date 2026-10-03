@@ -8,7 +8,6 @@ type Props = {
 function StatisticsActivity({ votes }: Props) {
   const presenceCount = votes.filter((vote) => vote.vote !== "ABSENT").length;
 
-  console.log(presenceCount);
   return (
     <ContentCard className="flex lg:flex-row flex-col gap-x-2 bg-background w-fit">
       {presenceCount !== 0 ? (

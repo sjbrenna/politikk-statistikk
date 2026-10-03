@@ -12,7 +12,7 @@ function SubjectButton({ subjectId, subjectName }: Props) {
     <Link href={"/temaer/" + subjectId.toString()}>
       <Button
         className="flex h-auto min-w-0 wrap-anywhere
-       whitespace-normal bg-primary min-h-10"
+       whitespace-normal bg-primary min-h-10 cursor-pointer"
       >
         {subjectName}
       </Button>

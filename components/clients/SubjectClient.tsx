@@ -8,6 +8,7 @@ import { CasesProviderContext } from "@/app/providers/casesProvider";
 
 type Props = {
   subject: Subject;
+  caseIds: Set<String>;
 };
 
 //Siste saker,
@@ -15,9 +16,9 @@ type Props = {
 //fra prisma finn sakene som har dette som ett av temaene
 //Statistikken må aggregeres på prisma for performance messige grunner.
 
-function SubjectClient({ subject }: Props) {
-  const cases = useContext(CasesProviderContext);
-  console.log("CASES:", cases);
+function SubjectClient({ subject, caseIds }: Props) {
+  const cases = useContext(CasesProviderContext).cases;
+
   return (
     <ContentContainer mode="half">
       <PageTitle

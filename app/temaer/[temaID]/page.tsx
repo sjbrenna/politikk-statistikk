@@ -19,7 +19,22 @@ async function SubjectPage({ params }: Props) {
     notFound();
   }
 
-  return <SubjectClient subject={subject} />;
+  //Get the metadata with cases that have this subject
+  //need cases, cases that have specific subject
+  //
+  const caseIds = (
+    await prisma.caseSubject.findMany({
+      where: {
+        subjectId: subject.id,
+      },
+      select: {
+        caseMetadataId: true,
+      },
+    })
+  ).map((metadata) => metadata.caseMetadataId);
+  const caseIdSet = new Set(caseIds);
+
+  return <SubjectClient subject={subject} caseIds={caseIdSet} />;
 }
 
 export default SubjectPage;

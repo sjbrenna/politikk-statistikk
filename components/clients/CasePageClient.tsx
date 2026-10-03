@@ -36,6 +36,7 @@ export default function CasePageClient({
   votingOverview,
   votingSuggestionOverview,
 }: Props) {
+  const displayVotes = (votingOverview?.sak_votering_liste.length ?? 0) > 0;
   const cases = useContext(CasesProviderContext).cases;
   const subjects = sourceCase.emne_liste;
   const caseDate = cases.find(
@@ -94,8 +95,8 @@ export default function CasePageClient({
         </ContentCard>
       )}
       <ContentCard centered={true}>
-        {votingOverview ? (
-          votingOverview.sak_votering_liste.map((voting, index) => (
+        {displayVotes ? (
+          votingOverview?.sak_votering_liste.map((voting, index) => (
             <CaseVote
               key={index}
               sourceVote={voting}
