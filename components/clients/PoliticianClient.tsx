@@ -42,9 +42,19 @@ type Props = {
   politician: PoliticianWithCommittees;
   govRole?: GovernmentRole | null;
   metadata: CaseMetadataWithSubjects[];
+  proposals: {
+    politicianId: string;
+    caseMetadataId: string;
+  }[];
 };
 
-function PoliticianClient({ votes, politician, govRole, metadata }: Props) {
+function PoliticianClient({
+  votes,
+  politician,
+  govRole,
+  metadata,
+  proposals,
+}: Props) {
   const dropdownOptions = [
     { label: "Filtrer basert på stemme...", value: null },
     { label: "For", value: "FOR" },
@@ -171,7 +181,11 @@ function PoliticianClient({ votes, politician, govRole, metadata }: Props) {
           )}
         </div>
       </ContentCard>
-      <VotingStatistics votes={votes} metadata={metadata} />
+      <VotingStatistics
+        votes={votes}
+        metadata={metadata}
+        proposalCount={proposals.length}
+      />
       <ContentCard header={<p className="cardTitle pl-2">Siste stemmer:</p>}>
         <div
           className="flex flex-col lg:flex-row 

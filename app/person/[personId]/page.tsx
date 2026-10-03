@@ -24,11 +24,18 @@ async function page({ params }: Props) {
     }),
   ]);
 
-  const votes: VoteRecord[] = await prisma.voteRecord.findMany({
-    where: {
-      politicianID: personId,
-    },
-  });
+  const [proposals, votes] = await Promise.all([
+    prisma.caseProposer.findMany({
+      where: {
+        politicianId: personId,
+      },
+    }),
+    prisma.voteRecord.findMany({
+      where: {
+        politicianID: personId,
+      },
+    }),
+  ]);
 
   //for each vote, get the associated metadata
   const caseMetadata = await prisma.caseMetadata.findMany({
@@ -55,6 +62,7 @@ async function page({ params }: Props) {
         politician={politician}
         govRole={govRole}
         metadata={caseMetadata}
+        proposals={proposals}
       />
     );
   }

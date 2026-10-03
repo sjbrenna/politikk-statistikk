@@ -15,9 +15,10 @@ type CaseMetadataWithSubjects = Prisma.CaseMetadataGetPayload<{
 type Props = {
   votes: VoteRecord[];
   metadata: CaseMetadataWithSubjects[];
+  proposalCount: number;
 };
 
-function VotingStatistics({ votes, metadata }: Props) {
+function VotingStatistics({ votes, metadata, proposalCount }: Props) {
   return (
     <ContentCard
       header={
@@ -30,7 +31,7 @@ function VotingStatistics({ votes, metadata }: Props) {
         </div>
       }
     >
-      <StatisticsActivity votes={votes} />
+      <StatisticsActivity votes={votes} proposalsCount={proposalCount} />
       <StatisticsSubjects votes={votes} metadata={metadata} />
     </ContentCard>
   );
