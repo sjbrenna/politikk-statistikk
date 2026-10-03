@@ -76,12 +76,16 @@ export const fetchCurrentRepresentatives = async () => {
 };
 
 export const fetchAllRepresentatives = async () => {
-  const response = await stortingFetch<ApiPoliticianResponse>(
-    `representanter?stortingsperiodeid=${config.currentPeriod}&vararepresentanter=true`,
-  );
-
-  const politicians = response.representanter_liste;
-  return politicians.map(mapPolitician);
+  const responses = (
+    await Promise.all(
+      config.politicianPeriods.map((period) =>
+        stortingFetch<ApiPoliticianResponse>(
+          `representanter?stortingsperiodeid=${period}&vararepresentanter=true`,
+        ),
+      ),
+    )
+  ).flatMap((response) => response.representanter_liste);
+  return responses.map(mapPolitician);
 };
 
 export const fetchCases = async () => {
