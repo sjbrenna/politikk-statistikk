@@ -1,6 +1,7 @@
 export const config = {
   homepageCases: 10,
   pageSize: 20,
+  subjectCases: 10,
   caseSyncConcurrently: 1,
   noOfSubjectsStats: 3,
   minVotesStatistic: 10,

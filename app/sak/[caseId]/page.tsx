@@ -5,6 +5,7 @@ import {
   fetchVotingResult,
   fetchVotingSuggestionOverview,
 } from "@/lib/stortinget/stortingetFetches";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{
@@ -15,29 +16,32 @@ type Props = {
 export default async function CasePage({ params }: Props) {
   const { caseId } = await params;
 
-  const sourceCase = await fetchCase(caseId);
+  try {
+    const sourceCase = await fetchCase(caseId);
 
-  const [votingOverview, votingResult] = sourceCase.ferdigbehandlet
-    ? await Promise.all([
-        fetchVotingOverview(caseId),
-        fetchVotingResult(caseId),
-      ])
-    : [null, null];
+    const [votingOverview, votingResult] = sourceCase.ferdigbehandlet
+      ? await Promise.all([
+          fetchVotingOverview(caseId),
+          fetchVotingResult(caseId),
+        ])
+      : [null, null];
 
-  const votingSuggestionOverview =
-    votingOverview !== null
-      ? await Promise.all(
-          votingOverview.sak_votering_liste.map((voting) =>
-            fetchVotingSuggestionOverview(voting.votering_id),
-          ),
-        )
-      : [];
-
-  return (
-    <CasePageClient
-      sourceCase={sourceCase}
-      votingOverview={votingOverview}
-      votingSuggestionOverview={votingSuggestionOverview}
-    />
-  );
+    const votingSuggestionOverview =
+      votingOverview !== null
+        ? await Promise.all(
+            votingOverview.sak_votering_liste.map((voting) =>
+              fetchVotingSuggestionOverview(voting.votering_id),
+            ),
+          )
+        : [];
+    return (
+      <CasePageClient
+        sourceCase={sourceCase}
+        votingOverview={votingOverview}
+        votingSuggestionOverview={votingSuggestionOverview}
+      />
+    );
+  } catch (error) {
+    notFound();
+  }
 }

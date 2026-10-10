@@ -97,9 +97,9 @@ export const fetchCases = async () => {
 
   const cases = response.flatMap((casesList) => casesList.saker_liste);
 
-  return cases
-    .map(mapCases)
-    .sort((a, b) => b.sist_oppdatert_dato.localeCompare(a.sist_oppdatert_dato));
+  return [...new Map(cases.map((c) => [c.id, mapCases(c)])).values()].sort(
+    (a, b) => b.sist_oppdatert_dato.localeCompare(a.sist_oppdatert_dato),
+  );
 };
 
 export const fetchCase = async (caseId: string) => {
