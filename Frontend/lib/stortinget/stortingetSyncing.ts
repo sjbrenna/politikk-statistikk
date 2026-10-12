@@ -13,14 +13,14 @@ import {
   fetchCurrentRepresentatives,
 } from "./stortingetFetches";
 import { PrismaVoteRecord } from "./types/voting";
-Voting;
 import { mapApiVoting } from "./services/mapVoting";
-import { ApiCase } from "./types/case";
 import { config } from "@/app/config";
-import { Voting } from "@/prisma/generated/enums";
+import { assertSyncEnabled } from "../sync/assertSyncEnabled";
 
 //fetch current parties, compare differences and update db
 export const syncParties = async () => {
+  assertSyncEnabled();
+
   try {
     const apiParties = await fetchParties();
     console.log(apiParties);
@@ -47,6 +47,7 @@ export const syncParties = async () => {
 
 //Retrieves all accessible politicians from the api
 export const syncPoliticians = async () => {
+  assertSyncEnabled();
   try {
     //Politicians are a set consisting of the representatives, and those in elected government positions who are not representatives.
     //In addition, fetch all vara-representatives
@@ -163,6 +164,7 @@ export const syncPoliticians = async () => {
 };
 
 export const syncSubjects = async () => {
+  assertSyncEnabled();
   try {
     const subjects = (await fetchSubjects()).emne_liste;
     await Promise.all(
@@ -213,6 +215,7 @@ export const syncCaseVote = async (
   caseID: string,
   syncedVotings: Set<string>,
 ) => {
+  assertSyncEnabled();
   const start = performance.now();
   //Fetch the votings for a case
   const votingOverview = (await fetchVotingOverview(caseID)).sak_votering_liste;
@@ -264,6 +267,7 @@ export const syncCaseVote = async (
 };
 
 export const syncAllCaseVotes = async () => {
+  assertSyncEnabled();
   const sleep = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -293,6 +297,7 @@ export const syncAllCaseVotes = async () => {
 };
 
 export const syncCaseMetadata = async () => {
+  assertSyncEnabled();
   const cases = await fetchCases();
 
   //create metadata records
@@ -331,6 +336,7 @@ export const syncCaseMetadata = async () => {
 };
 
 export const getCaseMetadata = async (caseId: string) => {
+  assertSyncEnabled();
   const caseMetadata = await prisma.caseMetadata.findUnique({
     where: { id: caseId },
     include: {
@@ -348,6 +354,7 @@ export const getCaseMetadata = async (caseId: string) => {
 };
 
 export const syncCommittees = async () => {
+  assertSyncEnabled();
   const committees = await fetchCommittees();
   await prisma.committee.createMany({
     data: committees.map((committee) => {
