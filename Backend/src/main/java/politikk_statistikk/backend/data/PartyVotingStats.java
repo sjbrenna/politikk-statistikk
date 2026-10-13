@@ -1,4 +1,4 @@
-package politikk_statistikk.backend.PartyVote;
+package politikk_statistikk.backend.data;
 
 import java.util.List;
 
