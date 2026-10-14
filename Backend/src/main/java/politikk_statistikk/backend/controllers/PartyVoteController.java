@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import politikk_statistikk.backend.data.Party;
-import politikk_statistikk.backend.data.PartyVote;
-import politikk_statistikk.backend.service.AggregatePartyVotes;
 import org.springframework.jdbc.core.JdbcTemplate;
+import politikk_statistikk.backend.data.PartyVotingStats;
+import politikk_statistikk.backend.service.PartyVoteFetcher;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ public class PartyVoteController {
         this.jdbcTemplate = jdbcTemplate;
     }
     @GetMapping(value = "/api/party-votes/get-parties-votes-for-subject/{subjectId}")
-    public PartyVote partyVote(@PathVariable int subjectId) {
-        AggregatePartyVotes aggregatePartyVotes = new AggregatePartyVotes();
-        return aggregatePartyVotes.votes();
+    public PartyVotingStats partyVote(@PathVariable int subjectId) {
+        PartyVoteFetcher pvf = new PartyVoteFetcher(jdbcTemplate);
+        return pvf.getPartyVotes(subjectId);
     }
 
     @GetMapping("/parties")
@@ -28,7 +28,7 @@ public class PartyVoteController {
         String sql = "select id, name FROM \"Party\" ORDER BY id";
         return jdbcTemplate.query(
                 sql,
-                (rs, _) -> new Party(
+                (rs, rowNum) -> new Party(
                         rs.getString("id"),
                         rs.getString("name")
                 )
