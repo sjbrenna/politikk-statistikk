@@ -25,46 +25,46 @@ export type AggregateVoteRecord = {
 }
 
 export type VoteRecordMinAggregateOutputType = {
+  caseID: string | null
   politicianID: string | null
   vote: $Enums.Voting | null
-  caseID: string | null
   votingID: string | null
 }
 
 export type VoteRecordMaxAggregateOutputType = {
+  caseID: string | null
   politicianID: string | null
   vote: $Enums.Voting | null
-  caseID: string | null
   votingID: string | null
 }
 
 export type VoteRecordCountAggregateOutputType = {
+  caseID: number
   politicianID: number
   vote: number
-  caseID: number
   votingID: number
   _all: number
 }
 
 
 export type VoteRecordMinAggregateInputType = {
+  caseID?: true
   politicianID?: true
   vote?: true
-  caseID?: true
   votingID?: true
 }
 
 export type VoteRecordMaxAggregateInputType = {
+  caseID?: true
   politicianID?: true
   vote?: true
-  caseID?: true
   votingID?: true
 }
 
 export type VoteRecordCountAggregateInputType = {
+  caseID?: true
   politicianID?: true
   vote?: true
-  caseID?: true
   votingID?: true
   _all?: true
 }
@@ -142,9 +142,9 @@ export type VoteRecordGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 export type VoteRecordGroupByOutputType = {
+  caseID: string
   politicianID: string
   vote: $Enums.Voting
-  caseID: string
   votingID: string
   _count: VoteRecordCountAggregateOutputType | null
   _min: VoteRecordMinAggregateOutputType | null
@@ -170,17 +170,17 @@ export type VoteRecordWhereInput = {
   AND?: Prisma.VoteRecordWhereInput | Prisma.VoteRecordWhereInput[]
   OR?: Prisma.VoteRecordWhereInput[]
   NOT?: Prisma.VoteRecordWhereInput | Prisma.VoteRecordWhereInput[]
+  caseID?: Prisma.StringFilter<"VoteRecord"> | string
   politicianID?: Prisma.StringFilter<"VoteRecord"> | string
   vote?: Prisma.EnumVotingFilter<"VoteRecord"> | $Enums.Voting
-  caseID?: Prisma.StringFilter<"VoteRecord"> | string
   votingID?: Prisma.StringFilter<"VoteRecord"> | string
   politician?: Prisma.XOR<Prisma.PoliticianScalarRelationFilter, Prisma.PoliticianWhereInput>
 }
 
 export type VoteRecordOrderByWithRelationInput = {
+  caseID?: Prisma.SortOrder
   politicianID?: Prisma.SortOrder
   vote?: Prisma.SortOrder
-  caseID?: Prisma.SortOrder
   votingID?: Prisma.SortOrder
   politician?: Prisma.PoliticianOrderByWithRelationInput
 }
@@ -190,17 +190,17 @@ export type VoteRecordWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.VoteRecordWhereInput | Prisma.VoteRecordWhereInput[]
   OR?: Prisma.VoteRecordWhereInput[]
   NOT?: Prisma.VoteRecordWhereInput | Prisma.VoteRecordWhereInput[]
+  caseID?: Prisma.StringFilter<"VoteRecord"> | string
   politicianID?: Prisma.StringFilter<"VoteRecord"> | string
   vote?: Prisma.EnumVotingFilter<"VoteRecord"> | $Enums.Voting
-  caseID?: Prisma.StringFilter<"VoteRecord"> | string
   votingID?: Prisma.StringFilter<"VoteRecord"> | string
   politician?: Prisma.XOR<Prisma.PoliticianScalarRelationFilter, Prisma.PoliticianWhereInput>
 }, "politicianID_votingID">
 
 export type VoteRecordOrderByWithAggregationInput = {
+  caseID?: Prisma.SortOrder
   politicianID?: Prisma.SortOrder
   vote?: Prisma.SortOrder
-  caseID?: Prisma.SortOrder
   votingID?: Prisma.SortOrder
   _count?: Prisma.VoteRecordCountOrderByAggregateInput
   _max?: Prisma.VoteRecordMaxOrderByAggregateInput
@@ -211,57 +211,57 @@ export type VoteRecordScalarWhereWithAggregatesInput = {
   AND?: Prisma.VoteRecordScalarWhereWithAggregatesInput | Prisma.VoteRecordScalarWhereWithAggregatesInput[]
   OR?: Prisma.VoteRecordScalarWhereWithAggregatesInput[]
   NOT?: Prisma.VoteRecordScalarWhereWithAggregatesInput | Prisma.VoteRecordScalarWhereWithAggregatesInput[]
+  caseID?: Prisma.StringWithAggregatesFilter<"VoteRecord"> | string
   politicianID?: Prisma.StringWithAggregatesFilter<"VoteRecord"> | string
   vote?: Prisma.EnumVotingWithAggregatesFilter<"VoteRecord"> | $Enums.Voting
-  caseID?: Prisma.StringWithAggregatesFilter<"VoteRecord"> | string
   votingID?: Prisma.StringWithAggregatesFilter<"VoteRecord"> | string
 }
 
 export type VoteRecordCreateInput = {
-  vote: $Enums.Voting
   caseID: string
+  vote: $Enums.Voting
   votingID: string
   politician: Prisma.PoliticianCreateNestedOneWithoutVotesInput
 }
 
 export type VoteRecordUncheckedCreateInput = {
+  caseID: string
   politicianID: string
   vote: $Enums.Voting
-  caseID: string
   votingID: string
 }
 
 export type VoteRecordUpdateInput = {
-  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   caseID?: Prisma.StringFieldUpdateOperationsInput | string
+  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   votingID?: Prisma.StringFieldUpdateOperationsInput | string
   politician?: Prisma.PoliticianUpdateOneRequiredWithoutVotesNestedInput
 }
 
 export type VoteRecordUncheckedUpdateInput = {
+  caseID?: Prisma.StringFieldUpdateOperationsInput | string
   politicianID?: Prisma.StringFieldUpdateOperationsInput | string
   vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
-  caseID?: Prisma.StringFieldUpdateOperationsInput | string
   votingID?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type VoteRecordCreateManyInput = {
+  caseID: string
   politicianID: string
   vote: $Enums.Voting
-  caseID: string
   votingID: string
 }
 
 export type VoteRecordUpdateManyMutationInput = {
-  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   caseID?: Prisma.StringFieldUpdateOperationsInput | string
+  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   votingID?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type VoteRecordUncheckedUpdateManyInput = {
+  caseID?: Prisma.StringFieldUpdateOperationsInput | string
   politicianID?: Prisma.StringFieldUpdateOperationsInput | string
   vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
-  caseID?: Prisma.StringFieldUpdateOperationsInput | string
   votingID?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -281,23 +281,23 @@ export type VoteRecordPoliticianIDVotingIDCompoundUniqueInput = {
 }
 
 export type VoteRecordCountOrderByAggregateInput = {
+  caseID?: Prisma.SortOrder
   politicianID?: Prisma.SortOrder
   vote?: Prisma.SortOrder
-  caseID?: Prisma.SortOrder
   votingID?: Prisma.SortOrder
 }
 
 export type VoteRecordMaxOrderByAggregateInput = {
+  caseID?: Prisma.SortOrder
   politicianID?: Prisma.SortOrder
   vote?: Prisma.SortOrder
-  caseID?: Prisma.SortOrder
   votingID?: Prisma.SortOrder
 }
 
 export type VoteRecordMinOrderByAggregateInput = {
+  caseID?: Prisma.SortOrder
   politicianID?: Prisma.SortOrder
   vote?: Prisma.SortOrder
-  caseID?: Prisma.SortOrder
   votingID?: Prisma.SortOrder
 }
 
@@ -348,14 +348,14 @@ export type EnumVotingFieldUpdateOperationsInput = {
 }
 
 export type VoteRecordCreateWithoutPoliticianInput = {
-  vote: $Enums.Voting
   caseID: string
+  vote: $Enums.Voting
   votingID: string
 }
 
 export type VoteRecordUncheckedCreateWithoutPoliticianInput = {
-  vote: $Enums.Voting
   caseID: string
+  vote: $Enums.Voting
   votingID: string
 }
 
@@ -389,70 +389,70 @@ export type VoteRecordScalarWhereInput = {
   AND?: Prisma.VoteRecordScalarWhereInput | Prisma.VoteRecordScalarWhereInput[]
   OR?: Prisma.VoteRecordScalarWhereInput[]
   NOT?: Prisma.VoteRecordScalarWhereInput | Prisma.VoteRecordScalarWhereInput[]
+  caseID?: Prisma.StringFilter<"VoteRecord"> | string
   politicianID?: Prisma.StringFilter<"VoteRecord"> | string
   vote?: Prisma.EnumVotingFilter<"VoteRecord"> | $Enums.Voting
-  caseID?: Prisma.StringFilter<"VoteRecord"> | string
   votingID?: Prisma.StringFilter<"VoteRecord"> | string
 }
 
 export type VoteRecordCreateManyPoliticianInput = {
-  vote: $Enums.Voting
   caseID: string
+  vote: $Enums.Voting
   votingID: string
 }
 
 export type VoteRecordUpdateWithoutPoliticianInput = {
-  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   caseID?: Prisma.StringFieldUpdateOperationsInput | string
+  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   votingID?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type VoteRecordUncheckedUpdateWithoutPoliticianInput = {
-  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   caseID?: Prisma.StringFieldUpdateOperationsInput | string
+  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   votingID?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type VoteRecordUncheckedUpdateManyWithoutPoliticianInput = {
-  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   caseID?: Prisma.StringFieldUpdateOperationsInput | string
+  vote?: Prisma.EnumVotingFieldUpdateOperationsInput | $Enums.Voting
   votingID?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
 
 export type VoteRecordSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  caseID?: boolean
   politicianID?: boolean
   vote?: boolean
-  caseID?: boolean
   votingID?: boolean
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["voteRecord"]>
 
 export type VoteRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  caseID?: boolean
   politicianID?: boolean
   vote?: boolean
-  caseID?: boolean
   votingID?: boolean
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["voteRecord"]>
 
 export type VoteRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  caseID?: boolean
   politicianID?: boolean
   vote?: boolean
-  caseID?: boolean
   votingID?: boolean
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["voteRecord"]>
 
 export type VoteRecordSelectScalar = {
+  caseID?: boolean
   politicianID?: boolean
   vote?: boolean
-  caseID?: boolean
   votingID?: boolean
 }
 
-export type VoteRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"politicianID" | "vote" | "caseID" | "votingID", ExtArgs["result"]["voteRecord"]>
+export type VoteRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"caseID" | "politicianID" | "vote" | "votingID", ExtArgs["result"]["voteRecord"]>
 export type VoteRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }
@@ -469,9 +469,9 @@ export type $VoteRecordPayload<ExtArgs extends runtime.Types.Extensions.Internal
     politician: Prisma.$PoliticianPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    caseID: string
     politicianID: string
     vote: $Enums.Voting
-    caseID: string
     votingID: string
   }, ExtArgs["result"]["voteRecord"]>
   composites: {}
@@ -556,8 +556,8 @@ export interface VoteRecordDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * // Get first 10 VoteRecords
    * const voteRecords = await prisma.voteRecord.findMany({ take: 10 })
    * 
-   * // Only select the `politicianID`
-   * const voteRecordWithPoliticianIDOnly = await prisma.voteRecord.findMany({ select: { politicianID: true } })
+   * // Only select the `caseID`
+   * const voteRecordWithCaseIDOnly = await prisma.voteRecord.findMany({ select: { caseID: true } })
    * 
    */
   findMany<T extends VoteRecordFindManyArgs>(args?: Prisma.SelectSubset<T, VoteRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VoteRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -601,9 +601,9 @@ export interface VoteRecordDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
-   * // Create many VoteRecords and only return the `politicianID`
-   * const voteRecordWithPoliticianIDOnly = await prisma.voteRecord.createManyAndReturn({
-   *   select: { politicianID: true },
+   * // Create many VoteRecords and only return the `caseID`
+   * const voteRecordWithCaseIDOnly = await prisma.voteRecord.createManyAndReturn({
+   *   select: { caseID: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -692,9 +692,9 @@ export interface VoteRecordDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   ]
    * })
    * 
-   * // Update zero or more VoteRecords and only return the `politicianID`
-   * const voteRecordWithPoliticianIDOnly = await prisma.voteRecord.updateManyAndReturn({
-   *   select: { politicianID: true },
+   * // Update zero or more VoteRecords and only return the `caseID`
+   * const voteRecordWithCaseIDOnly = await prisma.voteRecord.updateManyAndReturn({
+   *   select: { caseID: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -897,9 +897,9 @@ export interface Prisma__VoteRecordClient<T, Null = never, ExtArgs extends runti
  * Fields of the VoteRecord model
  */
 export interface VoteRecordFieldRefs {
+  readonly caseID: Prisma.FieldRef<"VoteRecord", 'String'>
   readonly politicianID: Prisma.FieldRef<"VoteRecord", 'String'>
   readonly vote: Prisma.FieldRef<"VoteRecord", 'Voting'>
-  readonly caseID: Prisma.FieldRef<"VoteRecord", 'String'>
   readonly votingID: Prisma.FieldRef<"VoteRecord", 'String'>
 }
     

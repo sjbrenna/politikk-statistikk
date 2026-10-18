@@ -25,47 +25,47 @@ export type AggregateGovernmentRole = {
 }
 
 export type GovernmentRoleMinAggregateOutputType = {
-  politicianId: string | null
-  department: string | null
   title: string | null
   role: string | null
+  politicianId: string | null
+  department: string | null
 }
 
 export type GovernmentRoleMaxAggregateOutputType = {
-  politicianId: string | null
-  department: string | null
   title: string | null
   role: string | null
+  politicianId: string | null
+  department: string | null
 }
 
 export type GovernmentRoleCountAggregateOutputType = {
-  politicianId: number
-  department: number
   title: number
   role: number
+  politicianId: number
+  department: number
   _all: number
 }
 
 
 export type GovernmentRoleMinAggregateInputType = {
-  politicianId?: true
-  department?: true
   title?: true
   role?: true
+  politicianId?: true
+  department?: true
 }
 
 export type GovernmentRoleMaxAggregateInputType = {
-  politicianId?: true
-  department?: true
   title?: true
   role?: true
+  politicianId?: true
+  department?: true
 }
 
 export type GovernmentRoleCountAggregateInputType = {
-  politicianId?: true
-  department?: true
   title?: true
   role?: true
+  politicianId?: true
+  department?: true
   _all?: true
 }
 
@@ -142,10 +142,10 @@ export type GovernmentRoleGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 export type GovernmentRoleGroupByOutputType = {
-  politicianId: string
-  department: string
   title: string
   role: string
+  politicianId: string
+  department: string
   _count: GovernmentRoleCountAggregateOutputType | null
   _min: GovernmentRoleMinAggregateOutputType | null
   _max: GovernmentRoleMaxAggregateOutputType | null
@@ -170,18 +170,18 @@ export type GovernmentRoleWhereInput = {
   AND?: Prisma.GovernmentRoleWhereInput | Prisma.GovernmentRoleWhereInput[]
   OR?: Prisma.GovernmentRoleWhereInput[]
   NOT?: Prisma.GovernmentRoleWhereInput | Prisma.GovernmentRoleWhereInput[]
-  politicianId?: Prisma.StringFilter<"GovernmentRole"> | string
-  department?: Prisma.StringFilter<"GovernmentRole"> | string
   title?: Prisma.StringFilter<"GovernmentRole"> | string
   role?: Prisma.StringFilter<"GovernmentRole"> | string
+  politicianId?: Prisma.StringFilter<"GovernmentRole"> | string
+  department?: Prisma.StringFilter<"GovernmentRole"> | string
   politician?: Prisma.XOR<Prisma.PoliticianScalarRelationFilter, Prisma.PoliticianWhereInput>
 }
 
 export type GovernmentRoleOrderByWithRelationInput = {
-  politicianId?: Prisma.SortOrder
-  department?: Prisma.SortOrder
   title?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  politicianId?: Prisma.SortOrder
+  department?: Prisma.SortOrder
   politician?: Prisma.PoliticianOrderByWithRelationInput
 }
 
@@ -190,17 +190,17 @@ export type GovernmentRoleWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.GovernmentRoleWhereInput | Prisma.GovernmentRoleWhereInput[]
   OR?: Prisma.GovernmentRoleWhereInput[]
   NOT?: Prisma.GovernmentRoleWhereInput | Prisma.GovernmentRoleWhereInput[]
-  department?: Prisma.StringFilter<"GovernmentRole"> | string
   title?: Prisma.StringFilter<"GovernmentRole"> | string
   role?: Prisma.StringFilter<"GovernmentRole"> | string
+  department?: Prisma.StringFilter<"GovernmentRole"> | string
   politician?: Prisma.XOR<Prisma.PoliticianScalarRelationFilter, Prisma.PoliticianWhereInput>
 }, "politicianId">
 
 export type GovernmentRoleOrderByWithAggregationInput = {
-  politicianId?: Prisma.SortOrder
-  department?: Prisma.SortOrder
   title?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  politicianId?: Prisma.SortOrder
+  department?: Prisma.SortOrder
   _count?: Prisma.GovernmentRoleCountOrderByAggregateInput
   _max?: Prisma.GovernmentRoleMaxOrderByAggregateInput
   _min?: Prisma.GovernmentRoleMinOrderByAggregateInput
@@ -210,58 +210,58 @@ export type GovernmentRoleScalarWhereWithAggregatesInput = {
   AND?: Prisma.GovernmentRoleScalarWhereWithAggregatesInput | Prisma.GovernmentRoleScalarWhereWithAggregatesInput[]
   OR?: Prisma.GovernmentRoleScalarWhereWithAggregatesInput[]
   NOT?: Prisma.GovernmentRoleScalarWhereWithAggregatesInput | Prisma.GovernmentRoleScalarWhereWithAggregatesInput[]
-  politicianId?: Prisma.StringWithAggregatesFilter<"GovernmentRole"> | string
-  department?: Prisma.StringWithAggregatesFilter<"GovernmentRole"> | string
   title?: Prisma.StringWithAggregatesFilter<"GovernmentRole"> | string
   role?: Prisma.StringWithAggregatesFilter<"GovernmentRole"> | string
+  politicianId?: Prisma.StringWithAggregatesFilter<"GovernmentRole"> | string
+  department?: Prisma.StringWithAggregatesFilter<"GovernmentRole"> | string
 }
 
 export type GovernmentRoleCreateInput = {
-  department: string
   title: string
   role: string
+  department: string
   politician: Prisma.PoliticianCreateNestedOneWithoutGovernmentRoleInput
 }
 
 export type GovernmentRoleUncheckedCreateInput = {
-  politicianId: string
-  department: string
   title: string
   role: string
+  politicianId: string
+  department: string
 }
 
 export type GovernmentRoleUpdateInput = {
-  department?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
   politician?: Prisma.PoliticianUpdateOneRequiredWithoutGovernmentRoleNestedInput
 }
 
 export type GovernmentRoleUncheckedUpdateInput = {
-  politicianId?: Prisma.StringFieldUpdateOperationsInput | string
-  department?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  politicianId?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GovernmentRoleCreateManyInput = {
-  politicianId: string
-  department: string
   title: string
   role: string
+  politicianId: string
+  department: string
 }
 
 export type GovernmentRoleUpdateManyMutationInput = {
-  department?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GovernmentRoleUncheckedUpdateManyInput = {
-  politicianId?: Prisma.StringFieldUpdateOperationsInput | string
-  department?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  politicianId?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GovernmentRoleNullableScalarRelationFilter = {
@@ -270,24 +270,24 @@ export type GovernmentRoleNullableScalarRelationFilter = {
 }
 
 export type GovernmentRoleCountOrderByAggregateInput = {
-  politicianId?: Prisma.SortOrder
-  department?: Prisma.SortOrder
   title?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  politicianId?: Prisma.SortOrder
+  department?: Prisma.SortOrder
 }
 
 export type GovernmentRoleMaxOrderByAggregateInput = {
-  politicianId?: Prisma.SortOrder
-  department?: Prisma.SortOrder
   title?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  politicianId?: Prisma.SortOrder
+  department?: Prisma.SortOrder
 }
 
 export type GovernmentRoleMinOrderByAggregateInput = {
-  politicianId?: Prisma.SortOrder
-  department?: Prisma.SortOrder
   title?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  politicianId?: Prisma.SortOrder
+  department?: Prisma.SortOrder
 }
 
 export type GovernmentRoleCreateNestedOneWithoutPoliticianInput = {
@@ -323,15 +323,15 @@ export type GovernmentRoleUncheckedUpdateOneWithoutPoliticianNestedInput = {
 }
 
 export type GovernmentRoleCreateWithoutPoliticianInput = {
-  department: string
   title: string
   role: string
+  department: string
 }
 
 export type GovernmentRoleUncheckedCreateWithoutPoliticianInput = {
-  department: string
   title: string
   role: string
+  department: string
 }
 
 export type GovernmentRoleCreateOrConnectWithoutPoliticianInput = {
@@ -351,51 +351,51 @@ export type GovernmentRoleUpdateToOneWithWhereWithoutPoliticianInput = {
 }
 
 export type GovernmentRoleUpdateWithoutPoliticianInput = {
-  department?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type GovernmentRoleUncheckedUpdateWithoutPoliticianInput = {
-  department?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  department?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
 
 export type GovernmentRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  politicianId?: boolean
-  department?: boolean
   title?: boolean
   role?: boolean
+  politicianId?: boolean
+  department?: boolean
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["governmentRole"]>
 
 export type GovernmentRoleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  politicianId?: boolean
-  department?: boolean
   title?: boolean
   role?: boolean
+  politicianId?: boolean
+  department?: boolean
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["governmentRole"]>
 
 export type GovernmentRoleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  politicianId?: boolean
-  department?: boolean
   title?: boolean
   role?: boolean
+  politicianId?: boolean
+  department?: boolean
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["governmentRole"]>
 
 export type GovernmentRoleSelectScalar = {
-  politicianId?: boolean
-  department?: boolean
   title?: boolean
   role?: boolean
+  politicianId?: boolean
+  department?: boolean
 }
 
-export type GovernmentRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"politicianId" | "department" | "title" | "role", ExtArgs["result"]["governmentRole"]>
+export type GovernmentRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"title" | "role" | "politicianId" | "department", ExtArgs["result"]["governmentRole"]>
 export type GovernmentRoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   politician?: boolean | Prisma.PoliticianDefaultArgs<ExtArgs>
 }
@@ -412,10 +412,10 @@ export type $GovernmentRolePayload<ExtArgs extends runtime.Types.Extensions.Inte
     politician: Prisma.$PoliticianPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    politicianId: string
-    department: string
     title: string
     role: string
+    politicianId: string
+    department: string
   }, ExtArgs["result"]["governmentRole"]>
   composites: {}
 }
@@ -499,8 +499,8 @@ export interface GovernmentRoleDelegate<ExtArgs extends runtime.Types.Extensions
    * // Get first 10 GovernmentRoles
    * const governmentRoles = await prisma.governmentRole.findMany({ take: 10 })
    * 
-   * // Only select the `politicianId`
-   * const governmentRoleWithPoliticianIdOnly = await prisma.governmentRole.findMany({ select: { politicianId: true } })
+   * // Only select the `title`
+   * const governmentRoleWithTitleOnly = await prisma.governmentRole.findMany({ select: { title: true } })
    * 
    */
   findMany<T extends GovernmentRoleFindManyArgs>(args?: Prisma.SelectSubset<T, GovernmentRoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GovernmentRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -544,9 +544,9 @@ export interface GovernmentRoleDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Create many GovernmentRoles and only return the `politicianId`
-   * const governmentRoleWithPoliticianIdOnly = await prisma.governmentRole.createManyAndReturn({
-   *   select: { politicianId: true },
+   * // Create many GovernmentRoles and only return the `title`
+   * const governmentRoleWithTitleOnly = await prisma.governmentRole.createManyAndReturn({
+   *   select: { title: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -635,9 +635,9 @@ export interface GovernmentRoleDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Update zero or more GovernmentRoles and only return the `politicianId`
-   * const governmentRoleWithPoliticianIdOnly = await prisma.governmentRole.updateManyAndReturn({
-   *   select: { politicianId: true },
+   * // Update zero or more GovernmentRoles and only return the `title`
+   * const governmentRoleWithTitleOnly = await prisma.governmentRole.updateManyAndReturn({
+   *   select: { title: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -840,10 +840,10 @@ export interface Prisma__GovernmentRoleClient<T, Null = never, ExtArgs extends r
  * Fields of the GovernmentRole model
  */
 export interface GovernmentRoleFieldRefs {
-  readonly politicianId: Prisma.FieldRef<"GovernmentRole", 'String'>
-  readonly department: Prisma.FieldRef<"GovernmentRole", 'String'>
   readonly title: Prisma.FieldRef<"GovernmentRole", 'String'>
   readonly role: Prisma.FieldRef<"GovernmentRole", 'String'>
+  readonly politicianId: Prisma.FieldRef<"GovernmentRole", 'String'>
+  readonly department: Prisma.FieldRef<"GovernmentRole", 'String'>
 }
     
 

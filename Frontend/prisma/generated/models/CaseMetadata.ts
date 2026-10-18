@@ -150,14 +150,16 @@ export type CaseMetadataWhereInput = {
   OR?: Prisma.CaseMetadataWhereInput[]
   NOT?: Prisma.CaseMetadataWhereInput | Prisma.CaseMetadataWhereInput[]
   id?: Prisma.StringFilter<"CaseMetadata"> | string
-  subjects?: Prisma.CaseSubjectListRelationFilter
+  committeeProposer?: Prisma.CaseCommitteProposerListRelationFilter
   proposers?: Prisma.CaseProposerListRelationFilter
+  subjects?: Prisma.CaseSubjectListRelationFilter
 }
 
 export type CaseMetadataOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  subjects?: Prisma.CaseSubjectOrderByRelationAggregateInput
+  committeeProposer?: Prisma.CaseCommitteProposerOrderByRelationAggregateInput
   proposers?: Prisma.CaseProposerOrderByRelationAggregateInput
+  subjects?: Prisma.CaseSubjectOrderByRelationAggregateInput
 }
 
 export type CaseMetadataWhereUniqueInput = Prisma.AtLeast<{
@@ -165,8 +167,9 @@ export type CaseMetadataWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CaseMetadataWhereInput | Prisma.CaseMetadataWhereInput[]
   OR?: Prisma.CaseMetadataWhereInput[]
   NOT?: Prisma.CaseMetadataWhereInput | Prisma.CaseMetadataWhereInput[]
-  subjects?: Prisma.CaseSubjectListRelationFilter
+  committeeProposer?: Prisma.CaseCommitteProposerListRelationFilter
   proposers?: Prisma.CaseProposerListRelationFilter
+  subjects?: Prisma.CaseSubjectListRelationFilter
 }, "id">
 
 export type CaseMetadataOrderByWithAggregationInput = {
@@ -185,26 +188,30 @@ export type CaseMetadataScalarWhereWithAggregatesInput = {
 
 export type CaseMetadataCreateInput = {
   id: string
-  subjects?: Prisma.CaseSubjectCreateNestedManyWithoutCaseMetadataInput
+  committeeProposer?: Prisma.CaseCommitteProposerCreateNestedManyWithoutCaseMetadataInput
   proposers?: Prisma.CaseProposerCreateNestedManyWithoutCaseMetadataInput
+  subjects?: Prisma.CaseSubjectCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataUncheckedCreateInput = {
   id: string
-  subjects?: Prisma.CaseSubjectUncheckedCreateNestedManyWithoutCaseMetadataInput
+  committeeProposer?: Prisma.CaseCommitteProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
   proposers?: Prisma.CaseProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
+  subjects?: Prisma.CaseSubjectUncheckedCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  subjects?: Prisma.CaseSubjectUpdateManyWithoutCaseMetadataNestedInput
+  committeeProposer?: Prisma.CaseCommitteProposerUpdateManyWithoutCaseMetadataNestedInput
   proposers?: Prisma.CaseProposerUpdateManyWithoutCaseMetadataNestedInput
+  subjects?: Prisma.CaseSubjectUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  subjects?: Prisma.CaseSubjectUncheckedUpdateManyWithoutCaseMetadataNestedInput
+  committeeProposer?: Prisma.CaseCommitteProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
   proposers?: Prisma.CaseProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
+  subjects?: Prisma.CaseSubjectUncheckedUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataCreateManyInput = {
@@ -250,6 +257,20 @@ export type CaseMetadataUpdateOneRequiredWithoutProposersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseMetadataUpdateToOneWithWhereWithoutProposersInput, Prisma.CaseMetadataUpdateWithoutProposersInput>, Prisma.CaseMetadataUncheckedUpdateWithoutProposersInput>
 }
 
+export type CaseMetadataCreateNestedOneWithoutCommitteeProposerInput = {
+  create?: Prisma.XOR<Prisma.CaseMetadataCreateWithoutCommitteeProposerInput, Prisma.CaseMetadataUncheckedCreateWithoutCommitteeProposerInput>
+  connectOrCreate?: Prisma.CaseMetadataCreateOrConnectWithoutCommitteeProposerInput
+  connect?: Prisma.CaseMetadataWhereUniqueInput
+}
+
+export type CaseMetadataUpdateOneRequiredWithoutCommitteeProposerNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseMetadataCreateWithoutCommitteeProposerInput, Prisma.CaseMetadataUncheckedCreateWithoutCommitteeProposerInput>
+  connectOrCreate?: Prisma.CaseMetadataCreateOrConnectWithoutCommitteeProposerInput
+  upsert?: Prisma.CaseMetadataUpsertWithoutCommitteeProposerInput
+  connect?: Prisma.CaseMetadataWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseMetadataUpdateToOneWithWhereWithoutCommitteeProposerInput, Prisma.CaseMetadataUpdateWithoutCommitteeProposerInput>, Prisma.CaseMetadataUncheckedUpdateWithoutCommitteeProposerInput>
+}
+
 export type CaseMetadataCreateNestedOneWithoutSubjectsInput = {
   create?: Prisma.XOR<Prisma.CaseMetadataCreateWithoutSubjectsInput, Prisma.CaseMetadataUncheckedCreateWithoutSubjectsInput>
   connectOrCreate?: Prisma.CaseMetadataCreateOrConnectWithoutSubjectsInput
@@ -266,11 +287,13 @@ export type CaseMetadataUpdateOneRequiredWithoutSubjectsNestedInput = {
 
 export type CaseMetadataCreateWithoutProposersInput = {
   id: string
+  committeeProposer?: Prisma.CaseCommitteProposerCreateNestedManyWithoutCaseMetadataInput
   subjects?: Prisma.CaseSubjectCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataUncheckedCreateWithoutProposersInput = {
   id: string
+  committeeProposer?: Prisma.CaseCommitteProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
   subjects?: Prisma.CaseSubjectUncheckedCreateNestedManyWithoutCaseMetadataInput
 }
 
@@ -292,21 +315,65 @@ export type CaseMetadataUpdateToOneWithWhereWithoutProposersInput = {
 
 export type CaseMetadataUpdateWithoutProposersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  committeeProposer?: Prisma.CaseCommitteProposerUpdateManyWithoutCaseMetadataNestedInput
   subjects?: Prisma.CaseSubjectUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataUncheckedUpdateWithoutProposersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  committeeProposer?: Prisma.CaseCommitteProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
+  subjects?: Prisma.CaseSubjectUncheckedUpdateManyWithoutCaseMetadataNestedInput
+}
+
+export type CaseMetadataCreateWithoutCommitteeProposerInput = {
+  id: string
+  proposers?: Prisma.CaseProposerCreateNestedManyWithoutCaseMetadataInput
+  subjects?: Prisma.CaseSubjectCreateNestedManyWithoutCaseMetadataInput
+}
+
+export type CaseMetadataUncheckedCreateWithoutCommitteeProposerInput = {
+  id: string
+  proposers?: Prisma.CaseProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
+  subjects?: Prisma.CaseSubjectUncheckedCreateNestedManyWithoutCaseMetadataInput
+}
+
+export type CaseMetadataCreateOrConnectWithoutCommitteeProposerInput = {
+  where: Prisma.CaseMetadataWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseMetadataCreateWithoutCommitteeProposerInput, Prisma.CaseMetadataUncheckedCreateWithoutCommitteeProposerInput>
+}
+
+export type CaseMetadataUpsertWithoutCommitteeProposerInput = {
+  update: Prisma.XOR<Prisma.CaseMetadataUpdateWithoutCommitteeProposerInput, Prisma.CaseMetadataUncheckedUpdateWithoutCommitteeProposerInput>
+  create: Prisma.XOR<Prisma.CaseMetadataCreateWithoutCommitteeProposerInput, Prisma.CaseMetadataUncheckedCreateWithoutCommitteeProposerInput>
+  where?: Prisma.CaseMetadataWhereInput
+}
+
+export type CaseMetadataUpdateToOneWithWhereWithoutCommitteeProposerInput = {
+  where?: Prisma.CaseMetadataWhereInput
+  data: Prisma.XOR<Prisma.CaseMetadataUpdateWithoutCommitteeProposerInput, Prisma.CaseMetadataUncheckedUpdateWithoutCommitteeProposerInput>
+}
+
+export type CaseMetadataUpdateWithoutCommitteeProposerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  proposers?: Prisma.CaseProposerUpdateManyWithoutCaseMetadataNestedInput
+  subjects?: Prisma.CaseSubjectUpdateManyWithoutCaseMetadataNestedInput
+}
+
+export type CaseMetadataUncheckedUpdateWithoutCommitteeProposerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  proposers?: Prisma.CaseProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
   subjects?: Prisma.CaseSubjectUncheckedUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataCreateWithoutSubjectsInput = {
   id: string
+  committeeProposer?: Prisma.CaseCommitteProposerCreateNestedManyWithoutCaseMetadataInput
   proposers?: Prisma.CaseProposerCreateNestedManyWithoutCaseMetadataInput
 }
 
 export type CaseMetadataUncheckedCreateWithoutSubjectsInput = {
   id: string
+  committeeProposer?: Prisma.CaseCommitteProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
   proposers?: Prisma.CaseProposerUncheckedCreateNestedManyWithoutCaseMetadataInput
 }
 
@@ -328,11 +395,13 @@ export type CaseMetadataUpdateToOneWithWhereWithoutSubjectsInput = {
 
 export type CaseMetadataUpdateWithoutSubjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  committeeProposer?: Prisma.CaseCommitteProposerUpdateManyWithoutCaseMetadataNestedInput
   proposers?: Prisma.CaseProposerUpdateManyWithoutCaseMetadataNestedInput
 }
 
 export type CaseMetadataUncheckedUpdateWithoutSubjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  committeeProposer?: Prisma.CaseCommitteProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
   proposers?: Prisma.CaseProposerUncheckedUpdateManyWithoutCaseMetadataNestedInput
 }
 
@@ -342,13 +411,15 @@ export type CaseMetadataUncheckedUpdateWithoutSubjectsInput = {
  */
 
 export type CaseMetadataCountOutputType = {
-  subjects: number
+  committeeProposer: number
   proposers: number
+  subjects: number
 }
 
 export type CaseMetadataCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subjects?: boolean | CaseMetadataCountOutputTypeCountSubjectsArgs
+  committeeProposer?: boolean | CaseMetadataCountOutputTypeCountCommitteeProposerArgs
   proposers?: boolean | CaseMetadataCountOutputTypeCountProposersArgs
+  subjects?: boolean | CaseMetadataCountOutputTypeCountSubjectsArgs
 }
 
 /**
@@ -364,8 +435,8 @@ export type CaseMetadataCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
 /**
  * CaseMetadataCountOutputType without action
  */
-export type CaseMetadataCountOutputTypeCountSubjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CaseSubjectWhereInput
+export type CaseMetadataCountOutputTypeCountCommitteeProposerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseCommitteProposerWhereInput
 }
 
 /**
@@ -375,11 +446,19 @@ export type CaseMetadataCountOutputTypeCountProposersArgs<ExtArgs extends runtim
   where?: Prisma.CaseProposerWhereInput
 }
 
+/**
+ * CaseMetadataCountOutputType without action
+ */
+export type CaseMetadataCountOutputTypeCountSubjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseSubjectWhereInput
+}
+
 
 export type CaseMetadataSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  subjects?: boolean | Prisma.CaseMetadata$subjectsArgs<ExtArgs>
+  committeeProposer?: boolean | Prisma.CaseMetadata$committeeProposerArgs<ExtArgs>
   proposers?: boolean | Prisma.CaseMetadata$proposersArgs<ExtArgs>
+  subjects?: boolean | Prisma.CaseMetadata$subjectsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseMetadataCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseMetadata"]>
 
@@ -397,8 +476,9 @@ export type CaseMetadataSelectScalar = {
 
 export type CaseMetadataOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["caseMetadata"]>
 export type CaseMetadataInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subjects?: boolean | Prisma.CaseMetadata$subjectsArgs<ExtArgs>
+  committeeProposer?: boolean | Prisma.CaseMetadata$committeeProposerArgs<ExtArgs>
   proposers?: boolean | Prisma.CaseMetadata$proposersArgs<ExtArgs>
+  subjects?: boolean | Prisma.CaseMetadata$subjectsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseMetadataCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseMetadataIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -407,8 +487,9 @@ export type CaseMetadataIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $CaseMetadataPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CaseMetadata"
   objects: {
-    subjects: Prisma.$CaseSubjectPayload<ExtArgs>[]
+    committeeProposer: Prisma.$CaseCommitteProposerPayload<ExtArgs>[]
     proposers: Prisma.$CaseProposerPayload<ExtArgs>[]
+    subjects: Prisma.$CaseSubjectPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -806,8 +887,9 @@ readonly fields: CaseMetadataFieldRefs;
  */
 export interface Prisma__CaseMetadataClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  subjects<T extends Prisma.CaseMetadata$subjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseMetadata$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseSubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  committeeProposer<T extends Prisma.CaseMetadata$committeeProposerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseMetadata$committeeProposerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseCommitteProposerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   proposers<T extends Prisma.CaseMetadata$proposersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseMetadata$proposersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseProposerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subjects<T extends Prisma.CaseMetadata$subjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseMetadata$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseSubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1231,27 +1313,27 @@ export type CaseMetadataDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * CaseMetadata.subjects
+ * CaseMetadata.committeeProposer
  */
-export type CaseMetadata$subjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CaseMetadata$committeeProposerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the CaseSubject
+   * Select specific fields to fetch from the CaseCommitteProposer
    */
-  select?: Prisma.CaseSubjectSelect<ExtArgs> | null
+  select?: Prisma.CaseCommitteProposerSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the CaseSubject
+   * Omit specific fields from the CaseCommitteProposer
    */
-  omit?: Prisma.CaseSubjectOmit<ExtArgs> | null
+  omit?: Prisma.CaseCommitteProposerOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.CaseSubjectInclude<ExtArgs> | null
-  where?: Prisma.CaseSubjectWhereInput
-  orderBy?: Prisma.CaseSubjectOrderByWithRelationInput | Prisma.CaseSubjectOrderByWithRelationInput[]
-  cursor?: Prisma.CaseSubjectWhereUniqueInput
+  include?: Prisma.CaseCommitteProposerInclude<ExtArgs> | null
+  where?: Prisma.CaseCommitteProposerWhereInput
+  orderBy?: Prisma.CaseCommitteProposerOrderByWithRelationInput | Prisma.CaseCommitteProposerOrderByWithRelationInput[]
+  cursor?: Prisma.CaseCommitteProposerWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.CaseSubjectScalarFieldEnum | Prisma.CaseSubjectScalarFieldEnum[]
+  distinct?: Prisma.CaseCommitteProposerScalarFieldEnum | Prisma.CaseCommitteProposerScalarFieldEnum[]
 }
 
 /**
@@ -1276,6 +1358,30 @@ export type CaseMetadata$proposersArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.CaseProposerScalarFieldEnum | Prisma.CaseProposerScalarFieldEnum[]
+}
+
+/**
+ * CaseMetadata.subjects
+ */
+export type CaseMetadata$subjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseSubject
+   */
+  select?: Prisma.CaseSubjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseSubject
+   */
+  omit?: Prisma.CaseSubjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseSubjectInclude<ExtArgs> | null
+  where?: Prisma.CaseSubjectWhereInput
+  orderBy?: Prisma.CaseSubjectOrderByWithRelationInput | Prisma.CaseSubjectOrderByWithRelationInput[]
+  cursor?: Prisma.CaseSubjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseSubjectScalarFieldEnum | Prisma.CaseSubjectScalarFieldEnum[]
 }
 
 /**

@@ -37,23 +37,23 @@ export type SubjectSumAggregateOutputType = {
 }
 
 export type SubjectMinAggregateOutputType = {
-  id: number | null
   name: string | null
   isMainSubject: boolean | null
+  id: number | null
   parentId: number | null
 }
 
 export type SubjectMaxAggregateOutputType = {
-  id: number | null
   name: string | null
   isMainSubject: boolean | null
+  id: number | null
   parentId: number | null
 }
 
 export type SubjectCountAggregateOutputType = {
-  id: number
   name: number
   isMainSubject: number
+  id: number
   parentId: number
   _all: number
 }
@@ -70,23 +70,23 @@ export type SubjectSumAggregateInputType = {
 }
 
 export type SubjectMinAggregateInputType = {
-  id?: true
   name?: true
   isMainSubject?: true
+  id?: true
   parentId?: true
 }
 
 export type SubjectMaxAggregateInputType = {
-  id?: true
   name?: true
   isMainSubject?: true
+  id?: true
   parentId?: true
 }
 
 export type SubjectCountAggregateInputType = {
-  id?: true
   name?: true
   isMainSubject?: true
+  id?: true
   parentId?: true
   _all?: true
 }
@@ -178,9 +178,9 @@ export type SubjectGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 export type SubjectGroupByOutputType = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   parentId: number | null
   _count: SubjectCountAggregateOutputType | null
   _avg: SubjectAvgAggregateOutputType | null
@@ -208,9 +208,9 @@ export type SubjectWhereInput = {
   AND?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
   OR?: Prisma.SubjectWhereInput[]
   NOT?: Prisma.SubjectWhereInput | Prisma.SubjectWhereInput[]
-  id?: Prisma.IntFilter<"Subject"> | number
   name?: Prisma.StringFilter<"Subject"> | string
   isMainSubject?: Prisma.BoolFilter<"Subject"> | boolean
+  id?: Prisma.IntFilter<"Subject"> | number
   parentId?: Prisma.IntNullableFilter<"Subject"> | number | null
   caseSubject?: Prisma.CaseSubjectListRelationFilter
   parent?: Prisma.XOR<Prisma.SubjectNullableScalarRelationFilter, Prisma.SubjectWhereInput> | null
@@ -218,9 +218,9 @@ export type SubjectWhereInput = {
 }
 
 export type SubjectOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   isMainSubject?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   caseSubject?: Prisma.CaseSubjectOrderByRelationAggregateInput
   parent?: Prisma.SubjectOrderByWithRelationInput
@@ -241,9 +241,9 @@ export type SubjectWhereUniqueInput = Prisma.AtLeast<{
 }, "id">
 
 export type SubjectOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   isMainSubject?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SubjectCountOrderByAggregateInput
   _avg?: Prisma.SubjectAvgOrderByAggregateInput
@@ -256,65 +256,65 @@ export type SubjectScalarWhereWithAggregatesInput = {
   AND?: Prisma.SubjectScalarWhereWithAggregatesInput | Prisma.SubjectScalarWhereWithAggregatesInput[]
   OR?: Prisma.SubjectScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SubjectScalarWhereWithAggregatesInput | Prisma.SubjectScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Subject"> | number
   name?: Prisma.StringWithAggregatesFilter<"Subject"> | string
   isMainSubject?: Prisma.BoolWithAggregatesFilter<"Subject"> | boolean
+  id?: Prisma.IntWithAggregatesFilter<"Subject"> | number
   parentId?: Prisma.IntNullableWithAggregatesFilter<"Subject"> | number | null
 }
 
 export type SubjectCreateInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   caseSubject?: Prisma.CaseSubjectCreateNestedManyWithoutSubjectInput
   parent?: Prisma.SubjectCreateNestedOneWithoutChildrenInput
   children?: Prisma.SubjectCreateNestedManyWithoutParentInput
 }
 
 export type SubjectUncheckedCreateInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   parentId?: number | null
   caseSubject?: Prisma.CaseSubjectUncheckedCreateNestedManyWithoutSubjectInput
   children?: Prisma.SubjectUncheckedCreateNestedManyWithoutParentInput
 }
 
 export type SubjectUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   caseSubject?: Prisma.CaseSubjectUpdateManyWithoutSubjectNestedInput
   parent?: Prisma.SubjectUpdateOneWithoutChildrenNestedInput
   children?: Prisma.SubjectUpdateManyWithoutParentNestedInput
 }
 
 export type SubjectUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   caseSubject?: Prisma.CaseSubjectUncheckedUpdateManyWithoutSubjectNestedInput
   children?: Prisma.SubjectUncheckedUpdateManyWithoutParentNestedInput
 }
 
 export type SubjectCreateManyInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   parentId?: number | null
 }
 
 export type SubjectUpdateManyMutationInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SubjectUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -334,9 +334,9 @@ export type SubjectOrderByRelationAggregateInput = {
 }
 
 export type SubjectCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   isMainSubject?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
 }
 
@@ -346,16 +346,16 @@ export type SubjectAvgOrderByAggregateInput = {
 }
 
 export type SubjectMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   isMainSubject?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
 }
 
 export type SubjectMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   isMainSubject?: Prisma.SortOrder
+  id?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
 }
 
@@ -458,17 +458,17 @@ export type SubjectUpdateOneRequiredWithoutCaseSubjectNestedInput = {
 }
 
 export type SubjectCreateWithoutChildrenInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   caseSubject?: Prisma.CaseSubjectCreateNestedManyWithoutSubjectInput
   parent?: Prisma.SubjectCreateNestedOneWithoutChildrenInput
 }
 
 export type SubjectUncheckedCreateWithoutChildrenInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   parentId?: number | null
   caseSubject?: Prisma.CaseSubjectUncheckedCreateNestedManyWithoutSubjectInput
 }
@@ -479,17 +479,17 @@ export type SubjectCreateOrConnectWithoutChildrenInput = {
 }
 
 export type SubjectCreateWithoutParentInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   caseSubject?: Prisma.CaseSubjectCreateNestedManyWithoutSubjectInput
   children?: Prisma.SubjectCreateNestedManyWithoutParentInput
 }
 
 export type SubjectUncheckedCreateWithoutParentInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   caseSubject?: Prisma.CaseSubjectUncheckedCreateNestedManyWithoutSubjectInput
   children?: Prisma.SubjectUncheckedCreateNestedManyWithoutParentInput
 }
@@ -516,17 +516,17 @@ export type SubjectUpdateToOneWithWhereWithoutChildrenInput = {
 }
 
 export type SubjectUpdateWithoutChildrenInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   caseSubject?: Prisma.CaseSubjectUpdateManyWithoutSubjectNestedInput
   parent?: Prisma.SubjectUpdateOneWithoutChildrenNestedInput
 }
 
 export type SubjectUncheckedUpdateWithoutChildrenInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   caseSubject?: Prisma.CaseSubjectUncheckedUpdateManyWithoutSubjectNestedInput
 }
@@ -551,24 +551,24 @@ export type SubjectScalarWhereInput = {
   AND?: Prisma.SubjectScalarWhereInput | Prisma.SubjectScalarWhereInput[]
   OR?: Prisma.SubjectScalarWhereInput[]
   NOT?: Prisma.SubjectScalarWhereInput | Prisma.SubjectScalarWhereInput[]
-  id?: Prisma.IntFilter<"Subject"> | number
   name?: Prisma.StringFilter<"Subject"> | string
   isMainSubject?: Prisma.BoolFilter<"Subject"> | boolean
+  id?: Prisma.IntFilter<"Subject"> | number
   parentId?: Prisma.IntNullableFilter<"Subject"> | number | null
 }
 
 export type SubjectCreateWithoutCaseSubjectInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   parent?: Prisma.SubjectCreateNestedOneWithoutChildrenInput
   children?: Prisma.SubjectCreateNestedManyWithoutParentInput
 }
 
 export type SubjectUncheckedCreateWithoutCaseSubjectInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
   parentId?: number | null
   children?: Prisma.SubjectUncheckedCreateNestedManyWithoutParentInput
 }
@@ -590,47 +590,47 @@ export type SubjectUpdateToOneWithWhereWithoutCaseSubjectInput = {
 }
 
 export type SubjectUpdateWithoutCaseSubjectInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   parent?: Prisma.SubjectUpdateOneWithoutChildrenNestedInput
   children?: Prisma.SubjectUpdateManyWithoutParentNestedInput
 }
 
 export type SubjectUncheckedUpdateWithoutCaseSubjectInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   parentId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   children?: Prisma.SubjectUncheckedUpdateManyWithoutParentNestedInput
 }
 
 export type SubjectCreateManyParentInput = {
-  id: number
   name: string
   isMainSubject: boolean
+  id: number
 }
 
 export type SubjectUpdateWithoutParentInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   caseSubject?: Prisma.CaseSubjectUpdateManyWithoutSubjectNestedInput
   children?: Prisma.SubjectUpdateManyWithoutParentNestedInput
 }
 
 export type SubjectUncheckedUpdateWithoutParentInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   caseSubject?: Prisma.CaseSubjectUncheckedUpdateManyWithoutSubjectNestedInput
   children?: Prisma.SubjectUncheckedUpdateManyWithoutParentNestedInput
 }
 
 export type SubjectUncheckedUpdateManyWithoutParentInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   isMainSubject?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -674,9 +674,9 @@ export type SubjectCountOutputTypeCountChildrenArgs<ExtArgs extends runtime.Type
 
 
 export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
   name?: boolean
   isMainSubject?: boolean
+  id?: boolean
   parentId?: boolean
   caseSubject?: boolean | Prisma.Subject$caseSubjectArgs<ExtArgs>
   parent?: boolean | Prisma.Subject$parentArgs<ExtArgs>
@@ -685,29 +685,29 @@ export type SubjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 }, ExtArgs["result"]["subject"]>
 
 export type SubjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
   name?: boolean
   isMainSubject?: boolean
+  id?: boolean
   parentId?: boolean
   parent?: boolean | Prisma.Subject$parentArgs<ExtArgs>
 }, ExtArgs["result"]["subject"]>
 
 export type SubjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
   name?: boolean
   isMainSubject?: boolean
+  id?: boolean
   parentId?: boolean
   parent?: boolean | Prisma.Subject$parentArgs<ExtArgs>
 }, ExtArgs["result"]["subject"]>
 
 export type SubjectSelectScalar = {
-  id?: boolean
   name?: boolean
   isMainSubject?: boolean
+  id?: boolean
   parentId?: boolean
 }
 
-export type SubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "isMainSubject" | "parentId", ExtArgs["result"]["subject"]>
+export type SubjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"name" | "isMainSubject" | "id" | "parentId", ExtArgs["result"]["subject"]>
 export type SubjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseSubject?: boolean | Prisma.Subject$caseSubjectArgs<ExtArgs>
   parent?: boolean | Prisma.Subject$parentArgs<ExtArgs>
@@ -729,9 +729,9 @@ export type $SubjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     children: Prisma.$SubjectPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
     name: string
     isMainSubject: boolean
+    id: number
     parentId: number | null
   }, ExtArgs["result"]["subject"]>
   composites: {}
@@ -816,8 +816,8 @@ export interface SubjectDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    * // Get first 10 Subjects
    * const subjects = await prisma.subject.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const subjectWithIdOnly = await prisma.subject.findMany({ select: { id: true } })
+   * // Only select the `name`
+   * const subjectWithNameOnly = await prisma.subject.findMany({ select: { name: true } })
    * 
    */
   findMany<T extends SubjectFindManyArgs>(args?: Prisma.SelectSubset<T, SubjectFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -861,9 +861,9 @@ export interface SubjectDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    *   ]
    * })
    * 
-   * // Create many Subjects and only return the `id`
-   * const subjectWithIdOnly = await prisma.subject.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Subjects and only return the `name`
+   * const subjectWithNameOnly = await prisma.subject.createManyAndReturn({
+   *   select: { name: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -952,9 +952,9 @@ export interface SubjectDelegate<ExtArgs extends runtime.Types.Extensions.Intern
    *   ]
    * })
    * 
-   * // Update zero or more Subjects and only return the `id`
-   * const subjectWithIdOnly = await prisma.subject.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Subjects and only return the `name`
+   * const subjectWithNameOnly = await prisma.subject.updateManyAndReturn({
+   *   select: { name: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1159,9 +1159,9 @@ export interface Prisma__SubjectClient<T, Null = never, ExtArgs extends runtime.
  * Fields of the Subject model
  */
 export interface SubjectFieldRefs {
-  readonly id: Prisma.FieldRef<"Subject", 'Int'>
   readonly name: Prisma.FieldRef<"Subject", 'String'>
   readonly isMainSubject: Prisma.FieldRef<"Subject", 'Boolean'>
+  readonly id: Prisma.FieldRef<"Subject", 'Int'>
   readonly parentId: Prisma.FieldRef<"Subject", 'Int'>
 }
     

@@ -56,9 +56,11 @@ export const ModelName = {
   Politician: 'Politician',
   GovernmentRole: 'GovernmentRole',
   VoteRecord: 'VoteRecord',
+  FinalVoting: 'FinalVoting',
   Subject: 'Subject',
   Committee: 'Committee',
   CaseProposer: 'CaseProposer',
+  CaseCommitteProposer: 'CaseCommitteProposer',
   CaseSubject: 'CaseSubject',
   CaseMetadata: 'CaseMetadata'
 } as const
@@ -110,29 +112,36 @@ export type PoliticianScalarFieldEnum = (typeof PoliticianScalarFieldEnum)[keyof
 
 
 export const GovernmentRoleScalarFieldEnum = {
-  politicianId: 'politicianId',
-  department: 'department',
   title: 'title',
-  role: 'role'
+  role: 'role',
+  politicianId: 'politicianId',
+  department: 'department'
 } as const
 
 export type GovernmentRoleScalarFieldEnum = (typeof GovernmentRoleScalarFieldEnum)[keyof typeof GovernmentRoleScalarFieldEnum]
 
 
 export const VoteRecordScalarFieldEnum = {
+  caseID: 'caseID',
   politicianID: 'politicianID',
   vote: 'vote',
-  caseID: 'caseID',
   votingID: 'votingID'
 } as const
 
 export type VoteRecordScalarFieldEnum = (typeof VoteRecordScalarFieldEnum)[keyof typeof VoteRecordScalarFieldEnum]
 
 
+export const FinalVotingScalarFieldEnum = {
+  votingID: 'votingID'
+} as const
+
+export type FinalVotingScalarFieldEnum = (typeof FinalVotingScalarFieldEnum)[keyof typeof FinalVotingScalarFieldEnum]
+
+
 export const SubjectScalarFieldEnum = {
-  id: 'id',
   name: 'name',
   isMainSubject: 'isMainSubject',
+  id: 'id',
   parentId: 'parentId'
 } as const
 
@@ -153,6 +162,14 @@ export const CaseProposerScalarFieldEnum = {
 } as const
 
 export type CaseProposerScalarFieldEnum = (typeof CaseProposerScalarFieldEnum)[keyof typeof CaseProposerScalarFieldEnum]
+
+
+export const CaseCommitteProposerScalarFieldEnum = {
+  caseMetadataId: 'caseMetadataId',
+  committeeId: 'committeeId'
+} as const
+
+export type CaseCommitteProposerScalarFieldEnum = (typeof CaseCommitteProposerScalarFieldEnum)[keyof typeof CaseCommitteProposerScalarFieldEnum]
 
 
 export const CaseSubjectScalarFieldEnum = {

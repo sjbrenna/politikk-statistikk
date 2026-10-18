@@ -21,8 +21,8 @@ public class PartyVoteFetcher {
         //fetch for the subject
 
         String sqlSubject = """
-            SELECT 
-                name, 
+            SELECT
+                name,
                 id
             FROM "Subject"
             WHERE id = ?
@@ -44,20 +44,25 @@ public class PartyVoteFetcher {
         String subjectName = subjects.getFirst();
 
         String sql = """
-    SELECT
-        p."partyId" AS party_id,
-        COUNT(*) FILTER (WHERE vr.vote = 'for') AS votes_for,
-        COUNT(*) FILTER (WHERE vr.vote = 'mot') AS votes_against
-    FROM "VoteRecord" vr
-    JOIN "Politician" p
-        ON vr."politicianID" = p.id
-    WHERE vr.vote IN ('for', 'mot')
-    AND EXISTS (
-        SELECT 1
-        FROM "CaseSubject" cs
-        WHERE cs."caseMetadataId" = vr."caseID"
-          AND cs."subjectId" = ?
-    )
+        SELECT
+            p."partyId" AS party_id,
+            COUNT(*) FILTER (WHERE vr.vote = 'for') AS votes_for,
+            COUNT(*) FILTER (WHERE vr.vote = 'mot') AS votes_against
+        FROM "VoteRecord" vr
+        JOIN "Politician" p
+            ON vr."politicianID" = p.id
+        WHERE vr.vote IN ('for', 'mot')
+        AND EXISTS (
+                  SELECT 1
+                  FROM "FinalVoting" fv
+                  WHERE fv."votingID" = vr."votingID"
+              )
+        AND EXISTS (
+            SELECT 1
+            FROM "CaseSubject" cs
+            WHERE cs."caseMetadataId" = vr."caseID"
+              AND cs."subjectId" = ?
+        )
     GROUP BY p."partyId"
     """;
 

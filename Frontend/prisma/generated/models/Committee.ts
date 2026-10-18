@@ -158,12 +158,14 @@ export type CommitteeWhereInput = {
   NOT?: Prisma.CommitteeWhereInput | Prisma.CommitteeWhereInput[]
   id?: Prisma.StringFilter<"Committee"> | string
   name?: Prisma.StringFilter<"Committee"> | string
+  proposedCases?: Prisma.CaseCommitteProposerListRelationFilter
   members?: Prisma.PoliticianListRelationFilter
 }
 
 export type CommitteeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  proposedCases?: Prisma.CaseCommitteProposerOrderByRelationAggregateInput
   members?: Prisma.PoliticianOrderByRelationAggregateInput
 }
 
@@ -173,6 +175,7 @@ export type CommitteeWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CommitteeWhereInput[]
   NOT?: Prisma.CommitteeWhereInput | Prisma.CommitteeWhereInput[]
   name?: Prisma.StringFilter<"Committee"> | string
+  proposedCases?: Prisma.CaseCommitteProposerListRelationFilter
   members?: Prisma.PoliticianListRelationFilter
 }, "id">
 
@@ -195,24 +198,28 @@ export type CommitteeScalarWhereWithAggregatesInput = {
 export type CommitteeCreateInput = {
   id: string
   name: string
+  proposedCases?: Prisma.CaseCommitteProposerCreateNestedManyWithoutCommitteInput
   members?: Prisma.PoliticianCreateNestedManyWithoutCommitteesInput
 }
 
 export type CommitteeUncheckedCreateInput = {
   id: string
   name: string
+  proposedCases?: Prisma.CaseCommitteProposerUncheckedCreateNestedManyWithoutCommitteInput
   members?: Prisma.PoliticianUncheckedCreateNestedManyWithoutCommitteesInput
 }
 
 export type CommitteeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  proposedCases?: Prisma.CaseCommitteProposerUpdateManyWithoutCommitteNestedInput
   members?: Prisma.PoliticianUpdateManyWithoutCommitteesNestedInput
 }
 
 export type CommitteeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  proposedCases?: Prisma.CaseCommitteProposerUncheckedUpdateManyWithoutCommitteNestedInput
   members?: Prisma.PoliticianUncheckedUpdateManyWithoutCommitteesNestedInput
 }
 
@@ -256,6 +263,11 @@ export type CommitteeMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
 }
 
+export type CommitteeScalarRelationFilter = {
+  is?: Prisma.CommitteeWhereInput
+  isNot?: Prisma.CommitteeWhereInput
+}
+
 export type CommitteeCreateNestedManyWithoutMembersInput = {
   create?: Prisma.XOR<Prisma.CommitteeCreateWithoutMembersInput, Prisma.CommitteeUncheckedCreateWithoutMembersInput> | Prisma.CommitteeCreateWithoutMembersInput[] | Prisma.CommitteeUncheckedCreateWithoutMembersInput[]
   connectOrCreate?: Prisma.CommitteeCreateOrConnectWithoutMembersInput | Prisma.CommitteeCreateOrConnectWithoutMembersInput[]
@@ -294,14 +306,30 @@ export type CommitteeUncheckedUpdateManyWithoutMembersNestedInput = {
   deleteMany?: Prisma.CommitteeScalarWhereInput | Prisma.CommitteeScalarWhereInput[]
 }
 
+export type CommitteeCreateNestedOneWithoutProposedCasesInput = {
+  create?: Prisma.XOR<Prisma.CommitteeCreateWithoutProposedCasesInput, Prisma.CommitteeUncheckedCreateWithoutProposedCasesInput>
+  connectOrCreate?: Prisma.CommitteeCreateOrConnectWithoutProposedCasesInput
+  connect?: Prisma.CommitteeWhereUniqueInput
+}
+
+export type CommitteeUpdateOneRequiredWithoutProposedCasesNestedInput = {
+  create?: Prisma.XOR<Prisma.CommitteeCreateWithoutProposedCasesInput, Prisma.CommitteeUncheckedCreateWithoutProposedCasesInput>
+  connectOrCreate?: Prisma.CommitteeCreateOrConnectWithoutProposedCasesInput
+  upsert?: Prisma.CommitteeUpsertWithoutProposedCasesInput
+  connect?: Prisma.CommitteeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommitteeUpdateToOneWithWhereWithoutProposedCasesInput, Prisma.CommitteeUpdateWithoutProposedCasesInput>, Prisma.CommitteeUncheckedUpdateWithoutProposedCasesInput>
+}
+
 export type CommitteeCreateWithoutMembersInput = {
   id: string
   name: string
+  proposedCases?: Prisma.CaseCommitteProposerCreateNestedManyWithoutCommitteInput
 }
 
 export type CommitteeUncheckedCreateWithoutMembersInput = {
   id: string
   name: string
+  proposedCases?: Prisma.CaseCommitteProposerUncheckedCreateNestedManyWithoutCommitteInput
 }
 
 export type CommitteeCreateOrConnectWithoutMembersInput = {
@@ -333,14 +361,56 @@ export type CommitteeScalarWhereInput = {
   name?: Prisma.StringFilter<"Committee"> | string
 }
 
+export type CommitteeCreateWithoutProposedCasesInput = {
+  id: string
+  name: string
+  members?: Prisma.PoliticianCreateNestedManyWithoutCommitteesInput
+}
+
+export type CommitteeUncheckedCreateWithoutProposedCasesInput = {
+  id: string
+  name: string
+  members?: Prisma.PoliticianUncheckedCreateNestedManyWithoutCommitteesInput
+}
+
+export type CommitteeCreateOrConnectWithoutProposedCasesInput = {
+  where: Prisma.CommitteeWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommitteeCreateWithoutProposedCasesInput, Prisma.CommitteeUncheckedCreateWithoutProposedCasesInput>
+}
+
+export type CommitteeUpsertWithoutProposedCasesInput = {
+  update: Prisma.XOR<Prisma.CommitteeUpdateWithoutProposedCasesInput, Prisma.CommitteeUncheckedUpdateWithoutProposedCasesInput>
+  create: Prisma.XOR<Prisma.CommitteeCreateWithoutProposedCasesInput, Prisma.CommitteeUncheckedCreateWithoutProposedCasesInput>
+  where?: Prisma.CommitteeWhereInput
+}
+
+export type CommitteeUpdateToOneWithWhereWithoutProposedCasesInput = {
+  where?: Prisma.CommitteeWhereInput
+  data: Prisma.XOR<Prisma.CommitteeUpdateWithoutProposedCasesInput, Prisma.CommitteeUncheckedUpdateWithoutProposedCasesInput>
+}
+
+export type CommitteeUpdateWithoutProposedCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.PoliticianUpdateManyWithoutCommitteesNestedInput
+}
+
+export type CommitteeUncheckedUpdateWithoutProposedCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  members?: Prisma.PoliticianUncheckedUpdateManyWithoutCommitteesNestedInput
+}
+
 export type CommitteeUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  proposedCases?: Prisma.CaseCommitteProposerUpdateManyWithoutCommitteNestedInput
 }
 
 export type CommitteeUncheckedUpdateWithoutMembersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  proposedCases?: Prisma.CaseCommitteProposerUncheckedUpdateManyWithoutCommitteNestedInput
 }
 
 export type CommitteeUncheckedUpdateManyWithoutMembersInput = {
@@ -354,10 +424,12 @@ export type CommitteeUncheckedUpdateManyWithoutMembersInput = {
  */
 
 export type CommitteeCountOutputType = {
+  proposedCases: number
   members: number
 }
 
 export type CommitteeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  proposedCases?: boolean | CommitteeCountOutputTypeCountProposedCasesArgs
   members?: boolean | CommitteeCountOutputTypeCountMembersArgs
 }
 
@@ -374,6 +446,13 @@ export type CommitteeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ex
 /**
  * CommitteeCountOutputType without action
  */
+export type CommitteeCountOutputTypeCountProposedCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseCommitteProposerWhereInput
+}
+
+/**
+ * CommitteeCountOutputType without action
+ */
 export type CommitteeCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PoliticianWhereInput
 }
@@ -382,6 +461,7 @@ export type CommitteeCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Typ
 export type CommitteeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  proposedCases?: boolean | Prisma.Committee$proposedCasesArgs<ExtArgs>
   members?: boolean | Prisma.Committee$membersArgs<ExtArgs>
   _count?: boolean | Prisma.CommitteeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["committee"]>
@@ -403,6 +483,7 @@ export type CommitteeSelectScalar = {
 
 export type CommitteeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["committee"]>
 export type CommitteeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  proposedCases?: boolean | Prisma.Committee$proposedCasesArgs<ExtArgs>
   members?: boolean | Prisma.Committee$membersArgs<ExtArgs>
   _count?: boolean | Prisma.CommitteeCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -412,6 +493,7 @@ export type CommitteeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $CommitteePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Committee"
   objects: {
+    proposedCases: Prisma.$CaseCommitteProposerPayload<ExtArgs>[]
     members: Prisma.$PoliticianPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -811,6 +893,7 @@ readonly fields: CommitteeFieldRefs;
  */
 export interface Prisma__CommitteeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  proposedCases<T extends Prisma.Committee$proposedCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Committee$proposedCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseCommitteProposerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   members<T extends Prisma.Committee$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Committee$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PoliticianPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1233,6 +1316,30 @@ export type CommitteeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Limit how many Committees to delete.
    */
   limit?: number
+}
+
+/**
+ * Committee.proposedCases
+ */
+export type Committee$proposedCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseCommitteProposer
+   */
+  select?: Prisma.CaseCommitteProposerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseCommitteProposer
+   */
+  omit?: Prisma.CaseCommitteProposerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseCommitteProposerInclude<ExtArgs> | null
+  where?: Prisma.CaseCommitteProposerWhereInput
+  orderBy?: Prisma.CaseCommitteProposerOrderByWithRelationInput | Prisma.CaseCommitteProposerOrderByWithRelationInput[]
+  cursor?: Prisma.CaseCommitteProposerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseCommitteProposerScalarFieldEnum | Prisma.CaseCommitteProposerScalarFieldEnum[]
 }
 
 /**

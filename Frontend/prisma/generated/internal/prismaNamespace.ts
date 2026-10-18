@@ -389,9 +389,11 @@ export const ModelName = {
   Politician: 'Politician',
   GovernmentRole: 'GovernmentRole',
   VoteRecord: 'VoteRecord',
+  FinalVoting: 'FinalVoting',
   Subject: 'Subject',
   Committee: 'Committee',
   CaseProposer: 'CaseProposer',
+  CaseCommitteProposer: 'CaseCommitteProposer',
   CaseSubject: 'CaseSubject',
   CaseMetadata: 'CaseMetadata'
 } as const
@@ -409,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "party" | "politician" | "governmentRole" | "voteRecord" | "subject" | "committee" | "caseProposer" | "caseSubject" | "caseMetadata"
+    modelProps: "user" | "party" | "politician" | "governmentRole" | "voteRecord" | "finalVoting" | "subject" | "committee" | "caseProposer" | "caseCommitteProposer" | "caseSubject" | "caseMetadata"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -783,6 +785,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FinalVoting: {
+      payload: Prisma.$FinalVotingPayload<ExtArgs>
+      fields: Prisma.FinalVotingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FinalVotingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FinalVotingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>
+        }
+        findFirst: {
+          args: Prisma.FinalVotingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FinalVotingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>
+        }
+        findMany: {
+          args: Prisma.FinalVotingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>[]
+        }
+        create: {
+          args: Prisma.FinalVotingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>
+        }
+        createMany: {
+          args: Prisma.FinalVotingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FinalVotingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>[]
+        }
+        delete: {
+          args: Prisma.FinalVotingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>
+        }
+        update: {
+          args: Prisma.FinalVotingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>
+        }
+        deleteMany: {
+          args: Prisma.FinalVotingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FinalVotingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FinalVotingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>[]
+        }
+        upsert: {
+          args: Prisma.FinalVotingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinalVotingPayload>
+        }
+        aggregate: {
+          args: Prisma.FinalVotingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFinalVoting>
+        }
+        groupBy: {
+          args: Prisma.FinalVotingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinalVotingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FinalVotingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinalVotingCountAggregateOutputType> | number
+        }
+      }
+    }
     Subject: {
       payload: Prisma.$SubjectPayload<ExtArgs>
       fields: Prisma.SubjectFieldRefs
@@ -1005,6 +1081,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CaseCommitteProposer: {
+      payload: Prisma.$CaseCommitteProposerPayload<ExtArgs>
+      fields: Prisma.CaseCommitteProposerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseCommitteProposerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseCommitteProposerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseCommitteProposerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseCommitteProposerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>
+        }
+        findMany: {
+          args: Prisma.CaseCommitteProposerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>[]
+        }
+        create: {
+          args: Prisma.CaseCommitteProposerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>
+        }
+        createMany: {
+          args: Prisma.CaseCommitteProposerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseCommitteProposerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseCommitteProposerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>
+        }
+        update: {
+          args: Prisma.CaseCommitteProposerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseCommitteProposerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseCommitteProposerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseCommitteProposerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseCommitteProposerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseCommitteProposerPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseCommitteProposerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseCommitteProposer>
+        }
+        groupBy: {
+          args: Prisma.CaseCommitteProposerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseCommitteProposerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseCommitteProposerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseCommitteProposerCountAggregateOutputType> | number
+        }
+      }
+    }
     CaseSubject: {
       payload: Prisma.$CaseSubjectPayload<ExtArgs>
       fields: Prisma.CaseSubjectFieldRefs
@@ -1223,29 +1373,36 @@ export type PoliticianScalarFieldEnum = (typeof PoliticianScalarFieldEnum)[keyof
 
 
 export const GovernmentRoleScalarFieldEnum = {
-  politicianId: 'politicianId',
-  department: 'department',
   title: 'title',
-  role: 'role'
+  role: 'role',
+  politicianId: 'politicianId',
+  department: 'department'
 } as const
 
 export type GovernmentRoleScalarFieldEnum = (typeof GovernmentRoleScalarFieldEnum)[keyof typeof GovernmentRoleScalarFieldEnum]
 
 
 export const VoteRecordScalarFieldEnum = {
+  caseID: 'caseID',
   politicianID: 'politicianID',
   vote: 'vote',
-  caseID: 'caseID',
   votingID: 'votingID'
 } as const
 
 export type VoteRecordScalarFieldEnum = (typeof VoteRecordScalarFieldEnum)[keyof typeof VoteRecordScalarFieldEnum]
 
 
+export const FinalVotingScalarFieldEnum = {
+  votingID: 'votingID'
+} as const
+
+export type FinalVotingScalarFieldEnum = (typeof FinalVotingScalarFieldEnum)[keyof typeof FinalVotingScalarFieldEnum]
+
+
 export const SubjectScalarFieldEnum = {
-  id: 'id',
   name: 'name',
   isMainSubject: 'isMainSubject',
+  id: 'id',
   parentId: 'parentId'
 } as const
 
@@ -1266,6 +1423,14 @@ export const CaseProposerScalarFieldEnum = {
 } as const
 
 export type CaseProposerScalarFieldEnum = (typeof CaseProposerScalarFieldEnum)[keyof typeof CaseProposerScalarFieldEnum]
+
+
+export const CaseCommitteProposerScalarFieldEnum = {
+  caseMetadataId: 'caseMetadataId',
+  committeeId: 'committeeId'
+} as const
+
+export type CaseCommitteProposerScalarFieldEnum = (typeof CaseCommitteProposerScalarFieldEnum)[keyof typeof CaseCommitteProposerScalarFieldEnum]
 
 
 export const CaseSubjectScalarFieldEnum = {
@@ -1490,9 +1655,11 @@ export type GlobalOmitConfig = {
   politician?: Prisma.PoliticianOmit
   governmentRole?: Prisma.GovernmentRoleOmit
   voteRecord?: Prisma.VoteRecordOmit
+  finalVoting?: Prisma.FinalVotingOmit
   subject?: Prisma.SubjectOmit
   committee?: Prisma.CommitteeOmit
   caseProposer?: Prisma.CaseProposerOmit
+  caseCommitteProposer?: Prisma.CaseCommitteProposerOmit
   caseSubject?: Prisma.CaseSubjectOmit
   caseMetadata?: Prisma.CaseMetadataOmit
 }

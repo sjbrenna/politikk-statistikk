@@ -1,118 +1,117 @@
 generator client {
   provider = "prisma-client"
-  output = "../prisma/generated"
+  output   = "../prisma/generated"
 }
 
 datasource db {
   provider = "postgresql"
-  
 }
 
-enum Voting {
-  FOR @map("for")
-  AGAINST @map("mot")
-  ABSENT @map("ikke_tilstede")
-}
 model User {
-  id String @id @default(uuid())
-
-  email String @unique
-
+  id        String   @id @default(uuid())
+  email     String   @unique
   favorites String[]
 }
 
 model Party {
-  id String @id
-  name String
+  id          String       @id
+  name        String
   politicians Politician[]
+}
+model Test {
+  id String @id
 }
 
 model Politician {
-  id String @id
-  firstName String
-  lastName String
-  birthday String
-  partyId String
-  party Party @relation(fields: [partyId], references: [id])
-  governmentRole GovernmentRole?
-  representative Boolean
-  vara_representative Boolean @default(false)
-  votes VoteRecord[]
-  committees Committee[]
-  proposedCases CaseProposer[]
+  id                  String          @id
+  firstName           String
+  lastName            String
+  birthday            String
+  partyId             String
+  representative      Boolean
+  vara_representative Boolean         @default(false)
+  proposedCases       CaseProposer[]
+  governmentRole      GovernmentRole?
+  party               Party           @relation(fields: [partyId], references: [id])
+  votes               VoteRecord[]
+  committees          Committee[]     @relation("CommitteeToPolitician")
 }
 
 model GovernmentRole {
-  politicianId String @id
-  politician Politician @relation(fields: [politicianId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  department String
-  title String
-  role String
+  title        String
+  role         String
+  politicianId String     @id
+  department   String
+  politician   Politician @relation(fields: [politicianId], references: [id], onDelete: Cascade)
 }
 
 model VoteRecord {
+  caseID       String
   politicianID String
-  politician Politician @relation(fields: [politicianID], references: [id])
-  vote Voting
-  caseID String
-  votingID String
+  vote         Voting
+  votingID     String
+  politician   Politician @relation(fields: [politicianID], references: [id])
+
   @@unique([politicianID, votingID])
 }
 
+model FinalVoting {
+  votingID String @id
+}
+
 model Subject {
-  id            Int   @id
-  name          String   
+  name          String
   isMainSubject Boolean
-
-  caseSubject CaseSubject[]
-
-  parentId Int?
-  parent   Subject?  @relation("SubjectHierarchy", fields: [parentId], references: [id])
-  children Subject[] @relation("SubjectHierarchy")
+  id            Int           @id
+  parentId      Int?
+  caseSubject   CaseSubject[]
+  parent        Subject?      @relation("SubjectHierarchy", fields: [parentId], references: [id])
+  children      Subject[]     @relation("SubjectHierarchy")
 }
 
 model Committee {
-  id String @id
-  name String
-  members Politician[]
+  id            String                 @id
+  name          String
   proposedCases CaseCommitteProposer[]
+  members       Politician[]           @relation("CommitteeToPolitician")
 }
 
 model CaseProposer {
   caseMetadataId String
-  politicianId String
-
-  caseMetadata CaseMetadata @relation(fields: [caseMetadataId], references: [id], onDelete: Cascade)
-  politician Politician @relation(fields: [politicianId], references: [id], onDelete: Cascade)
+  politicianId   String
+  caseMetadata   CaseMetadata @relation(fields: [caseMetadataId], references: [id], onDelete: Cascade)
+  politician     Politician   @relation(fields: [politicianId], references: [id], onDelete: Cascade)
 
   @@id([caseMetadataId, politicianId])
 }
 
 model CaseCommitteProposer {
   caseMetadataId String
-  committeeId String
-
-  caseMetadata CaseMetadata @relation(fields: [caseMetadataId], references: [id])
-  committe Committee @relation(fields: [committeeId], references: [id])
+  committeeId    String
+  caseMetadata   CaseMetadata @relation(fields: [caseMetadataId], references: [id])
+  committe       Committee    @relation(fields: [committeeId], references: [id])
 
   @@id([caseMetadataId, committeeId])
 }
 
 model CaseSubject {
   caseMetadataId String
-  subjectId Int
-
-  caseMetadata CaseMetadata @relation(fields: [caseMetadataId], references: [id], onDelete: Cascade)
-  subject Subject @relation(fields: [subjectId], references: [id])
+  subjectId      Int
+  caseMetadata   CaseMetadata @relation(fields: [caseMetadataId], references: [id], onDelete: Cascade)
+  subject        Subject      @relation(fields: [subjectId], references: [id])
 
   @@id([caseMetadataId, subjectId])
 }
 
-//TODO: Make CaseMetadata <-> Subject an explicit relation similar to proposer, to support createMany.
 model CaseMetadata {
-  id String @id
-
+  id                String                 @id
   committeeProposer CaseCommitteProposer[]
-  subjects CaseSubject[]
-  proposers CaseProposer[]
+  proposers         CaseProposer[]
+  subjects          CaseSubject[]
+}
+
+enum Voting {
+  FOR     @map("for")
+  AGAINST @map("mot")
+  ABSENT  @map("ikke_tilstede")
 }

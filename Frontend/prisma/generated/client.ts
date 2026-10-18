@@ -67,6 +67,11 @@ export type GovernmentRole = Prisma.GovernmentRoleModel
  */
 export type VoteRecord = Prisma.VoteRecordModel
 /**
+ * Model FinalVoting
+ * 
+ */
+export type FinalVoting = Prisma.FinalVotingModel
+/**
  * Model Subject
  * 
  */
@@ -81,6 +86,11 @@ export type Committee = Prisma.CommitteeModel
  * 
  */
 export type CaseProposer = Prisma.CaseProposerModel
+/**
+ * Model CaseCommitteProposer
+ * 
+ */
+export type CaseCommitteProposer = Prisma.CaseCommitteProposerModel
 /**
  * Model CaseSubject
  * 
