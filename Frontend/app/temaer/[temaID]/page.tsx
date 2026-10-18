@@ -21,8 +21,6 @@ async function SubjectPage({ params }: Props) {
     notFound();
   }
 
-  //Get the metadata with cases that have this subject
-  //need cases, cases that have specific subject
   const caseIds = new Set<string>(
     (
       await prisma.caseSubject.findMany({
@@ -36,7 +34,11 @@ async function SubjectPage({ params }: Props) {
     ).map((metadata) => metadata.caseMetadataId),
   );
 
-  const partyVotes = await CalculatePartyVotingOnSubject(subject.id);
+  const partyVotes = await fetch(
+    "https://politikk-statistikk-production.up.railway.app/api/party-votes/get-parties-votes-for-subject/" +
+      subject.id,
+  );
+  console.log(partyVotes);
 
   if (!partyVotes) {
     notFound();

@@ -17,12 +17,6 @@ type Props = {
   caseIds: Set<string>;
   partyVotes: PartyVoting;
 };
-
-//Siste saker,
-//sånn stemmer partiene basert på saker relatert til temaet
-//fra prisma finn sakene som har dette som ett av temaene
-//Statistikken må aggregeres på prisma for performance messige grunner.
-
 function SubjectClient({ subject, caseIds, partyVotes }: Props) {
   const cases = useContext(CasesProviderContext).cases;
   const subjectCases = cases.filter((item) => caseIds.has(item.id.toString()));
