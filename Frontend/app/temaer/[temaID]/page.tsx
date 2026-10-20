@@ -1,5 +1,6 @@
 import SubjectClient from "@/components/clients/SubjectClient";
-import { CalculatePartyVotingOnSubject } from "@/lib/StatCalculations/SubjectPartyVote";
+import mapPartyVotes from "@/lib/Mappers/mapPartyVotes";
+import { SpringPartyVotes } from "@/lib/springApi/springPartyVotes";
 import { Voting } from "@/prisma/generated/enums";
 import { prisma } from "@/prisma/prisma";
 import { notFound } from "next/navigation";
@@ -33,24 +34,25 @@ async function SubjectPage({ params }: Props) {
       })
     ).map((metadata) => metadata.caseMetadataId),
   );
-
-  const partyVotes = await fetch(
+  const response = await fetch(
     "https://politikk-statistikk-production.up.railway.app/api/party-votes/get-parties-votes-for-subject/" +
       subject.id,
   );
-  console.log(partyVotes);
+  if (!response.ok) {
+    throw new Error("Request failed: " + response.status);
+  }
+
+  const partyVotes = mapPartyVotes(await response.json());
 
   if (!partyVotes) {
     notFound();
   }
 
-  console.log("VOTES: ", partyVotes?.partyVotes);
-
   return (
     <SubjectClient
       subject={subject}
       caseIds={caseIds}
-      partyVotes={partyVotes}
+      partyVotes={partyVotes.votes}
     />
   );
 }

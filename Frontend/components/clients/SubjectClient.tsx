@@ -9,13 +9,13 @@ import OverviewCaseList from "../cases/OverviewCaseList";
 import PreviewCaseCard from "../cases/PreviewCaseCard";
 import { config } from "@/app/config";
 import ContentCard from "../pageLayout/ContentCard";
-import { PartyVoting } from "@/lib/StatCalculations/SubjectPartyVote";
 import PartyVoteStatistics from "../votes/PartyVoteStatistics";
+import { AppPartyVote } from "@/lib/AppTypes/AppPartyVotes";
 
 type Props = {
   subject: Subject;
   caseIds: Set<string>;
-  partyVotes: PartyVoting;
+  partyVotes: AppPartyVote[];
 };
 function SubjectClient({ subject, caseIds, partyVotes }: Props) {
   const cases = useContext(CasesProviderContext).cases;
@@ -38,7 +38,7 @@ function SubjectClient({ subject, caseIds, partyVotes }: Props) {
         }
       />
 
-      <PartyVoteStatistics partyVotesProps={partyVotes} />
+      <PartyVoteStatistics partyVotes={partyVotes} />
 
       <ContentCard>
         <p className="text-accent-foreground pb-2 border-b border-accent mb-2">

@@ -5,7 +5,7 @@
 //For each politician in  the vote record, associate with party
 //Then count each vote based on party affiliation for each voting
 
-import { PartyVoting } from "@/lib/StatCalculations/SubjectPartyVote";
+import { SpringPartyVote } from "@/lib/springApi/springPartyVotes";
 import ContentCard from "../pageLayout/ContentCard";
 import PercentBar from "../PercentBar";
 import {
@@ -21,16 +21,26 @@ import {
   PartyResourceId,
 } from "@/lib/stortinget/parties/partyResources";
 import Image from "next/image";
+import { AppPartyVote } from "@/lib/AppTypes/AppPartyVotes";
 
 type Props = {
-  partyVotesProps: PartyVoting;
+  partyVotes: AppPartyVote[];
 };
 
-function PartyVoteStatistics({ partyVotesProps }: Props) {
-  const partyVoteArray = Array.from(partyVotesProps.partyVotes.entries()).sort(
-    ([_, partyVoteA], [__, partyVoteB]) =>
-      partyVoteB.for / (partyVoteB.for + partyVoteB.against) -
-      partyVoteA.for / (partyVoteA.for + partyVoteA.against),
+function PartyVoteStatistics({ partyVotes }: Props) {
+  const ratio = ({
+    votesFor,
+    votesAgainst,
+  }: {
+    votesFor: number;
+    votesAgainst: number;
+  }) => {
+    const total = votesFor + votesAgainst;
+    return total === 0 ? 0 : Math.round((votesFor / total) * 100);
+  };
+
+  const partyVoteArray = Array.from(partyVotes).sort(
+    (a, b) => ratio(b) - ratio(a),
   );
 
   return (
@@ -45,33 +55,33 @@ function PartyVoteStatistics({ partyVotesProps }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {partyVoteArray.map(([partyId, partyVote], index) => {
-            const total = partyVote.for + partyVote.against;
-            const activePercent = total > 0 ? (partyVote.for / total) * 100 : 0;
+          {partyVoteArray.map((vote, index) => {
+            const voteRatio = ratio(vote);
+            const total = vote.votesFor + vote.votesAgainst;
             return (
-              <TableRow key={partyId}>
+              <TableRow key={vote.partyId}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>
                   <div className="flex flex-row items-center gap-x-2">
                     <Image
-                      src={getPartyLogo(partyId as PartyResourceId)}
-                      alt={`${partyId} logo`}
+                      src={getPartyLogo(vote.partyId as PartyResourceId)}
+                      alt={`${vote.partyId} logo`}
                       width={24}
                       height={24}
                       className="h-6 w-6 object-contain"
                     />
-                    {partyId}
+                    {vote.partyId}
                   </div>
                 </TableCell>
                 <TableCell>
-                  {partyVote.for} av {partyVote.against + partyVote.for} stemmer
+                  {vote.votesFor} av {total} stemmer
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-row items-center gap-x-2">
                     <div className="w-full hidden md:block">
-                      <PercentBar activePercent={activePercent} />
+                      <PercentBar activePercent={voteRatio} />
                     </div>
-                    {activePercent.toFixed(0)}%
+                    {voteRatio}%
                   </div>
                 </TableCell>
               </TableRow>
