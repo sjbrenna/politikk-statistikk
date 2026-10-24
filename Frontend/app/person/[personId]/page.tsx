@@ -1,4 +1,6 @@
+import { config } from "@/app/config";
 import PoliticianClient from "@/components/clients/PoliticianClient";
+import { PoliticianSubjectVotesResponse } from "@/lib/AppTypes/AppPoliticianSubjectVotes";
 
 import { VoteRecord } from "@/prisma/generated/client";
 import { prisma } from "@/prisma/prisma";
@@ -37,21 +39,14 @@ async function page({ params }: Props) {
     }),
   ]);
 
-  //for each vote, get the associated metadata
-  const caseMetadata = await prisma.caseMetadata.findMany({
-    where: {
-      id: {
-        in: votes.map((vote) => vote.caseID),
-      },
-    },
-    include: {
-      subjects: {
-        include: {
-          subject: true,
-        },
-      },
-    },
-  });
+  console.log(
+    config.localDevBackendUrl + config.politicianSubjectVotesURL + personId,
+  );
+  const subjectVotesResponse: PoliticianSubjectVotesResponse = await (
+    await fetch(
+      config.localDevBackendUrl + config.politicianSubjectVotesURL + personId,
+    )
+  ).json();
 
   if (!politician) {
     return notFound();
@@ -61,7 +56,7 @@ async function page({ params }: Props) {
         votes={votes}
         politician={politician}
         govRole={govRole}
-        metadata={caseMetadata}
+        subjectVotesResponse={subjectVotesResponse}
         proposals={proposals}
       />
     );

@@ -25,6 +25,7 @@ import useSearch from "@/hooks/useSearch";
 import SearchInput from "../SearchInput";
 import ItemDropdown from "../ItemDropdown";
 import VotingStatistics from "../votes/VotingStatistics";
+import { PoliticianSubjectVotesResponse } from "@/lib/AppTypes/AppPoliticianSubjectVotes";
 type CaseMetadataWithSubjects = Prisma.CaseMetadataGetPayload<{
   include: {
     subjects: {
@@ -41,7 +42,7 @@ type Props = {
   votes: VoteRecord[];
   politician: PoliticianWithCommittees;
   govRole?: GovernmentRole | null;
-  metadata: CaseMetadataWithSubjects[];
+  subjectVotesResponse: PoliticianSubjectVotesResponse;
   proposals: {
     politicianId: string;
     caseMetadataId: string;
@@ -52,8 +53,8 @@ function PoliticianClient({
   votes,
   politician,
   govRole,
-  metadata,
   proposals,
+  subjectVotesResponse,
 }: Props) {
   const dropdownOptions = [
     { label: "Filtrer basert på stemme...", value: null },
@@ -183,7 +184,7 @@ function PoliticianClient({
       </ContentCard>
       <VotingStatistics
         votes={votes}
-        metadata={metadata}
+        subjectVotesResponse={subjectVotesResponse}
         proposalCount={proposals.length}
       />
       <ContentCard header={<p className="cardTitle pl-2">Siste stemmer:</p>}>

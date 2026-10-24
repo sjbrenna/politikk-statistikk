@@ -1,70 +1,41 @@
 import { config } from "@/app/config";
-import { Prisma, Subject, VoteRecord } from "@/prisma/generated/client";
 import ContentCard from "../pageLayout/ContentCard";
 import SubjectVoteRanking from "./SubjectVoteRanking";
-type CaseMetadataWithSubjects = Prisma.CaseMetadataGetPayload<{
-  include: {
-    subjects: {
-      include: {
-        subject: true;
-      };
-    };
-  };
-}>;
+import {
+  AppSubjectVote,
+  PoliticianSubjectVotesResponse,
+} from "@/lib/AppTypes/AppPoliticianSubjectVotes";
+
 type Props = {
-  votes: VoteRecord[];
-  metadata: CaseMetadataWithSubjects[];
+  subjectVotesResponse: PoliticianSubjectVotesResponse;
 };
 
-function StatisticsSubjects({ votes, metadata }: Props) {
-  //Result: need a map where subjects are mapped to count of for and against votes.
-  //for each vote, get its associated metadata, then iterate through the subjects, add or increment to the map
-  const metadataMap = new Map(
-    metadata.map((metadata) => [metadata.id, metadata]),
+function StatisticsSubjects({ subjectVotesResponse }: Props) {
+  const subjectVotes = subjectVotesResponse.subjectVotes;
+
+  const forRatio = (subjectVote: AppSubjectVote) => {
+    return (
+      subjectVote.votesFor / (subjectVote.votesFor + subjectVote.votesAgainst)
+    );
+  };
+
+  const againstRatio = (subjectVote: AppSubjectVote) => {
+    return (
+      subjectVote.votesAgainst /
+      (subjectVote.votesFor + subjectVote.votesAgainst)
+    );
+  };
+
+  const subjects = subjectVotes.filter(
+    (item) => item.votesAgainst + item.votesFor >= config.minVotesStatistic,
   );
 
-  const subjectVoteMap = new Map<
-    number,
-    { subject: Subject; for: number; against: number }
-  >();
-
-  for (const vote of votes) {
-    const voteMetadata = metadataMap.get(vote.caseID);
-
-    if (!voteMetadata) continue;
-
-    for (const caseSubject of voteMetadata.subjects) {
-      const subject = caseSubject.subject;
-
-      let stats = subjectVoteMap.get(subject.id);
-
-      if (!stats) {
-        stats = { subject, for: 0, against: 0 };
-        subjectVoteMap.set(subject.id, stats);
-      }
-
-      if (vote.vote === "FOR") {
-        stats.for++;
-      } else if (vote.vote === "AGAINST") {
-        stats.against++;
-      }
-    }
-  }
-
-  const subjects = [...subjectVoteMap.values()].filter(
-    (item) => item.against + item.for >= config.minVotesStatistic,
-  );
-
-  //Calculate by percentage, not total votes
   const topAgainst = [...subjects]
-    .sort(
-      (a, b) =>
-        b.against / (b.for + b.against) - a.against / (a.for + a.against),
-    )
+    .sort((a, b) => againstRatio(b) - againstRatio(a))
     .slice(0, config.noOfSubjectsStats);
 
   const topFor = [...subjects]
-    .sort((a, b) => b.for / (b.for + b.against) - a.for / (a.for + a.against))
+    .sort((a, b) => forRatio(b) - forRatio(a))
     .slice(0, config.noOfSubjectsStats);
 
   return (

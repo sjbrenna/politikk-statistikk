@@ -2,23 +2,19 @@ import { Prisma, VoteRecord } from "@/prisma/generated/client";
 import ContentCard from "../pageLayout/ContentCard";
 import StatisticsActivity from "./StatisticsActivity";
 import StatisticsSubjects from "./StatisticsSubjects";
+import { PoliticianSubjectVotesResponse } from "@/lib/AppTypes/AppPoliticianSubjectVotes";
 
-type CaseMetadataWithSubjects = Prisma.CaseMetadataGetPayload<{
-  include: {
-    subjects: {
-      include: {
-        subject: true;
-      };
-    };
-  };
-}>;
 type Props = {
   votes: VoteRecord[];
-  metadata: CaseMetadataWithSubjects[];
   proposalCount: number;
+  subjectVotesResponse: PoliticianSubjectVotesResponse;
 };
 
-function VotingStatistics({ votes, metadata, proposalCount }: Props) {
+function VotingStatistics({
+  votes,
+  subjectVotesResponse,
+  proposalCount,
+}: Props) {
   return (
     <ContentCard
       header={
@@ -32,7 +28,7 @@ function VotingStatistics({ votes, metadata, proposalCount }: Props) {
       }
     >
       <StatisticsActivity votes={votes} proposalsCount={proposalCount} />
-      <StatisticsSubjects votes={votes} metadata={metadata} />
+      <StatisticsSubjects subjectVotesResponse={subjectVotesResponse} />
     </ContentCard>
   );
 }

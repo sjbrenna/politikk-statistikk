@@ -5,6 +5,8 @@ import politikk_statistikk.backend.config.AppConfig;
 import politikk_statistikk.backend.data.responses.PoliticianSubjectVotesResponse;
 import politikk_statistikk.backend.data.responses.SubjectVote;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class PoliticianSubjectVoteFetcher {
@@ -13,6 +15,7 @@ public class PoliticianSubjectVoteFetcher {
     public PoliticianSubjectVoteFetcher(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
 
     public PoliticianSubjectVotesResponse fetchPoliticianSubjectVotes(
             String politicianId) {
@@ -48,7 +51,6 @@ public class PoliticianSubjectVoteFetcher {
                 ),
                 politicianId
         );
-
         return new PoliticianSubjectVotesResponse(
                 politicianId,
                 AppConfig.CURRENT_PERIOD,

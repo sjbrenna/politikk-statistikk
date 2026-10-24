@@ -1,7 +1,7 @@
-import { Subject } from "@/prisma/generated/client";
+import { AppSubjectVote } from "@/lib/AppTypes/AppPoliticianSubjectVotes";
 
 type Props = {
-  subjectEntries: { subject: Subject; for: number; against: number }[];
+  subjectEntries: AppSubjectVote[];
   type: "for" | "against";
 };
 
@@ -10,21 +10,25 @@ function SubjectVoteRanking({ subjectEntries, type }: Props) {
   return (
     <div className="flex-col flex-1">
       {subjectEntries.map((entry, index) => (
-        <div key={entry.subject.id}>
+        <div key={entry.subjectId}>
           {type === "for" ? (
             <div className="flex items-center gap-4">
               <span className="text-sm text-muted-foreground">{index + 1}</span>
 
               <div className="flex-1 min-w-0">
-                <p className="font-medium truncate">{entry.subject.name}</p>
+                <p className="font-medium truncate">{entry.subjectName}</p>
 
                 <p className="text-sm text-muted-foreground">
-                  {entry.for} for · {entry.against} mot
+                  {entry.votesFor} for · {entry.votesAgainst} mot
                 </p>
               </div>
 
               <span className="text-lg font-semibold">
-                {((entry.for / (entry.for + entry.against)) * 100).toFixed(2)}%
+                {(
+                  (entry.votesFor / (entry.votesFor + entry.votesAgainst)) *
+                  100
+                ).toFixed(2)}
+                %
               </span>
             </div>
           ) : (
@@ -32,17 +36,18 @@ function SubjectVoteRanking({ subjectEntries, type }: Props) {
               <span className="text-sm text-muted-foreground">{index + 1}</span>
 
               <div className="flex-1 min-w-0">
-                <p className="font-medium truncate">{entry.subject.name}</p>
+                <p className="font-medium truncate">{entry.subjectName}</p>
 
                 <p className="text-sm text-muted-foreground">
-                  {entry.for} for · {entry.against} mot
+                  {entry.votesFor} for · {entry.votesAgainst} mot
                 </p>
               </div>
 
               <span className="text-lg font-semibold">
-                {((entry.against / (entry.for + entry.against)) * 100).toFixed(
-                  2,
-                )}
+                {(
+                  (entry.votesAgainst / (entry.votesFor + entry.votesAgainst)) *
+                  100
+                ).toFixed(2)}
                 %
               </span>
             </div>
