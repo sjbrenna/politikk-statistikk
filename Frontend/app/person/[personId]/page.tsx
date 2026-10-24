@@ -38,13 +38,9 @@ async function page({ params }: Props) {
       },
     }),
   ]);
-
-  console.log(
-    config.localDevBackendUrl + config.politicianSubjectVotesURL + personId,
-  );
   const subjectVotesResponse: PoliticianSubjectVotesResponse = await (
     await fetch(
-      config.localDevBackendUrl + config.politicianSubjectVotesURL + personId,
+      config.springApiBaseUrl + config.politicianSubjectVotesURL + personId,
     )
   ).json();
 
